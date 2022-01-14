@@ -10,21 +10,23 @@ namespace PrincessBrideTrivia
             string filePath = GetFilePath();
             Question[] questions = LoadQuestions(filePath);
 
-            int numberCorrect = 0;
+            int numberOfCorrectGuesses = 0;
             for (int i = 0; i < questions.Length; i++)
             {
                 bool result = AskQuestion(questions[i]);
                 if (result)
                 {
-                    numberCorrect++;
+                    numberOfCorrectGuesses++;
                 }
             }
-            Console.WriteLine("You got " + GetPercentCorrect(numberCorrect, questions.Length) + " correct");
+            Console.WriteLine("You got " + GetPercentCorrect(numberOfCorrectGuesses, questions.Length) + " correct");
         }
 
-        public static string GetPercentCorrect(int numberCorrectAnswers, int numberOfQuestions)
+        public static string GetPercentCorrect(int numberOfCorrectGuesses, int numberOfQuestions)
         {
-            return (numberCorrectAnswers / numberOfQuestions * 100) + "%";
+            double percent = (numberOfCorrectGuesses / numberOfQuestions * 100);
+            string percentage = percent + "%";
+            return percentage;
         }
 
         public static bool AskQuestion(Question question)

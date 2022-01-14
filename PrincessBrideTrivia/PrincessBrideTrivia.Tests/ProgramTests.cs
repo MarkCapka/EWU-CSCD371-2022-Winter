@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.IO;
 
 namespace PrincessBrideTrivia.Tests
@@ -60,16 +61,22 @@ namespace PrincessBrideTrivia.Tests
         [DataRow(5, 10, "50%")]
         [DataRow(1, 10, "10%")]
         [DataRow(0, 10, "0%")]
-        public void GetPercentCorrect_ReturnsExpectedPercentage(int numberOfCorrectGuesses, 
+        public void GetPercentCorrect_ReturnsExpectedPercentage(int numberOfCorrectGuesses,
             int numberOfQuestions, string expectedString)
         {
             // Arrange
 
+
+            //TODO this is being passed by value I think, this isn't updating when we do the maths... outputs as either 0 or 1 and anything in between -> 0
+            //strings are immutable.... do we need to compare the  results of the reference, not value.
+
             // Act
             string percentage = Program.GetPercentCorrect(numberOfCorrectGuesses, numberOfQuestions);
-
+          
             // Assert
             Assert.AreEqual(expectedString, percentage);
+            //Assert.IsTrue(expectedString.Equals(percentage)); TODO consider this 
+
         }
 
 

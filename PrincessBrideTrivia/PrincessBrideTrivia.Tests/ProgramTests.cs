@@ -7,24 +7,33 @@ namespace PrincessBrideTrivia.Tests
     [TestClass]
     public class ProgramTests
     {
+        static string FilePath;
+        static Question[] Questions;
+
+        [ClassInitialize]
+        public static void InitializeTestClass(TestContext context)
+        {
+            FilePath = Program.GetFilePath();
+            Questions = Program.LoadQuestions(FilePath);
+        }
+
         [TestMethod]
         public void LoadQuestions_RetrievesQuestionsFromFile()
         {
-            string filePath = Path.GetRandomFileName();
             try
             {
                 // Arrange
-                GenerateQuestionsFile(filePath, 2);
+                GenerateQuestionsFile(FilePath, 2);
 
                 // Act
-                Question[] questions = Program.LoadQuestions(filePath);
+                
 
                 // Assert 
-                Assert.AreEqual(2, questions.Length);
+                Assert.AreEqual(2, Questions.Length);
             }
             finally
             {
-                File.Delete(filePath);
+                File.Delete(FilePath);
             }
         }
 
@@ -50,10 +59,9 @@ namespace PrincessBrideTrivia.Tests
             // Arrange
 
             // Act
-            string filePath = Program.GetFilePath();
 
             // Assert
-            Assert.IsTrue(File.Exists(filePath));
+            Assert.IsTrue(File.Exists(FilePath));
         }
 
         [TestMethod]
@@ -68,11 +76,25 @@ namespace PrincessBrideTrivia.Tests
 
             // Act
             string percentage = Program.GetPercentCorrect(numberOfCorrectGuesses, numberOfQuestions);
-          
+
             // Assert
             Assert.AreEqual(expectedString, percentage);
         }
 
+        [TestMethod]
+        public void ShuffleQuestions_ConfirmRandomQuestionOrder_Success()
+        {
+
+            Question[] newQuestionSet = Program.LoadQuestions(FilePath);
+            bool flagSomethingChanged = false;
+            for (int i = 0; i < newQuestionSet.Length - 1; i++) {
+                if (!newQuestionSet[i].Equals(Questions[i]))
+                {
+                    flagSomethingChanged = true;
+                }
+            }
+            Assert.IsTrue(flagSomethingChanged);
+        }
 
         private static void GenerateQuestionsFile(string filePath, int numberOfQuestions)
         {

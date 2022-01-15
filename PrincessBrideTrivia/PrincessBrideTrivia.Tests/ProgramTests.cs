@@ -68,11 +68,38 @@ namespace PrincessBrideTrivia.Tests
 
             // Act
             string percentage = Program.GetPercentCorrect(numberOfCorrectGuesses, numberOfQuestions);
-          
+
             // Assert
             Assert.AreEqual(expectedString, percentage);
         }
 
+        [TestMethod]
+        public void ShuffleQuestions_ConfirmRandomQuestionOrder_Success()
+        {
+            //Arrange
+            string filePath = Program.GetFilePath();
+
+            //Act
+            Question[] newQuestionSet = Program.LoadQuestions(filePath);
+            Question[] questions = Program.LoadQuestions(filePath);
+
+            bool flagSomethingChanged = false;
+            for (int i = 0; i < newQuestionSet.Length - 1; i++) {
+                if (!newQuestionSet[i].Equals(questions[i]))
+                {
+                    flagSomethingChanged = true;
+                }
+            }
+
+            //Assert
+            Assert.IsTrue(flagSomethingChanged);
+        }
+
+        [TestMethod]
+        public void SwapElements_ConfirmElementsSwap_Success()
+        {
+        
+        }
 
         private static void GenerateQuestionsFile(string filePath, int numberOfQuestions)
         {

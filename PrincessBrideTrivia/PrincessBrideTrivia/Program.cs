@@ -24,8 +24,8 @@ namespace PrincessBrideTrivia
 
         public static string GetPercentCorrect(int numberOfCorrectGuesses, int numberOfQuestions)
         {
-            double percent = (numberOfCorrectGuesses / numberOfQuestions * 100);
-            string percentage = percent + "%";
+            double percent = ((double)numberOfCorrectGuesses / numberOfQuestions * 100);
+            string percentage = Math.Round(percent, 2) + "%";
             return percentage;
         }
 
@@ -92,8 +92,29 @@ namespace PrincessBrideTrivia
                 question.Answers[2] = answer3;
                 question.CorrectAnswerIndex = correctAnswerIndex;
                 questions[i] = question;
+
+                    
             }
+            ShuffleQuestions(questions);
             return questions;
+        }
+
+        private static void ShuffleQuestions(Question[] questionArray)
+        {
+            Random rnd = new Random();
+
+            for(int i = 0; i < questionArray.Length-1; i++)
+            {
+                SwapElements(questionArray, i, rnd.Next(0, questionArray.Length - 1));
+            }
+        }
+
+
+        private static void SwapElements(Question[] array, int index1, int index2)
+        {
+            Question temp = array[index2];
+            array[index2] = array[index1];
+            array[index1] = temp;
         }
     }
 }

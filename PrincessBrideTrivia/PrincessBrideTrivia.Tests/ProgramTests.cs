@@ -66,17 +66,11 @@ namespace PrincessBrideTrivia.Tests
         {
             // Arrange
 
-
-            //TODO this is being passed by value I think, this isn't updating when we do the maths... outputs as either 0 or 1 and anything in between -> 0
-            //strings are immutable.... do we need to compare the  results of the reference, not value.
-
             // Act
             string percentage = Program.GetPercentCorrect(numberOfCorrectGuesses, numberOfQuestions);
           
             // Assert
             Assert.AreEqual(expectedString, percentage);
-            //Assert.IsTrue(expectedString.Equals(percentage)); TODO consider this 
-
         }
 
 

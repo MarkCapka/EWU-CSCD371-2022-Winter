@@ -98,7 +98,25 @@ namespace PrincessBrideTrivia.Tests
         [TestMethod]
         public void SwapElements_ConfirmElementsSwap_Success()
         {
-        
+            //Arrange
+            string filePath = Program.GetFilePath();
+            bool flagIndexSwapped = false;
+            //Act
+            Question[] originalQuestions = Program.LoadQuestions(filePath); //unchanging indexes
+
+            Question[] shuffledQuestions = Program.LoadQuestions(filePath); //shuffled indexes through swap
+            Program.SwapElements(shuffledQuestions, 1, 2);
+
+            //index for shuffled and original questions should not match. 
+            if (!shuffledQuestions[1].Equals(originalQuestions[1]) && !shuffledQuestions[2].Equals(originalQuestions[2]))
+            {
+                flagIndexSwapped = true;
+            }
+
+            //Assert
+            Assert.IsTrue(flagIndexSwapped);
+
+
         }
 
         private static void GenerateQuestionsFile(string filePath, int numberOfQuestions)

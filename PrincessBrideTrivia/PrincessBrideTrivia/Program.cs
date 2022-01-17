@@ -1,6 +1,16 @@
 ﻿using System;
 using System.IO;
 
+
+//Assignment 1: .NET PROGRAMMING CSCD371
+//Tyler Rose & Mark Capka           //--students
+//@TylerRose8    //@MarkCapka      //--github
+
+//.NET 6.0  MSTest Visual Studio 2022
+
+
+
+
 namespace PrincessBrideTrivia
 {
     public class Program
@@ -110,7 +120,7 @@ namespace PrincessBrideTrivia
         }
 
 
-        private static void SwapElements(Question[] array, int index1, int index2)
+        public static void SwapElements(Question[] array, int index1, int index2)
         {
             Question temp = array[index2];
             array[index2] = array[index1];

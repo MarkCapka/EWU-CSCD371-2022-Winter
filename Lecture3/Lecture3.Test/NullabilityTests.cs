@@ -22,7 +22,7 @@ namespace Lecture3
 
             //if (text is not null)
             {
-                Assert.AreEqual(42, text.Length);
+                Assert.AreEqual(13, text.Length);
             }
 
             //if (text == null) <-- not prefered since "==" can be overridden
@@ -32,7 +32,7 @@ namespace Lecture3
             //if(string.ReferenceEquals(text, null))
 
             Assert.IsNotNull(text);
-            Assert.IsNotNull(number1);
+            Assert.IsNull(number1);
         }
 
         private string SomeMethod() => "Princess Buttercup"; //Expression bodied member

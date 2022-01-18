@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Lecture3
 {
-    internal class NullabilityTests
+    [TestClass]
+    public class NullabilityTests
     {
 
         [TestMethod]

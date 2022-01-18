@@ -7,6 +7,12 @@ namespace PrincessBrideTrivia.Tests
     [TestClass]
     public class ProgramTests
     {
+        private static string FilePath;
+        [ClassInitialize]
+        public static void Initialize_ClassVars(TestContext context)
+        {
+            FilePath = Program.GetFilePath();
+        }
         [TestMethod]
         public void LoadQuestions_RetrievesQuestionsFromFile()
         {
@@ -50,10 +56,10 @@ namespace PrincessBrideTrivia.Tests
             // Arrange
 
             // Act
-            string filePath = Program.GetFilePath();
+            
 
             // Assert
-            Assert.IsTrue(File.Exists(filePath));
+            Assert.IsTrue(File.Exists(FilePath));
         }
 
         [TestMethod]
@@ -77,11 +83,10 @@ namespace PrincessBrideTrivia.Tests
         public void ShuffleQuestions_ConfirmRandomQuestionOrder_Success()
         {
             //Arrange
-            string filePath = Program.GetFilePath();
 
             //Act
-            Question[] newQuestionSet = Program.LoadQuestions(filePath);
-            Question[] questions = Program.LoadQuestions(filePath);
+            Question[] newQuestionSet = Program.LoadQuestions(FilePath);
+            Question[] questions = Program.LoadQuestions(FilePath);
 
             bool flagSomethingChanged = false;
             for (int i = 0; i < newQuestionSet.Length - 1; i++) {
@@ -99,12 +104,11 @@ namespace PrincessBrideTrivia.Tests
         public void SwapElements_ConfirmElementsSwap_Success()
         {
             //Arrange
-            string filePath = Program.GetFilePath();
             bool flagIndexSwapped = false;
             //Act
-            Question[] originalQuestions = Program.LoadQuestions(filePath); //unchanging indexes
+            Question[] originalQuestions = Program.LoadQuestions(FilePath); //unchanging indexes
 
-            Question[] shuffledQuestions = Program.LoadQuestions(filePath); //shuffled indexes through swap
+            Question[] shuffledQuestions = Program.LoadQuestions(FilePath); //shuffled indexes through swap
             Program.SwapElements(shuffledQuestions, 1, 2);
 
             //index for shuffled and original questions should not match. 

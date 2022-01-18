@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Lecture1.Tests
 {
@@ -46,12 +47,12 @@ namespace Lecture1.Tests
         public void NullDeclarationConcepts()
         {
             string? text = "Inigo Montoya";
-            text = text.Length > 0 ? text : null;
+            text = text.Length > 0 ? text : SomeMethod();
             int? number1 = null;
 
             System.Nullable<int> number2 = null;
 
-            if (text is not null)
+            //if (text is not null)
             {
                 Assert.AreEqual(42, text.Length);
             }
@@ -64,6 +65,11 @@ namespace Lecture1.Tests
 
             Assert.IsNotNull(text);
             Assert.IsNotNull(number1);
+        }
+
+        private string SomeMethod()
+        {
+            throw new NotImplementedException();
         }
     }
 }

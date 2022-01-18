@@ -41,5 +41,29 @@ namespace Lecture1.Tests
             bool result = Person.Login(UserName, Password);
             Assert.IsFalse(result);
         }
+
+        [TestMethod]
+        public void NullDeclarationConcepts()
+        {
+            string? text = "Inigo Montoya";
+            text = text.Length > 0 ? text : null;
+            int? number1 = null;
+
+            System.Nullable<int> number2 = null;
+
+            if (text is not null)
+            {
+                Assert.AreEqual(42, text.Length);
+            }
+
+            //if (text == null) <-- not prefered since "==" can be overridden
+            //if(text is null) <-- Prefered method use "is"
+            //if(text is not null) <-- C# 9
+            //if(text.Equals(null)) <-- throws null pointer exception before it can check if it was null
+            //if(string.ReferenceEquals(text, null))
+
+            Assert.IsNotNull(text);
+            Assert.IsNotNull(number1);
+        }
     }
 }

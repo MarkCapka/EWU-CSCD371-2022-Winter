@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Lecture1\Lecture1.csproj" />
+    <ProjectReference Include="..\Lecture3\Lecture3.csproj" />
   </ItemGroup>
 
 </Project>

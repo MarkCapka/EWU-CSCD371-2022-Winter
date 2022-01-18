@@ -67,9 +67,6 @@ namespace Lecture1.Tests
             Assert.IsNotNull(number1);
         }
 
-        private string SomeMethod()
-        {
-            throw new NotImplementedException();
-        }
+        private string SomeMethod() => "Princess Buttercup"; //Expression bodied member
     }
 }

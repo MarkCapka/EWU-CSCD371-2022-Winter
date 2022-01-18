@@ -120,9 +120,9 @@ namespace PrincessBrideTrivia
         }
 
 
-        public static void SwapElements(Question[] array, int index1, int index2)
+        public static void SwapElements<T>(T[] array, int index1, int index2)
         {
-            Question temp = array[index2];
+            T temp = array[index2];
             array[index2] = array[index1];
             array[index1] = temp;
         }

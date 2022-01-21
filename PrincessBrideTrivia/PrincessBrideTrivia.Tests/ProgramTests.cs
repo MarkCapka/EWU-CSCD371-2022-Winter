@@ -84,7 +84,8 @@ namespace PrincessBrideTrivia.Tests
             Question[] questions = Program.LoadQuestions(filePath);
 
             bool flagSomethingChanged = false;
-            for (int i = 0; i < newQuestionSet.Length - 1; i++) {
+            for (int i = 0; i < newQuestionSet.Length - 1; i++)
+            {
                 if (!newQuestionSet[i].Equals(questions[i]))
                 {
                     flagSomethingChanged = true;
@@ -99,25 +100,21 @@ namespace PrincessBrideTrivia.Tests
         public void SwapElements_ConfirmElementsSwap_Success()
         {
             //Arrange
-            int[] questionArray = {2, 4, 6, 8, 10}; //random int array for testing swapping function
+            int[] testArray = { 2, 4, 6, 8, 10 }; //random int array for testing swapping function
 
 
             ////Act
-            Program.SwapElements(questionArray, 1, 3);
+            Program.SwapElements(testArray, 1, 3);
 
 
             //Assert
             //CONFIRMING SWITCH
-            Assert.IsTrue(questionArray[3].Equals(4));  //tests if original index 3 has value from index 1
-            Assert.IsTrue(questionArray[1].Equals(8));  //tests if original index 3 is moved to index 1
+            Assert.IsTrue(testArray[3].Equals(4));
+            Assert.IsTrue(testArray[1].Equals(8));
 
             //confirming that in between indices are untouched. 
-            Assert.IsTrue(questionArray[2].Equals(6));  //testing an unswapped member 
-            Assert.IsFalse(questionArray[1].Equals(4)); //tests old index position
-
-           
-
-
+            Assert.IsTrue(testArray[2].Equals(6)); 
+            Assert.IsTrue(testArray[4].Equals(10));
         }
 
         private static void GenerateQuestionsFile(string filePath, int numberOfQuestions)

@@ -7,12 +7,6 @@ namespace PrincessBrideTrivia.Tests
     [TestClass]
     public class ProgramTests
     {
-        private static string FilePath;
-        [ClassInitialize]
-        public static void Initialize_ClassVars(TestContext context)
-        {
-            FilePath = Program.GetFilePath();
-        }
         [TestMethod]
         public void LoadQuestions_RetrievesQuestionsFromFile()
         {
@@ -56,10 +50,10 @@ namespace PrincessBrideTrivia.Tests
             // Arrange
 
             // Act
-            
+            string filePath = Program.GetFilePath();
 
             // Assert
-            Assert.IsTrue(File.Exists(FilePath));
+            Assert.IsTrue(File.Exists(filePath));
         }
 
         [TestMethod]
@@ -83,10 +77,11 @@ namespace PrincessBrideTrivia.Tests
         public void ShuffleQuestions_ConfirmRandomQuestionOrder_Success()
         {
             //Arrange
+            string filePath = Program.GetFilePath();
 
             //Act
-            Question[] newQuestionSet = Program.LoadQuestions(FilePath);
-            Question[] questions = Program.LoadQuestions(FilePath);
+            Question[] newQuestionSet = Program.LoadQuestions(filePath);
+            Question[] questions = Program.LoadQuestions(filePath);
 
             bool flagSomethingChanged = false;
             for (int i = 0; i < newQuestionSet.Length - 1; i++) {
@@ -104,21 +99,23 @@ namespace PrincessBrideTrivia.Tests
         public void SwapElements_ConfirmElementsSwap_Success()
         {
             //Arrange
-            bool flagIndexSwapped = false;
-            //Act
-            Question[] originalQuestions = Program.LoadQuestions(FilePath); //unchanging indexes
+            int[] questionArray = {2, 4, 6, 8, 10}; //random int array for testing swapping function
 
-            Question[] shuffledQuestions = Program.LoadQuestions(FilePath); //shuffled indexes through swap
-            Program.SwapElements(shuffledQuestions, 1, 2);
 
-            //index for shuffled and original questions should not match. 
-            if (!shuffledQuestions[1].Equals(originalQuestions[1]) && !shuffledQuestions[2].Equals(originalQuestions[2]))
-            {
-                flagIndexSwapped = true;
-            }
+            ////Act
+            Program.SwapElements(questionArray, 1, 3);
+
 
             //Assert
-            Assert.IsTrue(flagIndexSwapped);
+            //CONFIRMING SWITCH
+            Assert.IsTrue(questionArray[3].Equals(4));  //tests if original index 3 has value from index 1
+            Assert.IsTrue(questionArray[1].Equals(8));  //tests if original index 3 is moved to index 1
+
+            //confirming that in between indices are untouched. 
+            Assert.IsTrue(questionArray[2].Equals(6));  //testing an unswapped member 
+            Assert.IsFalse(questionArray[1].Equals(4)); //tests old index position
+
+           
 
 
         }

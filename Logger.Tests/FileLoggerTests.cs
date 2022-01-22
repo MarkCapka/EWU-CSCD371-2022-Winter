@@ -13,6 +13,7 @@ namespace Logger.Tests
 
         [TestMethod]
         [ExpectedException(typeof(System.ArgumentNullException))]
+        [Ignore("Not Implemented Yet")]
         public void SetsFilePath_FilePathExistsAndSet_Success()
         {
             //string filePath = Path.GetRandomFileName();
@@ -37,7 +38,7 @@ namespace Logger.Tests
         }
 
         [TestMethod]
-        [Ignore("")]
+        [Ignore("Not Implemented Yet")]
         public void GetFilePath_ReturnsFileThatExists_Success()
         {
             // Arrange
@@ -51,7 +52,7 @@ namespace Logger.Tests
 
 
         [TestMethod]
-        [Ignore("")]
+        [Ignore("Not Implemented Yet")]
         public void Log_AppendsFile_Success()
         {
             // Arrange

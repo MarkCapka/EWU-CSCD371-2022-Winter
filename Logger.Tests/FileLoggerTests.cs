@@ -7,10 +7,6 @@ public class FileLoggerTests
 {
     public static string TEST_FILE = "testLogFile.txt";
 
-    //TODO:File Logger: derives from BaseLogger:
-    //takes path to write a file for a log into. 
-    //Appends message on own line when Log() is called. 
-
     [TestMethod]
     public void SetFilePath_ConfigureFileLoggerSetsFilePath_Success()
     {
@@ -55,7 +51,6 @@ public class FileLoggerTests
         loggerWithFile.Log(LogLevel.Information, appendedMessage);
 
         string[] fileContents = File.ReadAllLines(TEST_FILE);
-
 
         Assert.IsTrue(fileContents[0].Contains(originalMessage));
         Assert.IsTrue(fileContents[1].Contains(appendedMessage));

@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 
 namespace Logger;
-internal class FileLogger : BaseLogger
+public class FileLogger : BaseLogger
 {
     public string FilePath { get; }
 

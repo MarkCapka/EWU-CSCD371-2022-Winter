@@ -14,7 +14,6 @@ namespace Logger.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        [Ignore("Not Implemented Yet")]
         public void Error_WithNullLogger_ThrowsException()
         {
             // Arrange
@@ -32,29 +31,31 @@ namespace Logger.Tests
             var logger = new TestLogger();
 
             // Act
-            logger.Error("Error Message {0}", 42);
+            logger.Error("Error Message {0} {1}", 42, "test");
 
             // Assert
             Assert.AreEqual(1, logger.LoggedMessages.Count);
             Assert.AreEqual(LogLevel.Error, logger.LoggedMessages[0].LogLevel);
-            Assert.AreEqual("Error Message 42", logger.LoggedMessages[0].Message);
+            Assert.AreEqual("Error Message 42 test", logger.LoggedMessages[0].Message);
         }
-
-
 
         //-----------------------------------------------------------------------------------
         //Warning
         //-----------------------------------------------------------------------------------
 
         [TestMethod]
+        [DataRow(false, "test {0}")]
+        [DataRow(true, null)]
         [ExpectedException(typeof(ArgumentNullException))]
-        [Ignore("Not Implemented Yet")]
-        public void Warning_WithNullLogger_ThrowsException()
+        public void Warning_WithNullLogger_ThrowsException(bool useValidClass, string message)
         {
             // Arrange
+            var logger = new TestLogger();
+            int[] array = { 42 };
 
             // Act
-            BaseLoggerMixins.Warning(null!, "");
+
+            BaseLoggerMixins.Warning(useValidClass ? logger : null!, message!, array);
 
             // Assert
         }
@@ -68,16 +69,16 @@ namespace Logger.Tests
             var logger = new TestLogger();
 
             // Act
-            logger.Warning("Warning Message {0}", 42);
+            logger.Warning("Warning Message {0} {1}", 42, "test");
 
             // Assert
             Assert.AreEqual(1, logger.LoggedMessages.Count);
             Assert.AreEqual(LogLevel.Warning, logger.LoggedMessages[0].LogLevel);
-            Assert.AreEqual("Warning Message 42", logger.LoggedMessages[0].Message);
+            Assert.AreEqual("Warning Message 42 test", logger.LoggedMessages[0].Message);
         }
 
         //{message }, {logLevel }, ["this is the message", "Warning"];
-    
+
 
         //-----------------------------------------------------------------------------------
         //Information
@@ -88,7 +89,6 @@ namespace Logger.Tests
         //TODO
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        [Ignore("Not Implemented Yet")]
         public void Information_WithNullLogger_ThrowsException()
         {
             // Arrange
@@ -110,13 +110,13 @@ namespace Logger.Tests
             var logger = new TestLogger();
 
             // Act
-            logger.Information("Information Message {0}", 42);
+            logger.Information("Information Message {0} {1}", 42, "test");
 
 
             // Assert
             Assert.AreEqual(1, logger.LoggedMessages.Count);
             Assert.AreEqual(LogLevel.Information, logger.LoggedMessages[0].LogLevel);
-            Assert.AreEqual("Information Message 42", logger.LoggedMessages[0].Message);
+            Assert.AreEqual("Information Message 42 test", logger.LoggedMessages[0].Message);
         }
 
 
@@ -134,20 +134,19 @@ namespace Logger.Tests
             var logger = new TestLogger();
 
             // Act                    //  logger.Debug("Debug Message {0} {1}", [42, secondArgument]);
-            logger.Debug("Debug Message {0}", 42);
+            logger.Debug("Debug Message {0} {1}", 42, "test");
 
             // Assert
             Assert.AreEqual(1, logger.LoggedMessages.Count);
             Assert.AreEqual(LogLevel.Debug, logger.LoggedMessages[0].LogLevel);
-            Assert.AreEqual("Debug Message 42", logger.LoggedMessages[0].Message);
+            Assert.AreEqual("Debug Message 42 test", logger.LoggedMessages[0].Message);
         }
 
-        
+
 
         //TODO
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        [Ignore("Not Implemented Yet")]
         public void Debug_WithNullLogger_ThrowsException()
         {
             // Arrange

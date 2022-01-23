@@ -56,46 +56,5 @@ public class FileLoggerTests
         Assert.IsTrue(fileContents[1].Contains(appendedMessage));
         File.Delete(TEST_FILE);
     }
-
-    [TestMethod]
-    [Ignore("Not Implemented Yet")]
-    public void GetFilePath_ReturnsFileThatExists_Success()
-    {
-        // Arrange
-
-        // Act
-        //string filePath = Logger.GetFilePath();
-
-        // Assert
-        //Assert.IsTrue(File.Exists(filePath));
-    }
-
-
-    [TestMethod]
-    [Ignore("Not Implemented Yet")]
-    public void Log_AppendsFile_Success()
-    {
-        // Arrange
-
-        //TODO
-
-        // Act
-        //TODO: load filepath
-        // string filePath = Logger.GetFilePath();
-
-        //TODO message outputs: 
-        //current date/time                                 
-        //name of the class created the logger
-        //log level
-        //message
-        //format: "10/7/2019 12:38:59 AM FileLoggerTests Warning: Test message"
-
-
-        //TODO confirm that there is no overwrite of any previous messages. 
-
-        //// Assert
-        //Assert.IsTrue(File.Exists(filePath));
-    }
-
 }
 

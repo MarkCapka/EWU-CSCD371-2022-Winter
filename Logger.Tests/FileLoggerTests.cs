@@ -29,7 +29,7 @@ public class FileLoggerTests
         logFactory.ConfigureFileLogger(TEST_FILE);
         BaseLogger loggerWithFile = logFactory.CreateLogger(nameof(FileLoggerTests));
         Assert.IsFalse(File.Exists(TEST_FILE));
-     
+
         loggerWithFile.Log(LogLevel.Information, "This log will instantiate a file at the given path.");
 
         Assert.IsTrue(File.Exists(TEST_FILE));

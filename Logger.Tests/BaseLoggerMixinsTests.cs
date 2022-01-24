@@ -14,15 +14,41 @@ namespace Logger.Tests
         //-----------------------------------------------------------------------------------
 
         [TestMethod]
+        [DataRow(false, "test {0}")]
+        [DataRow(true, null)]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Error_WithNullLogger_ThrowsException()
+        public void Error_WithNullLogger_ThrowsException(bool useValidClass, string message)
         {
             // Arrange
-
+            var logger = new TestLogger();
+            int[] array = { 42 };
             // Act
-            BaseLoggerMixins.Error(null!, "");   //TODO need error message? 
+         
+            try
+            {
+
+                // Act
+              //  #pragma warning disable CS8625        //TODO maybe delete? now that i've added in the try-catch, I don't think that we need to disable the warning to confirm that it is taking in nullable
+                BaseLoggerMixins.Error(useValidClass ? logger : null!, message!, array);
+                // #pragma warning restore CS8625         //TODO maybe delete? now that i've added in the try-catch, I don't think that we need to disable the warning to confirm that it is taking in nullable
+            }
+            catch (ArgumentNullException exception)
+            {
+                //ArgumentNullException argumentNullException = Assert.ThrowsException<ArgumentNullException>(exception.ParamName);  //TODO probably can delete this line, just think that we need to throw if we can't proceed.
+                //I believe the flag above the method  [ExpectedException(typeof(ArgumentNullException))] signifies that the exception will be thrown so no need to assert? 
+                throw exception;
+              
+            }
 
             // Assert
+
+           Assert.AreEqual(nameof(logger), "Error");         //added to confirm that the logger is still seeing this as an "Error" even if passed in as null. 
+           Assert.AreNotEqual(nameof(logger), "Warning");
+          
+            // Assert.AreEqual(LogLevel.Error, logger.LoggedMessages[0].LogLevel);              //probably extraneous, just testing
+            //Assert.AreEqual("Error Message 42 test", logger.LoggedMessages[0].Message);
+
+
         }
 
         [TestMethod]
@@ -55,10 +81,21 @@ namespace Logger.Tests
             int[] array = { 42 };
 
             // Act
+            try
+            {
+                BaseLoggerMixins.Warning(useValidClass ? logger : null!, message!, array);
+       
+            }
+            catch (ArgumentNullException exception)
+            {
+               
+                throw exception;
 
-            BaseLoggerMixins.Warning(useValidClass ? logger : null!, message!, array);
-
+            }
             // Assert
+            Assert.AreNotEqual(nameof(logger), "Error");
+            Assert.AreEqual(nameof(logger), "Warning");
+            
         }
 
 

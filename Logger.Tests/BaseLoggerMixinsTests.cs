@@ -22,33 +22,18 @@ namespace Logger.Tests
             // Arrange
             var logger = new TestLogger();
             int[] array = { 42 };
+
             // Act
-         
             try
             {
-
                 // Act
-              //  #pragma warning disable CS8625        //TODO maybe delete? now that i've added in the try-catch, I don't think that we need to disable the warning to confirm that it is taking in nullable
                 BaseLoggerMixins.Error(useValidClass ? logger : null!, message!, array);
-                // #pragma warning restore CS8625         //TODO maybe delete? now that i've added in the try-catch, I don't think that we need to disable the warning to confirm that it is taking in nullable
+
             }
             catch (ArgumentNullException exception)
             {
-                //ArgumentNullException argumentNullException = Assert.ThrowsException<ArgumentNullException>(exception.ParamName);  //TODO probably can delete this line, just think that we need to throw if we can't proceed.
-                //I believe the flag above the method  [ExpectedException(typeof(ArgumentNullException))] signifies that the exception will be thrown so no need to assert? 
                 throw exception;
-              
             }
-
-            // Assert
-
-           Assert.AreEqual(nameof(logger), "Error");         //added to confirm that the logger is still seeing this as an "Error" even if passed in as null. 
-           Assert.AreNotEqual(nameof(logger), "Warning");
-          
-            // Assert.AreEqual(LogLevel.Error, logger.LoggedMessages[0].LogLevel);              //probably extraneous, just testing
-            //Assert.AreEqual("Error Message 42 test", logger.LoggedMessages[0].Message);
-
-
         }
 
         [TestMethod]
@@ -78,26 +63,21 @@ namespace Logger.Tests
         {
             // Arrange
             var logger = new TestLogger();
-            int[] array = { 42 };
+            int[] array = { 25 };
 
             // Act
             try
             {
                 BaseLoggerMixins.Warning(useValidClass ? logger : null!, message!, array);
-       
             }
             catch (ArgumentNullException exception)
             {
-               
+
                 throw exception;
 
             }
-            // Assert
-            Assert.AreNotEqual(nameof(logger), "Error");
-            Assert.AreEqual(nameof(logger), "Warning");
-            
-        }
 
+        }
 
 
         [TestMethod]
@@ -107,12 +87,12 @@ namespace Logger.Tests
             var logger = new TestLogger();
 
             // Act
-            logger.Warning("Warning Message {0} {1}", 42, "test");
+            logger.Warning("Warning Message {0} {1}", 25, "test");
 
             // Assert
             Assert.AreEqual(1, logger.LoggedMessages.Count);
             Assert.AreEqual(LogLevel.Warning, logger.LoggedMessages[0].LogLevel);
-            Assert.AreEqual("Warning Message 42 test", logger.LoggedMessages[0].Message);
+            Assert.AreEqual("Warning Message 25 test", logger.LoggedMessages[0].Message);
         }
 
         //{message }, {logLevel }, ["this is the message", "Warning"];
@@ -124,18 +104,27 @@ namespace Logger.Tests
 
 
 
-        //TODO
         [TestMethod]
+        [DataRow(false, "test {0}")]
+        [DataRow(true, null)]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Information_WithNullLogger_ThrowsException()
+        public void Information_WithNullLogger_ThrowsException(bool useValidClass, string message)
         {
-            // Arrange
+            var logger = new TestLogger();
+            int[] array = { 33 };
 
             // Act
-            BaseLoggerMixins.Information(null!, "");
+            try
+            {
+                BaseLoggerMixins.Information(useValidClass ? logger : null!, message!, array);
 
-            // Assert
+            }
+            catch (ArgumentNullException exception)
+            {
 
+                throw exception;
+
+            }
 
         }
 
@@ -148,13 +137,13 @@ namespace Logger.Tests
             var logger = new TestLogger();
 
             // Act
-            logger.Information("Information Message {0} {1}", 42, "test");
+            logger.Information("Information Message {0} {1}", 33, "test");
 
 
             // Assert
             Assert.AreEqual(1, logger.LoggedMessages.Count);
             Assert.AreEqual(LogLevel.Information, logger.LoggedMessages[0].LogLevel);
-            Assert.AreEqual("Information Message 42 test", logger.LoggedMessages[0].Message);
+            Assert.AreEqual("Information Message 33 test", logger.LoggedMessages[0].Message);
         }
 
 
@@ -163,8 +152,6 @@ namespace Logger.Tests
         //-----------------------------------------------------------------------------------
         //Debug
         //-----------------------------------------------------------------------------------
-
-        //TODO
         [TestMethod]
         public void Debug_LogMessageWithValidData_Success()
         {
@@ -172,27 +159,36 @@ namespace Logger.Tests
             var logger = new TestLogger();
 
             // Act                    //  logger.Debug("Debug Message {0} {1}", [42, secondArgument]);
-            logger.Debug("Debug Message {0} {1}", 42, "test");
+            logger.Debug("Debug Message {0} {1}", 24, "test");
 
             // Assert
             Assert.AreEqual(1, logger.LoggedMessages.Count);
             Assert.AreEqual(LogLevel.Debug, logger.LoggedMessages[0].LogLevel);
-            Assert.AreEqual("Debug Message 42 test", logger.LoggedMessages[0].Message);
+            Assert.AreEqual("Debug Message 24 test", logger.LoggedMessages[0].Message);
         }
 
 
-
-        //TODO
         [TestMethod]
+        [DataRow(false, "test {0}")]
+        [DataRow(true, null)]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Debug_WithNullLogger_ThrowsException()
+        public void Debug_WithNullLogger_ThrowsException(bool useValidClass, string message)
         {
-            // Arrange
 
+            //Arrange
+            var logger = new TestLogger();
+            int[] array = { 24 };
             // Act
-            BaseLoggerMixins.Debug(null!, "");
+            try
+            {
+                BaseLoggerMixins.Debug(useValidClass ? logger : null!, message!, array);
+            }
+            catch (ArgumentNullException exception)
+            {
 
-            // Assert
+                throw exception;
+
+            }
         }
     }
 

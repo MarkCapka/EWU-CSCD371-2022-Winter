@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+//Assignment 2: .NET PROGRAMMING CSCD371
+//Tyler Rose & Mark Capka           //--students
+//@TylerRose8    //@MarkCapka      //--github
+
+//.NET 6.0  MSTest Visual Studio 2022
+
 namespace Logger;
 public class FileLogger : BaseLogger
 {

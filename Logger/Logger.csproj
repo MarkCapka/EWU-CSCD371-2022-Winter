@@ -8,19 +8,18 @@
 		<CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
 		<Nullable>enable</Nullable>
 		<LangVersion>10.0</LangVersion>
-		<OutputType>Library</OutputType>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <WarningLevel>5</WarningLevel>
+		<WarningLevel>4</WarningLevel>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <WarningLevel>5</WarningLevel>
+		<WarningLevel>4</WarningLevel>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
+		<PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
 	</ItemGroup>
 
 </Project>

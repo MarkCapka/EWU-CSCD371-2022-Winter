@@ -83,27 +83,19 @@ namespace Logger.Tests
 
         //-----------------------------------------------------------------------------------
         //Information
-        //-----------------------------------------------------------------------------------
-
-
-
-        //TODO
+        
         [TestMethod]
+        [DataRow(false, "test {0}")]
+        [DataRow(true, null)]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Information_WithNullLogger_ThrowsException()
+        public void Information_WithNullLogger_ThrowsException(bool useValidClass, string message)
         {
-            // Arrange
+            var logger = new TestLogger();
+            int[] array = { 42 };
 
-            // Act
-            BaseLoggerMixins.Information(null!, "");
-
-            // Assert
-
-
+            BaseLoggerMixins.Information(useValidClass ? logger : null!, message!, array);
         }
 
-
-        //TODO
         [TestMethod]
         public void Information_LogMessageWithValidData_Success()
         {
@@ -126,8 +118,6 @@ namespace Logger.Tests
         //-----------------------------------------------------------------------------------
         //Debug
         //-----------------------------------------------------------------------------------
-
-        //TODO
         [TestMethod]
         public void Debug_LogMessageWithValidData_Success()
         {
@@ -143,19 +133,16 @@ namespace Logger.Tests
             Assert.AreEqual("Debug Message 42 test", logger.LoggedMessages[0].Message);
         }
 
-
-
-        //TODO
         [TestMethod]
+        [DataRow(false, "test {0}")]
+        [DataRow(true, null)]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Debug_WithNullLogger_ThrowsException()
+        public void Debug_WithNullLogger_ThrowsException(bool useValidClass, string message)
         {
-            // Arrange
+            var logger = new TestLogger();
+            int[] array = { 42 };
 
-            // Act
-            BaseLoggerMixins.Debug(null!, "");
-
-            // Assert
+            BaseLoggerMixins.Debug(useValidClass ? logger : null!, message!, array);
         }
     }
 

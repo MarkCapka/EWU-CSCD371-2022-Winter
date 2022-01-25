@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-
-namespace Logger;
+﻿namespace Logger;
 public class FileLogger : BaseLogger
 {
     public string FilePath { get; }

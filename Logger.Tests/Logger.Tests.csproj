@@ -9,6 +9,7 @@
 		<CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
 		<Nullable>enable</Nullable>
 		<LangVersion>10.0</LangVersion>
+		<AnalysisMode>EnableAllByDefault</AnalysisMode>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -23,17 +23,10 @@ namespace Logger.Tests
             var logger = new TestLogger();
             int[] array = { 42 };
 
-            // Act
-            try
-            {
+          
                 // Act
                 BaseLoggerMixins.Error(useValidClass ? logger : null!, message!, array);
 
-            }
-            catch (ArgumentNullException exception)
-            {
-                throw exception;
-            }
         }
 
         [TestMethod]
@@ -66,16 +59,8 @@ namespace Logger.Tests
             int[] array = { 25 };
 
             // Act
-            try
-            {
-                BaseLoggerMixins.Warning(useValidClass ? logger : null!, message!, array);
-            }
-            catch (ArgumentNullException exception)
-            {
+            BaseLoggerMixins.Warning(useValidClass ? logger : null!, message!, array);
 
-                throw exception;
-
-            }
 
         }
 
@@ -114,17 +99,10 @@ namespace Logger.Tests
             int[] array = { 33 };
 
             // Act
-            try
-            {
+        
                 BaseLoggerMixins.Information(useValidClass ? logger : null!, message!, array);
 
-            }
-            catch (ArgumentNullException exception)
-            {
-
-                throw exception;
-
-            }
+       
 
         }
 
@@ -179,16 +157,8 @@ namespace Logger.Tests
             var logger = new TestLogger();
             int[] array = { 24 };
             // Act
-            try
-            {
-                BaseLoggerMixins.Debug(useValidClass ? logger : null!, message!, array);
-            }
-            catch (ArgumentNullException exception)
-            {
-
-                throw exception;
-
-            }
+            BaseLoggerMixins.Debug(useValidClass ? logger : null!, message!, array);
+            
         }
     }
 

@@ -1,6 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 
 namespace Logger.Tests
 {
@@ -85,10 +83,7 @@ namespace Logger.Tests
 
         //-----------------------------------------------------------------------------------
         //Information
-        //-----------------------------------------------------------------------------------
-
-
-
+        
         [TestMethod]
         [DataRow(false, "test {0}")]
         [DataRow(true, null)]
@@ -96,18 +91,15 @@ namespace Logger.Tests
         public void Information_WithNullLogger_ThrowsException(bool useValidClass, string message)
         {
             var logger = new TestLogger();
+
             int[] array = { 33 };
 
             // Act
         
-                BaseLoggerMixins.Information(useValidClass ? logger : null!, message!, array);
-
-       
+             BaseLoggerMixins.Information(useValidClass ? logger : null!, message!, array);
 
         }
 
-
-        //TODO
         [TestMethod]
         public void Information_LogMessageWithValidData_Success()
         {
@@ -152,13 +144,12 @@ namespace Logger.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void Debug_WithNullLogger_ThrowsException(bool useValidClass, string message)
         {
-
             //Arrange
             var logger = new TestLogger();
             int[] array = { 24 };
             // Act
             BaseLoggerMixins.Debug(useValidClass ? logger : null!, message!, array);
-            
+
         }
     }
 

@@ -12,7 +12,7 @@ public class FileLoggerTests
         File.Delete(TEST_FILE);
         LogFactory logFactory = new LogFactory();
         logFactory.ConfigureFileLogger(TEST_FILE);
-        BaseLogger loggerWithFile = logFactory.CreateLogger(nameof(FileLoggerTests));
+        BaseLogger loggerWithFile = logFactory.CreateLogger(nameof(FileLogger))!;
         Assert.IsFalse(File.Exists(TEST_FILE));
 
         logFactory.ConfigureFileLogger(TEST_FILE);
@@ -26,7 +26,7 @@ public class FileLoggerTests
         File.Delete(TEST_FILE);
         LogFactory logFactory = new LogFactory();
         logFactory.ConfigureFileLogger(TEST_FILE);
-        BaseLogger loggerWithFile = logFactory.CreateLogger(nameof(FileLoggerTests));
+        BaseLogger loggerWithFile = logFactory.CreateLogger(nameof(FileLogger))!;
         Assert.IsFalse(File.Exists(TEST_FILE));
 
         loggerWithFile.Log(LogLevel.Information, "This log will instantiate a file at the given path.");
@@ -41,7 +41,7 @@ public class FileLoggerTests
         File.Delete(TEST_FILE);
         LogFactory logFactory = new LogFactory();
         logFactory.ConfigureFileLogger(TEST_FILE);
-        BaseLogger loggerWithFile = logFactory.CreateLogger(nameof(FileLoggerTests));
+        BaseLogger loggerWithFile = logFactory.CreateLogger(nameof(FileLogger))!;
         string originalMessage = "This log will instantiate a file at the given path.";
         loggerWithFile.Log(LogLevel.Information, originalMessage);
         Assert.IsTrue(File.Exists(TEST_FILE));

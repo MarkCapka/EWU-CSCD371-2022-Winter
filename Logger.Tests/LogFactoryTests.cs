@@ -11,19 +11,39 @@ namespace Logger.Tests
             LogFactory logFactory = new LogFactory();
 
             logFactory.ConfigureFileLogger("log.txt");
-            BaseLogger loggerWithFile = logFactory.CreateLogger(nameof(LogFactoryTests));
+            BaseLogger loggerWithFile = logFactory.CreateLogger(nameof(FileLogger))!;
 
             Assert.IsNotNull(loggerWithFile);
         }
 
         [TestMethod]
-        public void CreateLogger_UnconfiguredLoggerReturnsNull_Success()
+        public void CreateLogger_UnconfiguredFileLoggerReturnsNull_Success()
         {
             LogFactory logFactory = new LogFactory();
 
-            BaseLogger loggerWithFile = logFactory.CreateLogger(nameof(LogFactoryTests));
+            BaseLogger loggerWithFile = logFactory.CreateLogger(nameof(FileLogger))!;
 
             Assert.IsNull(loggerWithFile);
+        }
+
+        [TestMethod]
+        public void CreateLogger_ConsoleLoggerReturnsLogger_Success()
+        {
+            LogFactory logFactory = new LogFactory();
+
+            BaseLogger consoleLogger = logFactory.CreateLogger(nameof(ConsoleLogger))!;
+
+            Assert.IsNotNull(consoleLogger);
+        }
+
+        [TestMethod]
+        public void CreateLogger_UnknownLoggerReturnsNull_Success()
+        {
+            LogFactory logFactory = new LogFactory();
+
+            BaseLogger unknownLogger = logFactory.CreateLogger("FancyUnknownLogger")!;
+
+            Assert.IsNull(unknownLogger);
         }
     }
 }

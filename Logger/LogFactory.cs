@@ -1,6 +1,5 @@
 ﻿
-namespace Logger
-{
+namespace Logger;
     public class LogFactory
     {
         public bool FileLoggerIsConfigured { get; private set; }
@@ -19,19 +18,20 @@ namespace Logger
 
         public BaseLogger? CreateLogger(string className)
         {
-            
             switch (className)
             {
-                case "FileLogger":                    
-                    if (FileLoggerIsConfigured)
-                    {
-                        return new FileLogger(_filePath!);
-                    }
-                    break;
+            case "FileLogger":
+                if (FileLoggerIsConfigured)
+                {
+                    return new FileLogger(_filePath!);
+                }
+                break;
+            case "ConsoleLogger":
+                return new ConsoleLogger();
             }
             return null;
         }
     }
-}
+
 
 

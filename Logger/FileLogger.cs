@@ -19,9 +19,10 @@ public class FileLogger : BaseLogger
         FilePath = filePath;
     }
 
-    public override void Log(LogLevel logLevel, string message, [System.Runtime.CompilerServices.CallerMemberName] string loggedBy = "")
+    public override void Log(LogLevel logLevel, string message, [System.Runtime.CompilerServices.CallerFilePath] string loggedBy = "")
     {
-        string logEvent = $"{DateTime.Now} {loggedBy} {logLevel}: {message}\n";
+        string loggedByFileName = loggedBy.Substring(loggedBy.LastIndexOf("\\"), loggedBy.LastIndexOf("."));
+        string logEvent = $"{DateTime.Now} {loggedByFileName} {logLevel}: {message}\n";
         File.AppendAllText(FilePath, logEvent);
     }
 }

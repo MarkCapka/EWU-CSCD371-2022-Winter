@@ -51,8 +51,8 @@ public class FileLoggerTests
 
         string[] fileContents = File.ReadAllLines(TEST_FILE);
 
-        Assert.IsTrue(fileContents[0].Contains(originalMessage));
-        Assert.IsTrue(fileContents[1].Contains(appendedMessage));
+        Assert.IsTrue(fileContents[0].Contains($"FileLoggerTests Information: {originalMessage}"));
+        Assert.IsTrue(fileContents[1].Contains($"FileLoggerTests Information: {appendedMessage}"));
         File.Delete(TEST_FILE);
     }
 }

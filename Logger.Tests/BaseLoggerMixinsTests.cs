@@ -12,15 +12,19 @@ namespace Logger.Tests
         //-----------------------------------------------------------------------------------
 
         [TestMethod]
+        [DataRow(false, "test {0}")]
+        [DataRow(true, null)]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Error_WithNullLogger_ThrowsException()
+        public void Error_WithNullLogger_ThrowsException(bool useValidClass, string message)
         {
             // Arrange
+            var logger = new TestLogger();
+            int[] array = { 42 };
 
-            // Act
-            BaseLoggerMixins.Error(null!, "");   //TODO need error message? 
+          
+                // Act
+                BaseLoggerMixins.Error(useValidClass ? logger : null!, message!, array);
 
-            // Assert
         }
 
         [TestMethod]
@@ -50,15 +54,13 @@ namespace Logger.Tests
         {
             // Arrange
             var logger = new TestLogger();
-            int[] array = { 42 };
+            int[] array = { 25 };
 
             // Act
-
             BaseLoggerMixins.Warning(useValidClass ? logger : null!, message!, array);
 
-            // Assert
-        }
 
+        }
 
 
         [TestMethod]
@@ -68,12 +70,12 @@ namespace Logger.Tests
             var logger = new TestLogger();
 
             // Act
-            logger.Warning("Warning Message {0} {1}", 42, "test");
+            logger.Warning("Warning Message {0} {1}", 25, "test");
 
             // Assert
             Assert.AreEqual(1, logger.LoggedMessages.Count);
             Assert.AreEqual(LogLevel.Warning, logger.LoggedMessages[0].LogLevel);
-            Assert.AreEqual("Warning Message 42 test", logger.LoggedMessages[0].Message);
+            Assert.AreEqual("Warning Message 25 test", logger.LoggedMessages[0].Message);
         }
 
         //{message }, {logLevel }, ["this is the message", "Warning"];
@@ -89,9 +91,13 @@ namespace Logger.Tests
         public void Information_WithNullLogger_ThrowsException(bool useValidClass, string message)
         {
             var logger = new TestLogger();
-            int[] array = { 42 };
 
-            BaseLoggerMixins.Information(useValidClass ? logger : null!, message!, array);
+            int[] array = { 33 };
+
+            // Act
+        
+             BaseLoggerMixins.Information(useValidClass ? logger : null!, message!, array);
+
         }
 
         [TestMethod]
@@ -101,13 +107,13 @@ namespace Logger.Tests
             var logger = new TestLogger();
 
             // Act
-            logger.Information("Information Message {0} {1}", 42, "test");
+            logger.Information("Information Message {0} {1}", 33, "test");
 
 
             // Assert
             Assert.AreEqual(1, logger.LoggedMessages.Count);
             Assert.AreEqual(LogLevel.Information, logger.LoggedMessages[0].LogLevel);
-            Assert.AreEqual("Information Message 42 test", logger.LoggedMessages[0].Message);
+            Assert.AreEqual("Information Message 33 test", logger.LoggedMessages[0].Message);
         }
 
 
@@ -123,13 +129,14 @@ namespace Logger.Tests
             var logger = new TestLogger();
 
             // Act                    //  logger.Debug("Debug Message {0} {1}", [42, secondArgument]);
-            logger.Debug("Debug Message {0} {1}", 42, "test");
+            logger.Debug("Debug Message {0} {1}", 24, "test");
 
             // Assert
             Assert.AreEqual(1, logger.LoggedMessages.Count);
             Assert.AreEqual(LogLevel.Debug, logger.LoggedMessages[0].LogLevel);
-            Assert.AreEqual("Debug Message 42 test", logger.LoggedMessages[0].Message);
+            Assert.AreEqual("Debug Message 24 test", logger.LoggedMessages[0].Message);
         }
+
 
         [TestMethod]
         [DataRow(false, "test {0}")]
@@ -137,10 +144,12 @@ namespace Logger.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void Debug_WithNullLogger_ThrowsException(bool useValidClass, string message)
         {
+            //Arrange
             var logger = new TestLogger();
-            int[] array = { 42 };
-
+            int[] array = { 24 };
+            // Act
             BaseLoggerMixins.Debug(useValidClass ? logger : null!, message!, array);
+
         }
     }
 

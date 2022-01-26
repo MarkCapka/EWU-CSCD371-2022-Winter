@@ -1,40 +1,37 @@
 ﻿
-namespace Logger
-{
+namespace Logger;
     public class LogFactory
     {
-        public bool IsConfigured { get; private set; }
+        public bool FileLoggerIsConfigured { get; private set; }
         private string? _filePath;
 
         public LogFactory()
         {
-            IsConfigured = false;
+            FileLoggerIsConfigured = false;
         }
 
         public void ConfigureFileLogger(string path)
         {
-            IsConfigured = true;
+            FileLoggerIsConfigured = true;
             _filePath = path;
         }
 
-        public BaseLogger CreateLogger(string className)
+        public BaseLogger? CreateLogger(string className)
         {
-            if (!IsConfigured)
+            switch (className)
             {
-                return null!;
+            case "FileLogger":
+                if (FileLoggerIsConfigured)
+                {
+                    return new FileLogger(_filePath!);
+                }
+                break;
+            case "ConsoleLogger":
+                return new ConsoleLogger();
             }
-            BaseLogger fileLogger = new FileLogger(_filePath!)
-            {
-                ClassName = className,
-            };
-            return fileLogger;
+            return null;
         }
-
-
-
-
-
     }
-}
+
 
 

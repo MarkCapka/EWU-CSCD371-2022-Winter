@@ -2,8 +2,8 @@
 {
     public abstract class BaseLogger
     {
-        public string? ClassName { get; set; }
+        public string? CallingClassName { get; set; }
 
-        public abstract void Log(LogLevel logLevel, string message);
+        public abstract void Log(LogLevel logLevel, string message, [System.Runtime.CompilerServices.CallerMemberName] string loggedBy = "");
     }
 }

@@ -1,17 +1,10 @@
 ﻿namespace Logger;
-public class FileLogger : BaseLogger
-{
-    public string FilePath { get; }
-
-    public FileLogger(string filePath)
-    {
-        FilePath = filePath;
-        
-    }
+public class ConsoleLogger : BaseLogger
+{ 
 
     public override void Log(LogLevel logLevel, string message)
     {
-        string logEvent = $"{DateTime.Now} {ClassName} {logLevel}: {message}\n";
-        File.AppendAllText(FilePath, logEvent);
+        string logEvent = $"{DateTime.Now} {nameof(ConsoleLogger)} {logLevel}: {message}\n";
+        System.Console.WriteLine(logEvent);
    }
 }

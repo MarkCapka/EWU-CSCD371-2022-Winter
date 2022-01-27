@@ -27,7 +27,7 @@ namespace Logger;
                 }
                 break;
             case "ConsoleLogger":
-                return new ConsoleLogger();
+                    return new ConsoleLogger();        //TODO I think the issue is with passing a parameter here. 
             }
             return null;
         }

@@ -3,7 +3,7 @@ namespace Logger;
     public class LogFactory
     {
         public bool FileLoggerIsConfigured { get; private set; }
-        private string? _filePath;
+        private string? _FilePath;
 
         public LogFactory()
         {
@@ -13,7 +13,7 @@ namespace Logger;
         public void ConfigureFileLogger(string path)
         {
             FileLoggerIsConfigured = true;
-            _filePath = path;
+            _FilePath = path;
         }
 
         public BaseLogger? CreateLogger(string className)
@@ -23,7 +23,7 @@ namespace Logger;
             case "FileLogger":
                 if (FileLoggerIsConfigured)
                 {
-                    return new FileLogger(_filePath!);
+                    return new FileLogger(_FilePath!);
                 }
                 break;
             case "ConsoleLogger":

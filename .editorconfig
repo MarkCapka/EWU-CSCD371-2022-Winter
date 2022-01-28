@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# Globalization not required for this project
+dotnet_analyzer_diagnostic.category-Globalization.severity = none

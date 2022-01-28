@@ -13,18 +13,26 @@ public class ConsoleLoggerTests
         //arrange
         ConsoleLogger? logger = new();
         string message = "This log will be written to the console.";
-        logger.Log(LogLevel.Information, message);
+
 
         //TODO -- Assert something
-        IExecuteProcessActivity activity = new ExecuteProcessActivity("dotnet");
-        Console.WriteLine("Invoking((IExecuteProcessActivity)activity).Run()");
 
+        //Console redirect code: https://stackoverflow.com/a/11911722
+        var originalConsoleOut = Console.Out; // preserve the original stream
+        using (var writer = new StringWriter())
+        {
+            Console.SetOut(writer);
 
-        string activityOutput = ((IExecuteProcessActivity)activity.Run();
-        Console.WriteLine("Invoking activity.Run()");
+            //Console.WriteLine("some stuff"); // or make your DLL calls :)
+            logger.Log(LogLevel.Information, message);
 
+            writer.Flush(); // when you're done, make sure everything is written out
 
-        Assert.AreEqual(activityOutput, logger.Contains($"FileLoggerTests Information: {message}"));
+            var myString = writer.GetStringBuilder().ToString();
+            Assert.AreEqual(message, myString);
+        }
+
+        Console.SetOut(originalConsoleOut);
     }
 
 

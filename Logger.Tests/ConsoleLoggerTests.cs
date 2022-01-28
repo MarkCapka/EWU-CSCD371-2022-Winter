@@ -28,12 +28,9 @@ public class ConsoleLoggerTests
             writer.Flush(); // when you're done, make sure everything is written out
 
             var myString = writer.GetStringBuilder().ToString();
-            Assert.AreEqual(message, myString);
+            Assert.IsTrue(myString.Contains($"ConsoleLoggerTests Information: {message}"));
         }
-
         Console.SetOut(originalConsoleOut);
     }
-
-
 }
 

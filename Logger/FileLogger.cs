@@ -29,7 +29,7 @@ public class FileLogger : BaseLogger
         else
         {
             //use .Remove to delete everything before the file name, then use .Remove again to delete the file extension
-            loggedByFileName = loggedBy.Remove(0, loggedBy.LastIndexOf("\\"));
+            loggedByFileName = loggedBy.Remove(0, loggedBy.LastIndexOf("\\")+1);
             loggedByFileName = loggedByFileName.Remove(loggedByFileName.LastIndexOf("."));
         }
         string logEvent = $"{DateTime.Now} {loggedByFileName} {logLevel}: {message}\n";

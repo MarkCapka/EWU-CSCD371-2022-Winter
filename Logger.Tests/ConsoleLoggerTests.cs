@@ -13,9 +13,7 @@ public class ConsoleLoggerTests
         //arrange
         ConsoleLogger? logger = new();
         string message = "This log will be written to the console.";
-
-        //TODO -- Assert something
-
+        
         //Console redirect code: https://stackoverflow.com/a/11911722
         var originalConsoleOut = Console.Out; // preserve the original stream
         using (var writer = new StringWriter())

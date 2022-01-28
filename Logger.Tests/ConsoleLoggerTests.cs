@@ -14,7 +14,6 @@ public class ConsoleLoggerTests
         ConsoleLogger? logger = new();
         string message = "This log will be written to the console.";
 
-
         //TODO -- Assert something
 
         //Console redirect code: https://stackoverflow.com/a/11911722

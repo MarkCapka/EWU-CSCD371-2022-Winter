@@ -16,10 +16,15 @@ public class ConsoleLoggerTests
         logger.Log(LogLevel.Information, message);
 
         //TODO -- Assert something
-        
-       
+        IExecuteProcessActivity activity = new ExecuteProcessActivity("dotnet");
+        Console.WriteLine("Invoking((IExecuteProcessActivity)activity).Run()");
 
-        Assert.IsTrue(logger.Contains($"FileLoggerTests Information: {message}"));
+
+        string activityOutput = ((IExecuteProcessActivity)activity.Run();
+        Console.WriteLine("Invoking activity.Run()");
+
+
+        Assert.AreEqual(activityOutput, logger.Contains($"FileLoggerTests Information: {message}"));
     }
 
 

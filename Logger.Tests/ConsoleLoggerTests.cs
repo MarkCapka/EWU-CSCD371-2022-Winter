@@ -12,19 +12,19 @@ public class ConsoleLoggerTests
 
         //arrange
         ConsoleLogger? logger = new();
-        string message = "This log will be written to the console.";
+        string? message = "This log will be written to the console.";
         logger.Log(LogLevel.Information, message);
 
         //TODO -- Assert something
-        IExecuteProcessActivity activity = new ExecuteProcessActivity("dotnet");
+        IExecuteProcessActivity? activity = new ExecuteProcessActivity("dotnet");
         Console.WriteLine("Invoking((IExecuteProcessActivity)activity).Run()");
 
 
-        string activityOutput = ((IExecuteProcessActivity)activity.Run();
+        ((IExecuteProcessActivity?)activity.Run();
         Console.WriteLine("Invoking activity.Run()");
+        activity.Run();
 
-
-        Assert.AreEqual(activityOutput, logger.Contains($"FileLoggerTests Information: {message}"));
+        Assert.AreEqual(activity.Run(), logger.Contains($"FileLoggerTests Information: {message}"));
     }
 
 

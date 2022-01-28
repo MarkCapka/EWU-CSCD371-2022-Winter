@@ -16,10 +16,10 @@ namespace Logger;
             _FilePath = path;
         }
 
-        public BaseLogger? CreateLogger(string className)
+    public BaseLogger? CreateLogger(string className)
+    {
+        switch (className)
         {
-            switch (className)
-            {
             case "FileLogger":
                 if (FileLoggerIsConfigured)
                 {

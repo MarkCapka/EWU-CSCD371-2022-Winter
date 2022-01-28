@@ -3,22 +3,27 @@
 public class ConsoleLogger : BaseLogger
 {
 
-    private readonly IConsoleIO? ConsoleIO;
+    private readonly IExecuteProcessActivity? ExecuteProcessActivity;
 
     public ConsoleLogger()
     {
-        ConsoleIO? consoleIO = new ConsoleIO();
+        ConsoleLogger? logger = new();
     }
 
-    public ConsoleLogger(IConsoleIO? consoleIO)
+    public ConsoleLogger(ConsoleLogger? logger)
     {
-        ConsoleIO = consoleIO;
+        ExecuteProcessActivity = (IExecuteProcessActivity?)logger;
     }
 
     public override void Log(LogLevel logLevel, string message, [System.Runtime.CompilerServices.CallerFilePath] string loggedBy = "")
     {
         string logEvent = $"{DateTime.Now} {loggedBy} {logLevel}: {message}\n";
-        ConsoleIO?.WriteLine(logEvent);
+        Console.WriteLine(logEvent);
 
     }
+
+
+
+
+
 }

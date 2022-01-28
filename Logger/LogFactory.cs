@@ -1,25 +1,25 @@
 ﻿
-namespace Logger;
-    public class LogFactory
+namespace Logger.Tests;
+public class LogFactory
+{
+    public bool FileLoggerIsConfigured { get; private set; }
+    private string? _filePath;
+
+    public LogFactory()
     {
-        public bool FileLoggerIsConfigured { get; private set; }
-        private string? _filePath;
+        FileLoggerIsConfigured = false;
+    }
 
-        public LogFactory()
-        {
-            FileLoggerIsConfigured = false;
-        }
+    public void ConfigureFileLogger(string path)
+    {
+        FileLoggerIsConfigured = true;
+        _filePath = path;
+    }
 
-        public void ConfigureFileLogger(string path)
+    public BaseLogger? CreateLogger(string className)
+    {
+        switch (className)
         {
-            FileLoggerIsConfigured = true;
-            _filePath = path;
-        }
-
-        public BaseLogger? CreateLogger(string className)
-        {
-            switch (className)
-            {
             case "FileLogger":
                 if (FileLoggerIsConfigured)
                 {
@@ -27,11 +27,11 @@ namespace Logger;
                 }
                 break;
             case "ConsoleLogger":
-                    return new ConsoleLogger();        //TODO I think the issue is with passing a parameter here. 
-            }
-            return null;
+                return new ConsoleLogger();        //TODO I think the issue is with passing a parameter here. 
         }
+        return null;
     }
+}
 
 
 

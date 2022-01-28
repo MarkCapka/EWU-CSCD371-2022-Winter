@@ -39,7 +39,7 @@ public class FileLoggerTests
     public void Log_LogFunctionAppendsToFileWhenFileExist_Success()
     {
         File.Delete(TEST_FILE);
-        LogFactory logFactory = new LogFactory();
+        LogFactory logFactory = new();
         logFactory.ConfigureFileLogger(TEST_FILE);
         BaseLogger loggerWithFile = logFactory.CreateLogger(nameof(FileLogger))!;
         string originalMessage = "This log will instantiate a file at the given path.";

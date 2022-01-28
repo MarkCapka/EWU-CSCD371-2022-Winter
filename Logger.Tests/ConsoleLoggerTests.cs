@@ -13,21 +13,11 @@ public class ConsoleLoggerTests
         //arrange
       
         string message = "This log will be written to the console.";
+        logger.Log(LogLevel.Information, message);
 
+        //TODO -- Assert something
 
-        var mockConsoleIO = new Mock<IConsoleIO>();
-        mockConsoleIO.Setup(x => x.ReadLine()).Returns(message);
-        var consoleLogger = new ConsoleLogger(mockConsoleIO.Object);
-        
-        //act
-        consoleLogger.Log(LogLevel.Information, message);
-
-
-
-        // Assert 
-        mockConsoleIO.Verify(x => x.WriteLine("This log will be written to the console."), Times.Once()); 
-
-
+        Assert.IsTrue(logger.Contains($"FileLoggerTests Information: {message}"));
     }
 
 

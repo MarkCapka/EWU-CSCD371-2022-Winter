@@ -1,18 +1,7 @@
-﻿using System;
-
-namespace CanHazFunny
+﻿namespace CanHazFunny
 {
-
-    //should output our JokeService to the screen
-    public interface IJesterOutput : IJokeService
+    public interface IJesterOutput
     {
-
-        IJesterOutput? JesterOutput { get; }
-        string? joke = GetJoke();
-
-        
-        JesterOutput jokeOutput = new ();
-
-       
+        public void JesterPrint(string joke);
     }
 }

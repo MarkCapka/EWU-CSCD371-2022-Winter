@@ -1,42 +1,33 @@
-﻿namespace CanHazFunny;
+﻿
+namespace CanHazFunny;
+using System;
 
-public class Jester : IJesterOutput: IJokeService
+
+
+public class Jester 
 {
+    private IJesterOutput _JesterOutput;
+    private IJokeService _JokeService;
+    
+    public IJokeService JokeService { get { return _JokeService; } }
+    public IJesterOutput JesterOutput { get { return _JesterOutput; } }
 
-        public JesterOutput jesterOutput { get; }
-        public JokeService joke { get; }
-        Jester jester = new();
-   
 
-public Jester(JesterOutput jesterOutput, JokeService joke)
+    public Jester(IJesterOutput jesterOutput, IJokeService jokeService)
     {
-        JesterOutput = jesterOutput;
-        Joke = joke;
+        _JesterOutput = jesterOutput ?? throw new ArgumentNullException(nameof(jesterOutput));
+        _JokeService = jokeService ?? throw new ArgumentNullException(nameof(jokeService));
 
     }
 
-
-
-
-        
-    public string tellJoke(jesterOutput, jokeService)
+    public void TellJoke()
     {
-    Jester jester = new();
-    JokeService joke = new();
-   
-    jester.TellJoke(joke);
+        string joke = JokeService.GetJoke();
 
-    string? jokeOut = "write out joke to console: Jester.Telljoke: {0}", joke;
 
-    //fetch joke using GetJoke()
-   
-    return joke;
-        //output joke
+        JesterOutput.JesterPrint(joke);
     }
-
-
-
-
 
    
 }
+

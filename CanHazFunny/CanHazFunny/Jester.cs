@@ -4,30 +4,20 @@ using System;
 
 
 
-public class Jester 
+public class Jester : IJesterOutput
 {
-    private IJesterOutput _JesterOutput;
-    private IJokeService _JokeService;
     
-    public IJokeService JokeService { get { return _JokeService; } }
-    public IJesterOutput JesterOutput { get { return _JesterOutput; } }
-
-
-    public Jester(IJesterOutput jesterOutput, IJokeService jokeService)
-    {
-        _JesterOutput = jesterOutput ?? throw new ArgumentNullException(nameof(jesterOutput));
-        _JokeService = jokeService ?? throw new ArgumentNullException(nameof(jokeService));
-
-    }
+    public JokeService JokeService { get { return new (); } }
 
     public void TellJoke()
     {
         string joke = JokeService.GetJoke();
-
-
-        JesterOutput.JesterPrint(joke);
+        JesterPrint(joke);
     }
 
-   
+    public void JesterPrint(string joke)
+    {
+        throw new NotImplementedException();
+    }
 }
 

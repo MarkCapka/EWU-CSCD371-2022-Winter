@@ -17,7 +17,8 @@ public class Jester : IJesterOutput
 
     public void JesterPrint(string joke)
     {
-        throw new NotImplementedException();
+
+        Console.WriteLine(joke);
     }
 }
 

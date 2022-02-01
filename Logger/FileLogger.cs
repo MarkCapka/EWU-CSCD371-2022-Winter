@@ -9,6 +9,10 @@ using System.Text;
 
 //.NET 6.0  MSTest Visual Studio 2022
 
+
+//TODO feedback comment: there is alo to fadditional stuff here that should not be in the FileLogger.cs
+
+
 namespace Logger;
 public class FileLogger : BaseLogger
 {

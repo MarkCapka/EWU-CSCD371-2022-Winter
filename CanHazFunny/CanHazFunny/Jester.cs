@@ -17,6 +17,7 @@ public class Jester : IJesterOutput
 
     public void JesterPrint(string joke)
     {
+
         Console.WriteLine(joke);
     }
 }

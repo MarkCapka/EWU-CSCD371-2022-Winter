@@ -38,12 +38,7 @@ namespace CanHazFunny.Tests
         [TestMethod]
         public void JesterTellJoke_TellJokePrintsToConsole_Success()
         {
-
-            string? joke = "This joke will be written to the console.";
-
-            var mockJesterOutput = new Mock<IJesterOutput>();
-            mockJesterOutput.Setup(jester => jester.JesterPrint(joke));
-
+            Jester joker = new();
             //Console redirect code: https://stackoverflow.com/a/11911722
             var originalConsoleOut = Console.Out; // preserve the original stream
             using (var writer = new StringWriter())
@@ -51,14 +46,14 @@ namespace CanHazFunny.Tests
                 Console.SetOut(writer);
 
                 //Console.WriteLine("some stuff"); // or make your DLL calls :)
-                mockJesterOutput.Object.JesterPrint(joke);
-                Console.WriteLine(joke);
+                joker.TellJoke();
 
                 writer.Flush(); // when you're done, make sure everything is written out
 
                 var myString = writer.GetStringBuilder().ToString();
                 Console.WriteLine(myString);
-                Assert.IsTrue(myString.Equals(joke + "\r\n"));
+                Assert.IsTrue(!string.IsNullOrEmpty(myString));
+                Assert.IsTrue(!myString.ToLower().Contains("chuck") & !myString.ToLower().Contains("norris"));
             }
             Console.SetOut(originalConsoleOut);
         }

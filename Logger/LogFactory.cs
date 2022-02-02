@@ -34,7 +34,7 @@ public class LogFactory
                 if (FileLoggerIsConfigured)
                 {                                               //pattern matching below
                     return new FileLogger(FilePath!);
-                    //Notes for polymorphism
+         //Notes for polymorphism
                    //should utilize the below instead.
                    //switch((FilePath, className)) 
                         //case(null, _FilePath):

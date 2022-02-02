@@ -7,7 +7,7 @@ using System;
 public class Jester : IJesterOutput, IJokeService
 {
     
-    public static JokeService JokeService { get { return new (); } }
+    private JokeService JokeService { get { return new (); } }
 
 
     public void TellJoke()

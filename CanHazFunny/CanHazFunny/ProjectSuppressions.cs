@@ -7,4 +7,4 @@ using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Globalization", "CA1307:Specify StringComparison", Justification = "Don't need to consider globalization")]
 [assembly: SuppressMessage("Globalization", "CA1304:Specify CultureInfo", Justification = "Don't need to consider globalization")]
-[assembly: SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Main is upset that it is so simple... we think", Scope = "member", Target = "~M:CanHazFunny.Program.Main(System.String[])")]
+[assembly: SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "We know better than to trust the compiler on 'static'")]

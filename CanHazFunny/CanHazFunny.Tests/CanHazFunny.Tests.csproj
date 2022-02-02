@@ -13,6 +13,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="GlobalSupressions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="NewFile1.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="IntelliTect.Analyzers" Version="0.1.8" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
     <PackageReference Include="Moq" Version="4.16.1" />

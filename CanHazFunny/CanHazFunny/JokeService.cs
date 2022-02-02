@@ -1,30 +1,21 @@
 ﻿using System.Net.Http;
-using System.URI;
+using System;
 namespace CanHazFunny
 {
     public class JokeService : IJokeService
     {
         private HttpClient HttpClient { get; } = new();
 
-        public string GetJoke()    //TODO confirm if nullable should be addressed.
+        public string GetJoke()
         {
-             string joke = "Links to Joke Service: Generates Joke, commented out until final result to avoid API calls...";
-            // string chuckJoke = "Coroners refer to dead people as \"ABC's\". Already Been Chucked."; //TODO test specifically for this line.
+            string joke = "Coroners refer to dead people as \"ABC's\". Already Been Chucked."; //Favorite joke   (one that always fails ;)
             
-            //TODO add  line below back and comment out the one above. For sake of not making incessant calls to the API. 
-           
-            
-            //string? joke = HttpClient.GetStringAsync("https://geek-jokes.sameerkumar.website/api").Result;   //TODO UNCOMMENT THIS LINE FOR API CALLStry{try{
-
-            while (joke.ToLower().Contains("Chuck") || joke.ToLower().Contains("Norris"))
+            //Make like your favorite action hero and do some roundhouse kicks on the jokes
+            while (joke.ToLower().Contains("chuck") || joke.ToLower().Contains("norris"))
             {
-
-              
                 joke = HttpClient.GetStringAsync(new Uri("https://geek-jokes.sameerkumar.website/api")).Result;
             }
             return joke;
         }
-
-
     }
 }

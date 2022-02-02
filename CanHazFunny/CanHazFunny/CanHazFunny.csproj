@@ -11,6 +11,15 @@
 		<Nullable>enable</Nullable>
 		<LangVersion>10.0</LangVersion>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="GlobalSuppressions.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="NewFile1.txt" />
+	  <None Remove="Program.c" />
+	</ItemGroup>
  <ItemGroup>
     <PackageReference Include="IntelliTect.Analyzers" Version="0.1.8" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />

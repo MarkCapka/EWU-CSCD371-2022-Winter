@@ -4,14 +4,15 @@ using System;
 
 
 
-public class Jester : IJesterOutput
+public class Jester : IJesterOutput, IJokeService
 {
     
     public JokeService JokeService { get { return new (); } }
 
+
     public void TellJoke()
     {
-        string joke = JokeService.GetJoke();
+        string joke = GetJoke();
         JesterPrint(joke);
     }
 
@@ -19,6 +20,11 @@ public class Jester : IJesterOutput
     {
 
         Console.WriteLine(joke);
+    }
+
+    public string GetJoke()
+    {
+        return ((IJokeService)JokeService).GetJoke();
     }
 }
 

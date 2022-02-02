@@ -26,7 +26,6 @@ namespace CanHazFunny.Tests
 
             string? joke = "This joke will be written to the console.";
 
-
             var mockTestJesterGetJoke = new Mock<IJokeService>();
             mockTestJesterGetJoke.SetupSequence(jester => jester.GetJoke()).Returns(joke).Returns("Again: " + joke);
 
@@ -53,12 +52,12 @@ namespace CanHazFunny.Tests
 
                 //Console.WriteLine("some stuff"); // or make your DLL calls :)
                 mockJesterOutput.Object.JesterPrint(joke);
-                System.Console.WriteLine(joke);
+                Console.WriteLine(joke);
 
                 writer.Flush(); // when you're done, make sure everything is written out
 
                 var myString = writer.GetStringBuilder().ToString();
-                System.Console.WriteLine(myString);
+                Console.WriteLine(myString);
                 Assert.IsTrue(myString.Equals(joke + "\r\n"));
             }
             Console.SetOut(originalConsoleOut);

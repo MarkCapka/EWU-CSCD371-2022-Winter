@@ -1,13 +1,13 @@
 ﻿namespace CanHazFunny;
 using System;
 
-    class Program
-    {
-    
+class Program
+{
+
     public static void Main()
     {
         Jester funnyJester = new Jester();
         funnyJester.TellJoke();
     }
-    }
+}
 

@@ -9,3 +9,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "Underscores allowed in test method names")]
 [assembly: SuppressMessage("Globalization", "CA1304:Specify CultureInfo", Justification = "Don't need to consider globalization")]
 [assembly: SuppressMessage("Globalization", "CA1307:Specify StringComparison", Justification = "Don't need to consider globalization")]
+

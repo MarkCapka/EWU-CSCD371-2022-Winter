@@ -2,8 +2,6 @@
 {
     public interface IJokeService
     {
-
-       string GetJoke(); // //generates joke from website 
-     
+        string GetJoke(); // //generates joke from website 
     }
 }

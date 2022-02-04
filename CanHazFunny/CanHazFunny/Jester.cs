@@ -6,9 +6,8 @@ using System;
 
 public class Jester : IJesterOutput, IJokeService
 {
-    
-    private JokeService JokeService { get { return new (); } }
 
+    private JokeService JokeService { get { return new(); } }
 
     public void TellJoke()
     {
@@ -23,8 +22,7 @@ public class Jester : IJesterOutput, IJokeService
     }
 
     public string GetJoke()
-    { 
+    {
         return ((IJokeService)JokeService).GetJoke();
     }
 }
-

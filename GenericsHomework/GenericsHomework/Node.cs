@@ -21,7 +21,7 @@ public class Node<TPrevious, TCurrent, TNext>
 {
     private Node<TPrevious, TCurrent, TNext> _Node = new();
     //Linked list will hold a node that has a reference to the node before it, itself (to track which node is highlighted in linkedlist), and to the next. 
-    private LinkedList<TNode> _LinkedList = new(); //TODO arbitrary potential params currently   //know we need a next, not sure about current or previous
+    private LinkedList<Node> _LinkedList = new(); //TODO arbitrary potential params currently   //know we need a next, not sure about current or previous
 
   
 

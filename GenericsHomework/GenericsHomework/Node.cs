@@ -86,11 +86,11 @@ Include a constuctor that takes a value. S(No validation is necessary on the val
     {
         public object NodeData;
 
-    public Node CurrentNode;
-    public Node NextNode;
-    private static Node<T> firstNode;
-    private static Node<T> lastNode;
-}
+        public Node CurrentNode;
+        public Node NextNode;
+        private static Node<T> firstNode;
+        private static Node<T> lastNode;
+    }
 
 public Node<T> CurrentNode
 {
@@ -181,7 +181,7 @@ internal class LinkedList<TNode>
         //TODO psuedocode
         //if(valu of node.NotEqual(any other node in linkedlist))
         //if (node.next.Equals(current))    //reached end of the list
-        //{
+//{
         //    LinkedList.Add(node.Next());
         //}
 

@@ -5,8 +5,8 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "<Pending>", Scope = "member", Target = "~M:GenericsHomework.Tests.GenericsHomeworkTests.Node_ConstructsHeadNode_Success")]
-[assembly: SuppressMessage("Naming", "INTL0003:Methods PascalCase", Justification = "<Pending>", Scope = "member", Target = "~M:GenericsHomework.Tests.GenericsHomeworkTests.Node_ConstructsHeadNode_Success")]
+//[assembly: SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "<Pending>", Scope = "member", Target = "~M:GenericsHomework.Tests.GenericsHomeworkTests.Node_ConstructsHeadNode_Success")]
+//[assembly: SuppressMessage("Naming", "INTL0003:Methods PascalCase", Justification = "<Pending>", Scope = "member", Target = "~M:GenericsHomework.Tests.GenericsHomeworkTests.Node_ConstructsHeadNode_Success")]
 [assembly: SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "<Pending>", Scope = "member", Target = "~M:GenericsHomework.Tests.GenericsHomeworkTests.Node_ConstructsNode_Success")]
 [assembly: SuppressMessage("Naming", "INTL0003:Methods PascalCase", Justification = "<Pending>", Scope = "member", Target = "~M:GenericsHomework.Tests.GenericsHomeworkTests.Node_ConstructsNode_Success")]
 [assembly: SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "<Pending>", Scope = "member", Target = "~M:GenericsHomework.Tests.GenericsHomeworkTests.CircularLinkedList_AppendsNode_Success")]

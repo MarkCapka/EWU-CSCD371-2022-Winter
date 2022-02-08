@@ -42,7 +42,11 @@ namespace GenericsHomework.Tests
             // CircularLinkedList<Node<string>>.Node<string>.Head = head; 
            // list.Append((string)value);
             //list.Append(head);
-            list.Append(node2);
+            //list.Append(value);
+
+           
+            list.Append(value2);
+           
 
             //Node<string> node1 = new();
             //Node<string> node2 = new();
@@ -52,7 +56,8 @@ namespace GenericsHomework.Tests
             //            node1.Append(node2);
             //Head = new Node<T>(value);
             //node.Next = Head; //since only thing it will point to itself
-
+            //  Console.WriteLine(list.ToString());
+            //Assert.AreEqual<string>(Current.ToString(), "hello->howdy");
             Assert.AreEqual<string>(list.ToString(), "hello->howdy");
             //  Assert.AreEqual<Node<string>>(Head.Next, Head);
         }

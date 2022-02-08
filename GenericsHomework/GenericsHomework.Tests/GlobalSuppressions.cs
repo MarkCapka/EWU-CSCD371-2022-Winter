@@ -13,3 +13,5 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Naming", "INTL0003:Methods PascalCase", Justification = "<Pending>", Scope = "member", Target = "~M:GenericsHomework.Tests.GenericsHomeworkTests.SimpleLinkedList_AppendsNode_Success")]
 [assembly: SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "<Pending>", Scope = "member", Target = "~M:GenericsHomework.Tests.GenericsHomeworkTests.SimpleLinkedList_ClearClears_Success")]
 [assembly: SuppressMessage("Naming", "INTL0003:Methods PascalCase", Justification = "<Pending>", Scope = "member", Target = "~M:GenericsHomework.Tests.GenericsHomeworkTests.SimpleLinkedList_ClearClears_Success")]
+[assembly: SuppressMessage("Naming", "INTL0003:Methods PascalCase", Justification = "<Pending>", Scope = "member", Target = "~M:GenericsHomework.Tests.GenericsHomeworkTests.SimpleLinkedList_AddsDuplicate_Fail")]
+[assembly: SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "<Pending>", Scope = "member", Target = "~M:GenericsHomework.Tests.GenericsHomeworkTests.SimpleLinkedList_AddsDuplicate_Fail")]

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Text;
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("GenericsHomework.Tests")]
 
+//TODO make circular
 
 namespace GenericsHomework;
 internal class SimpleLinkedList<T> : IEnumerable, IEnumerator<Node<T>> where T : notnull
@@ -42,6 +43,11 @@ internal class SimpleLinkedList<T> : IEnumerable, IEnumerator<Node<T>> where T :
             current = current.Next;
         }
         return current.NodeData.Equals(value);
+    }
+
+    internal void Append(Node<string> node2)
+    {
+        throw new NotImplementedException();
     }
 
 

@@ -33,7 +33,9 @@ namespace GenericsHomework.Tests
             string value2 = "howdy";
             Node<string> head = new Node<string>(value);
             Node<string> node2 = new Node<string>(value2);
-            SimpleLinkedList<Node<string>> list = new SimpleLinkedList<Node<string>>(head);
+            SimpleLinkedList<Node<string>> list = new(head);
+           
+
             //Node<T> SimpleLinkedList<Node<T>>.Current => Head;
 
 
@@ -78,7 +80,7 @@ namespace GenericsHomework.Tests
 
             //TODO for the test below, might need to do bool.toString()? may also need cast in appends
             Assert.AreEqual<string>(list.ToString(), "hello->true->0->goodbye");
-            Assert.AreEqual<string>(typeof(list[3]).ToString(), "string"); //TODO confirm if best way to call this... probably not
+            //Assert.AreEqual<string>(typeof(list[3]).ToString(), "string"); //TODO confirm if best way to call this... probably not
           //  Assert.IsTrue(list.(SimpleLinkedList<string>.Next()), "goodbye"); //points back to itself
 
         }

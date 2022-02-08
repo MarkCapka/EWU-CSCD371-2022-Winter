@@ -6,7 +6,7 @@ using System.Text;
 //TODO make circular
 
 namespace GenericsHomework;
-internal class SimpleLinkedList<T> : IEnumerable, IEnumerator<Node<T>> where T : notnull
+internal class CircularLinkedList<T> : IEnumerable, IEnumerator<Node<T>> where T : notnull
 {
     private Node<T> Head { get; set; }
 
@@ -14,11 +14,11 @@ internal class SimpleLinkedList<T> : IEnumerable, IEnumerator<Node<T>> where T :
 
     public Node<T> Current => Head;
 
-    public SimpleLinkedList(T value)
+    public CircularLinkedList(T value)
     {
         Head = new Node<T>(value);
     }
-    public SimpleLinkedList(Node<T> head)
+    public CircularLinkedList(Node<T> head)
     {
         Head = head;
     }
@@ -45,11 +45,7 @@ internal class SimpleLinkedList<T> : IEnumerable, IEnumerator<Node<T>> where T :
         return current.NodeData.Equals(value);
     }
 
-    internal void Append(Node<string> node2)
-    {
-        throw new NotImplementedException();
-    }
-
+    //TODO answer questions here about tail s
 
     //TODO consider: Whether it is sufficient to only set Next to itself ❌✔
     //Whether to set the removed items to circle back on themselves. In other words, whether to close the loop of the removed items. (Provide a test to show why this is required if it is required). ❌✔

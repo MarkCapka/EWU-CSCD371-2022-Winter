@@ -33,13 +33,13 @@ namespace GenericsHomework.Tests
             string value2 = "howdy";
             Node<string> head = new Node<string>(value);
             Node<string> node2 = new Node<string>(value2);
-            SimpleLinkedList<Node<string>> list = new(head);
+            CircularLinkedList<Node<string>> list = new(head);
            
 
-            //Node<T> SimpleLinkedList<Node<T>>.Current => Head;
+            //Node<T> CircularLinkedList<Node<T>>.Current => Head;
 
 
-            // SimpleLinkedList<Node<string>>.Node<string>.Head = head; 
+            // CircularLinkedList<Node<string>>.Node<string>.Head = head; 
            // list.Append((string)value);
             //list.Append(head);
             list.Append(node2);
@@ -58,7 +58,7 @@ namespace GenericsHomework.Tests
         }
 
         [TestMethod]
-        public void SimpleLinkedList_AppendsNode_Success()
+        public void CircularLinkedList_AppendsNode_Success()
         {
             //    throw new NotImplementedException();
 
@@ -71,7 +71,7 @@ namespace GenericsHomework.Tests
             string value4 = "goodbye";
 
 
-            SimpleLinkedList<object> list = new SimpleLinkedList<object>(value);
+            CircularLinkedList<object> list = new CircularLinkedList<object>(value);
 
             list.Append(value);
             list.Append(value2);
@@ -81,20 +81,20 @@ namespace GenericsHomework.Tests
             //TODO for the test below, might need to do bool.toString()? may also need cast in appends
             Assert.AreEqual<string>(list.ToString(), "hello->true->0->goodbye");
             //Assert.AreEqual<string>(typeof(list[3]).ToString(), "string"); //TODO confirm if best way to call this... probably not
-          //  Assert.IsTrue(list.(SimpleLinkedList<string>.Next()), "goodbye"); //points back to itself
+          //  Assert.IsTrue(list.(CircularLinkedList<string>.Next()), "goodbye"); //points back to itself
 
         }
 
         [TestMethod]
-        public void SimpleLinkedList_ClearClears_Success()
+        public void CircularLinkedList_ClearClears_Success()
         {
             string value = "hello";
             string value2 = "howdy";
             string value3 = "all alone";
 
 
-            //SimpleLinkedList<Node<string>> list = new SimpleLinkedList<Node<string>(value as Node<string>);
-            SimpleLinkedList<string> list = new SimpleLinkedList<string>(value);
+            //CircularLinkedList<Node<string>> list = new CircularLinkedList<Node<string>(value as Node<string>);
+            CircularLinkedList<string> list = new CircularLinkedList<string>(value);
 
             list.Append(value2);
             list.Append(value3); 
@@ -109,30 +109,30 @@ namespace GenericsHomework.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void SimpleLinkedList_AddsDuplicate_Fail()
+        public void CircularLinkedList_AddsDuplicate_Fail()
         {
             string value = "hello";
             string value2 = "howdy";
             string value3 = "hello";
 
 
-            //SimpleLinkedList<Node<string>> list = new SimpleLinkedList<Node<string>(value as Node<string>);
-            SimpleLinkedList<string> list = new SimpleLinkedList<string>(value);
+            //CircularLinkedList<Node<string>> list = new CircularLinkedList<Node<string>(value as Node<string>);
+            CircularLinkedList<string> list = new CircularLinkedList<string>(value);
 
             list.Append(value2);
             list.Append(value3);
             //only last appended value (which is the current value) should remain
 
             Assert.AreEqual<string>(list.ToString(), "hello->howdy");
-          //  Assert.AreEqual<string>(SimpleLinkedlist.Node<string>.Next, value3); //another attempt
-          //  Assert.AreEqual<string>(list.Next, "howdy"); //points back to itself //this was  MoveNext from SimpleLInkedLIst and is is a boolean return, but depending on that boolean will detmine action? 
+          //  Assert.AreEqual<string>(CircularLinkedList.Node<string>.Next, value3); //another attempt
+          //  Assert.AreEqual<string>(list.Next, "howdy"); //points back to itself //this was  MoveNext from CircularLinkedList and is is a boolean return, but depending on that boolean will detmine action? 
             
         }
 
 
         //[TestMethod]   //TODO this might be a duplicate with the one above
         ////[ExpectedException]
-        //public void SimpleLinkedList_AttemptToAddDuplicateThowsException_Fail()
+        //public void CircularLinkedList_AttemptToAddDuplicateThowsException_Fail()
         //{
         //    throw new NotImplementedException();
 
@@ -146,7 +146,7 @@ namespace GenericsHomework.Tests
 
 
     //building an attempt at a constructor, however, couldn't get it to work with enums... will clarify tomorrow
-        //public class SimpleLinkedList<T>
+        //public class CircularLinkedList<T>
         //        where T : notnull
 
 
@@ -157,7 +157,7 @@ namespace GenericsHomework.Tests
 
         //    //Console.Write(this.toString());
         //   public List<(GenericsHomework.Node<T> Node, GenericsHomework.Node<T> Next)> List { get; } = new ();
-        //    SimpleLinkedList<T>
+        //    CircularLinkedList<T>
 
 
     }

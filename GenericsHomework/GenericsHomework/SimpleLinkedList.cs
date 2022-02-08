@@ -21,6 +21,7 @@ internal class SimpleLinkedList<T> : ICollection<T> where T : notnull
     public SimpleLinkedList(Node<T> head)
     {
         Head = head;
+        Head.Next = Head;
     }
     public void Append(T value)
     {
@@ -72,13 +73,16 @@ internal class SimpleLinkedList<T> : ICollection<T> where T : notnull
                 throw new ArgumentException($"NodeData with value {item} is a duplicate to another Node's data");
             }
         }
+        Count++;
         current.Next = new Node<T>(item);
+        current.Next.Next = Head;
     }
 
     public bool Contains(T item)
     {
         Node<T> current = Head;
-        while (!current.Next.Equals(current) && !current.NodeData.Equals(item))
+        int searched = 0;
+        while (!current.Next.Equals(current) && searched < Count)
         {
             current = current.Next;
         }

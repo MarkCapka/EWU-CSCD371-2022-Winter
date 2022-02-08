@@ -31,18 +31,24 @@ namespace GenericsHomework.Tests
 
             string value = "hello";
             string value2 = "howdy";
-            Node<string> head = new Node<string>(value);
-            Node<string> node2 = new Node<string>(value2);
-            SimpleLinkedList<Node<string>> list = new(head);
-           
+            Node<string> Head = new(value);
+            SimpleLinkedList<string> list = new(Head);          // Head = new Node<T>(value);
+           // SimpleLinkedList<Node<string>> Current = new(Head);
+
+
+            // Node<string> node2 = new(value2);
+
 
             //Node<T> SimpleLinkedList<Node<T>>.Current => Head;
 
-
             // SimpleLinkedList<Node<string>>.Node<string>.Head = head; 
-           // list.Append((string)value);
+            // list.Append((string)value);
             //list.Append(head);
-            list.Append(node2);
+            //list.Append(value);
+
+           
+            list.Append(value2);
+           
 
             //Node<string> node1 = new();
             //Node<string> node2 = new();
@@ -52,81 +58,10 @@ namespace GenericsHomework.Tests
             //            node1.Append(node2);
             //Head = new Node<T>(value);
             //node.Next = Head; //since only thing it will point to itself
-
+            //  Console.WriteLine(list.ToString());
+            //Assert.AreEqual<string>(Current.ToString(), "hello->howdy");
             Assert.AreEqual<string>(list.ToString(), "hello->howdy");
             //  Assert.AreEqual<Node<string>>(Head.Next, Head);
-        }
-
-        [TestMethod]
-        public void SimpleLinkedList_AppendsNode_Success()
-        {
-            //    throw new NotImplementedException();
-
-
-            //TODO test for empty linkedlist
-
-            string value = "hello";
-            bool value2 = true;
-            int value3 = 0;
-            string value4 = "goodbye";
-
-
-            SimpleLinkedList<object> list = new SimpleLinkedList<object>(value);
-
-            list.Append(value);
-            list.Append(value2);
-            list.Append(value3);
-            list.Append(value4);
-
-            //TODO for the test below, might need to do bool.toString()? may also need cast in appends
-            Assert.AreEqual<string>(list.ToString(), "hello->true->0->goodbye");
-            //Assert.AreEqual<string>(typeof(list[3]).ToString(), "string"); //TODO confirm if best way to call this... probably not
-          //  Assert.IsTrue(list.(SimpleLinkedList<string>.Next()), "goodbye"); //points back to itself
-
-        }
-
-        [TestMethod]
-        public void SimpleLinkedList_ClearClears_Success()
-        {
-            string value = "hello";
-            string value2 = "howdy";
-            string value3 = "all alone";
-
-
-            //SimpleLinkedList<Node<string>> list = new SimpleLinkedList<Node<string>(value as Node<string>);
-            SimpleLinkedList<string> list = new SimpleLinkedList<string>(value);
-
-            list.Append(value2);
-            list.Append(value3); 
-            list.Clear(); //only last appended value (which is the current value) should remain
-
-            Assert.AreEqual(list.ToString(), value3);
-            Assert.IsTrue(list.MoveNext(), value3); //points back to itself
-
-        }
-
-
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void SimpleLinkedList_AddsDuplicate_Fail()
-        {
-            string value = "hello";
-            string value2 = "howdy";
-            string value3 = "hello";
-
-
-            //SimpleLinkedList<Node<string>> list = new SimpleLinkedList<Node<string>(value as Node<string>);
-            SimpleLinkedList<string> list = new SimpleLinkedList<string>(value);
-
-            list.Append(value2);
-            list.Append(value3);
-            //only last appended value (which is the current value) should remain
-
-            Assert.AreEqual<string>(list.ToString(), "hello->howdy");
-          //  Assert.AreEqual<string>(SimpleLinkedlist.Node<string>.Next, value3); //another attempt
-          //  Assert.AreEqual<string>(list.Next, "howdy"); //points back to itself //this was  MoveNext from SimpleLInkedLIst and is is a boolean return, but depending on that boolean will detmine action? 
-            
         }
 
 

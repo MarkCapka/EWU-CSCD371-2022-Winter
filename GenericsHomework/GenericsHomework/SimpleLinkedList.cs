@@ -45,10 +45,6 @@ internal class SimpleLinkedList<T> : IEnumerable, IEnumerator<Node<T>> where T :
         return current.NodeData.Equals(value);
     }
 
-    internal void Append(Node<string> node2)
-    {
-        throw new NotImplementedException();
-    }
 
 
     //TODO consider: Whether it is sufficient to only set Next to itself ❌✔
@@ -101,11 +97,11 @@ internal class SimpleLinkedList<T> : IEnumerable, IEnumerator<Node<T>> where T :
 
     public void Reset()
     {
-        throw new NotImplementedException();
+        Clear();
     }
 
     public void Dispose()
     {
-        throw new NotImplementedException();
+        Clear();
     }
 }

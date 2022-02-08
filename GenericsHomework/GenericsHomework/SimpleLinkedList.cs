@@ -1,15 +1,17 @@
 ﻿
 using System.Collections;
 using System.Text;
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("GenericsHomework.Tests")]
+
 
 namespace GenericsHomework;
 internal class SimpleLinkedList<T> : IEnumerable, IEnumerator<Node<T>> where T : notnull
 {
     private Node<T> Head { get; set; }
 
-    object IEnumerator.Current => Head;//throw new NotImplementedException();
+    object IEnumerator.Current => Head;
 
-    public Node<T> Current => Head;// throw new NotImplementedException();
+    public Node<T> Current => Head;
 
     public SimpleLinkedList(T value)
     {
@@ -57,7 +59,7 @@ internal class SimpleLinkedList<T> : IEnumerable, IEnumerator<Node<T>> where T :
     //To establish arrow relationship between nodes. 
     public override string ToString()
     {
-        StringBuilder outputListAsString = new StringBuilder();
+        StringBuilder outputListAsString = new();
         Node<T> current = Head!;
         while (!current.Next.Equals(current))
         {
@@ -69,7 +71,7 @@ internal class SimpleLinkedList<T> : IEnumerable, IEnumerator<Node<T>> where T :
             outputListAsString.Append(current.ToString());
             current = current.Next;
         }
-
+        
         return outputListAsString.ToString();
     }
 

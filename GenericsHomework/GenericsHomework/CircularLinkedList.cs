@@ -30,12 +30,6 @@ internal class CircularLinkedList<T> : ICollection<T> where T : notnull
         return Contains(value);
     }
 
-    internal void Append(Node<string> node2)
-    {
-        throw new NotImplementedException();
-    }
-
-
     //TODO consider: Whether it is sufficient to only set Next to itself ❌✔
     //Whether to set the removed items to circle back on themselves. In other words, whether to close the loop of the removed items. (Provide a test to show why this is required if it is required). ❌✔
     //Given there is a circular list of items, provide a comment to indicate whether you need to worry about garbage collection because all the items point to each other and therefore may never be garbage collected. ❌✔

@@ -41,7 +41,7 @@ internal class CircularLinkedList<T> : ICollection<T> where T : notnull
     //Given there is a circular list of items, provide a comment to indicate whether you need to worry about garbage collection because all the items point to each other and therefore may never be garbage collected. ❌✔
     public void Clear()
     {
-        //Head = Current;
+       
         Head.Next = Head;
 
         //if we set the End to the head (not circularly but assign it as the head) it will have nothing after it. 

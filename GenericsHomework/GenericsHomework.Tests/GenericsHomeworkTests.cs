@@ -31,9 +31,9 @@ namespace GenericsHomework.Tests
 
             string value = "hello";
             string value2 = "howdy";
-            Node<string> head = new Node<string>(value);
-            Node<string> node2 = new Node<string>(value2);
-            CircularLinkedList<Node<string>> list = new(head);
+         
+         //   Node<string> node2 = new Node<string>(value2);
+            CircularLinkedList<string> list = new(value);
            
 
             //Node<T> CircularLinkedList<Node<T>>.Current => Head;
@@ -63,14 +63,16 @@ namespace GenericsHomework.Tests
         }
 
 
+
         //comment test change
         [TestMethod]
         public void CircularLinkedList_AppendsNode_Success()
         {
             //    throw new NotImplementedException();
-
+            //Simplify
 
             //TODO test for empty linkedlist
+            //
 
             string value = "hello";
             bool value2 = true;
@@ -78,7 +80,7 @@ namespace GenericsHomework.Tests
             string value4 = "goodbye";
 
 
-            CircularLinkedList<object> list = new CircularLinkedList<object>(value);
+            CircularLinkedList<string> list = new CircularLinkedList<string>(value);
 
             list.Append(value);
             list.Append(value2);
@@ -108,7 +110,7 @@ namespace GenericsHomework.Tests
             list.Clear(); //only last appended value (which is the current value) should remain
 
             Assert.AreEqual(list.ToString(), value3);
-            Assert.IsTrue(list.MoveNext(), value3); //points back to itself
+        //    Assert.IsTrue(list.Next(), value3); //points back to itself
 
         }
 

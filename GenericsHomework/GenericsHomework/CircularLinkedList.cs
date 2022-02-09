@@ -9,7 +9,8 @@ internal class CircularLinkedList<T> : ICollection<T> where T : notnull
 {
     private Node<T> Head { get; set; }
 
-    public int Count { get; set; }
+    public int Count { get; set; } = 1;
+    
 
     public bool IsReadOnly => true;
 
@@ -31,6 +32,7 @@ internal class CircularLinkedList<T> : ICollection<T> where T : notnull
     }
 
     //TODO consider: Whether it is sufficient to only set Next to itself ❌✔
+        //yes, it is sufficient to just reference Head as the Head.Next value since the rest of the linkedList that was cleared will be garbage collected since it has a null reference to the old Head //TODO read this again. 
     //Whether to set the removed items to circle back on themselves. In other words, whether to close the loop of the removed items. (Provide a test to show why this is required if it is required). ❌✔
     //Given there is a circular list of items, provide a comment to indicate whether you need to worry about garbage collection because all the items point to each other and therefore may never be garbage collected. ❌✔
     public void Clear()

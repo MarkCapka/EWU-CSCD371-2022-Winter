@@ -6,7 +6,7 @@ using System.Text;
 //TODO make circular
 
 namespace GenericsHomework;
-internal class CircularLinkedList<T> : IEnumerable, IEnumerator<Node<T>> where T : notnull
+internal class CircularLinkedList<T> : ICollection<T> where T : notnull
 {
     private Node<T> Head { get; set; }
 
@@ -63,7 +63,7 @@ internal class CircularLinkedList<T> : IEnumerable, IEnumerator<Node<T>> where T
             outputListAsString.Append(current.ToString());
             current = current.Next;
         }
-        
+
         return outputListAsString.ToString();
     }
 
@@ -84,21 +84,46 @@ internal class CircularLinkedList<T> : IEnumerable, IEnumerator<Node<T>> where T
     public bool Contains(T item)
     {
         Node<T> current = Head;
-        while (!current.Next.Equals(current) && !current.NodeData.Equals(item))
+        int searched = 0;
+        while (!current.Next.Equals(current) && searched++ < Count)
         {
             current = current.Next;
         }
-        return current.NodeData.Equals(item);
+        if (searched < Count)
+        {
+            return current.NodeData.Equals(item);
+        }
+        return false;
     }
 
     public void CopyTo(T[] array, int arrayIndex)
     {
-        throw new NotImplementedException();
+        if(array.Length < Count + arrayIndex)
+        {
+            throw new ArgumentException($"The array was not large enough to hold {Count} items starting at index {arrayIndex}");
+        }
+        Node<T> current = Head;
+        for(int i = 0; i < Count; i++)
+        {
+            array[arrayIndex++] = current.NodeData;
+            current = current.Next;
+        }
     }
 
     public bool Remove(T item)
     {
-        throw new NotImplementedException();
+        Node<T> current = Head;
+        int searched = 0;
+        while (!current.Next.Equals(current) && searched++ < Count)
+        {
+            current = current.Next;
+        }
+        if (searched < Count)
+        {
+            current.Next = current.Next.Next;
+            return true;
+        }
+        return false;
     }
 
     public IEnumerator<T> GetEnumerator()

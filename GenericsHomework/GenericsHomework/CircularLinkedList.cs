@@ -3,7 +3,6 @@ using System.Collections;
 using System.Text;
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("GenericsHomework.Tests")]
 
-//TODO make circular
 
 namespace GenericsHomework;
 internal class CircularLinkedList<T> : ICollection<T> where T : notnull

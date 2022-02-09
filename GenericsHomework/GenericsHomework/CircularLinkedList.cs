@@ -121,11 +121,13 @@ internal class CircularLinkedList<T> : ICollection<T> where T : notnull
 
     public IEnumerator<T> GetEnumerator()
     {
+        //Yield return
         throw new NotImplementedException();
     }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
+        //Yield return
         throw new NotImplementedException();
     }
 }

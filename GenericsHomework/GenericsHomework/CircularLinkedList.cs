@@ -41,10 +41,7 @@ internal class CircularLinkedList<T> : ICollection<T> where T : notnull
     //Given there is a circular list of items, provide a comment to indicate whether you need to worry about garbage collection because all the items point to each other and therefore may never be garbage collected. ❌✔
     public void Clear()
     {
-        //Head = Current;
         Head.Next = Head;
-
-        //if we set the End to the head (not circularly but assign it as the head) it will have nothing after it. 
     }
 
     //To establish arrow relationship between nodes. 
@@ -77,6 +74,7 @@ internal class CircularLinkedList<T> : ICollection<T> where T : notnull
                 throw new ArgumentException($"NodeData with value {item} is a duplicate to another Node's data");
             }
         }
+        Count++;
         current.Next = new Node<T>(item);
     }
 
@@ -120,6 +118,7 @@ internal class CircularLinkedList<T> : ICollection<T> where T : notnull
         if (searched < Count)
         {
             current.Next = current.Next.Next;
+            Count--;
             return true;
         }
         return false;

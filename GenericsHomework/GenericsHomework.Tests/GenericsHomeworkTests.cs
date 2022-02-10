@@ -8,7 +8,6 @@
 
 namespace GenericsHomework.Tests
 {
-    [TestClass]
     public class GenericsHomeworkTests
     {
         //[TestMethod]

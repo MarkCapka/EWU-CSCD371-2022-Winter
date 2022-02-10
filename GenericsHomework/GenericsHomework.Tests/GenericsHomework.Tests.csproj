@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-	<WarningsAsErrors>true</WarningsAsErrors>
+	<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+	<WarningsAsErrors>false</WarningsAsErrors>
 	<EnableNETAnalyzers>true</EnableNETAnalyzers>
 	<CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
 	<Nullable>enable</Nullable>
@@ -13,11 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="GlobalSupressions.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="NewFile1.txt" />
+    <Compile Remove="GenericsHomeworkTests.cs" />
   </ItemGroup>
 
   <ItemGroup>

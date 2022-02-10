@@ -5,7 +5,12 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericsHomework", "GenericsHomework\GenericsHomework.csproj", "{2D19A262-E238-4569-B449-F6D73F592F41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericsHomework.Tests", "GenericsHomework.Tests\GenericsHomework.Tests.csproj", "{4824C3C2-D615-4434-85F6-9DE2B71D2B23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericsHomework.Tests", "GenericsHomework.Tests\GenericsHomework.Tests.csproj", "{4824C3C2-D615-4434-85F6-9DE2B71D2B23}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2D19A262-E238-4569-B449-F6D73F592F41} = {2D19A262-E238-4569-B449-F6D73F592F41}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericsHomework.Tests2", "GenericsHomework.Tests2\GenericsHomework.Tests2.csproj", "{ECACA02C-CF1A-4417-BE7C-76E5AA29D41B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2D19A262-E238-4569-B449-F6D73F592F41} = {2D19A262-E238-4569-B449-F6D73F592F41}
 	EndProjectSection
@@ -24,6 +29,10 @@ Global
 		{4824C3C2-D615-4434-85F6-9DE2B71D2B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4824C3C2-D615-4434-85F6-9DE2B71D2B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4824C3C2-D615-4434-85F6-9DE2B71D2B23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECACA02C-CF1A-4417-BE7C-76E5AA29D41B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECACA02C-CF1A-4417-BE7C-76E5AA29D41B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECACA02C-CF1A-4417-BE7C-76E5AA29D41B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECACA02C-CF1A-4417-BE7C-76E5AA29D41B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

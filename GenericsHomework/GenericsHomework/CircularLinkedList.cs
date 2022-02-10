@@ -146,10 +146,6 @@ public class CircularLinkedList<T> : ICollection<T> where T : notnull
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-        for (int i = 0; i < Count; i++)
-        {
-            yield return Cursor.NodeData;
-            Cursor = Cursor.Next;
-        }
+        yield return GetEnumerator();
     }
 }

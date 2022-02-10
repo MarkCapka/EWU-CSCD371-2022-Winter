@@ -78,4 +78,60 @@ public class CircularLinkedListTests
         list.Append(value3); // Add hello again, should throw error
     }
 
+    [TestMethod]
+    public void GetEnumerator_EnumeratorEnumerates_Success()
+    {
+        int value = 1;
+        int value2 = 2;
+        int value3 = 3;
+        int value4 = 4;
+
+        CircularLinkedList<int> list = new CircularLinkedList<int>(value);
+
+        list.Append(value2);
+        list.Append(value3);
+        list.Append(value4);
+        list.Next();
+        var enumerator = list.GetEnumerator();
+
+        Assert.IsNotNull(enumerator);
+
+        for (int i = 1; i <= 4; i++)
+        {
+            enumerator.MoveNext();
+            Assert.AreEqual(i, enumerator.Current);
+        }
+    }
+
+    [TestMethod]
+    public void IEnumerableGetEnumerator_CircularLinkedListsAreEnumerable_Success()
+    {
+        CircularLinkedList<int>[] lists = new CircularLinkedList<int>[3];
+        lists[0] = new(1);
+        lists[0].Append(2);
+        lists[0].Append(3);
+        lists[0].Next();
+
+        lists[1] = new(4);
+        lists[1].Append(5);
+        lists[1].Append(6);
+        lists[1].Next();
+
+        lists[2] = new(7);
+        lists[2].Append(8);
+        lists[2].Append(9);
+        lists[2].Next();
+
+        var enumerator = lists.GetEnumerator();
+
+        Assert.IsNotNull(enumerator);
+
+        enumerator.MoveNext();
+        Assert.AreEqual(1 + "->" + 2 + "->" + 3, enumerator.Current.ToString());
+        enumerator.MoveNext();
+        Assert.AreEqual(4 + "->" + 5 + "->" + 6, enumerator.Current.ToString());
+        enumerator.MoveNext();
+        Assert.AreEqual(7 + "->" + 8 + "->" + 9, enumerator.Current.ToString());
+    }
+
 }

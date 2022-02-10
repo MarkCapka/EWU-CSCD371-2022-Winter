@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace CircularLinkedListTests;
+namespace GenericHomework.Tests;
 [TestClass]
 public class CircularLinkedListTests
 {
@@ -16,16 +16,19 @@ public class CircularLinkedListTests
         Assert.IsTrue(list.Count == 1);
     }
 
-    [TestMethod]
-    public void Constructor_CreateFromNode_Success()
-    {
-        string value = "howdy";
-        Node<string> node = new(value);
-        CircularLinkedList<string> list = new(node);
 
-        Assert.IsTrue(list.Contains(value));
-        Assert.IsTrue(list.Count == 1);
+   
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentNullException))] //TODO we have "where notnull" but it isn't throwing an exception when we pass the value?
+    public void Constructor_DataNull_Fail()
+    {
+        string? value = null;
+        CircularLinkedList<string> list = new(value!);
+      
     }
+
+
+
 
     [TestMethod]
     public void Append_AddsNodeToLinkedList_Success()

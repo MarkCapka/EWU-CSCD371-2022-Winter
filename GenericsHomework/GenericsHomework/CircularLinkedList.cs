@@ -4,24 +4,57 @@ using System.Text;
 
 
 namespace GenericsHomework;
-public class CircularLinkedList<T> : ICollection<T> where T : notnull
+public class CircularLinkedList<T> : ICollection<T> where T : notnull  
 {
+
+
+
+
+//instruction: Create a node class that can contain a value of any type and points to the next node and traversing the next node points back to the first item.
+
+/*
+ * 
+ * Define the Node class
+ * 
+ */
+
+
+
+     private class Node<T1>// : ICollection<T> //EXTRA CREDIT: 2.Implement Systm.Collections.Generic.ICollection<T> on the Node class ❌✔     
+        where T1 : notnull
+    {
+        public T1 NodeData { get; set; } //these should be private through nested class
+        public Node<T1> Next { get; set; }//these should be private through nested class
+
+        public Node(T1 data)
+        {
+            NodeData = data;
+            Next = this;
+        }
+    }
+
+
     private Node<T> Cursor { get; set; }
 
     public int Count { get; private set; }
 
     public bool IsReadOnly => false;
 
+    
+
     public CircularLinkedList(T value)
     {
+
+        if (value == null)
+            throw new ArgumentNullException();
+
         Cursor = new Node<T>(value);
         Count = 1;
     }
-    public CircularLinkedList(Node<T> head)
-    {
-        Cursor = head;
-        Count = 1;
-    }
+
+
+    
+   
     public void Next()
     {
         Cursor = Cursor.Next;

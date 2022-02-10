@@ -3,10 +3,9 @@ using System.Collections;
 using System.Text;
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("GenericsHomework.Tests")]
 
-//TODO make circular
 
 namespace GenericsHomework;
-internal class SimpleLinkedList<T> : ICollection<T> where T : notnull
+internal class CircularLinkedList<T> : ICollection<T> where T : notnull
 {
     private Node<T> Head { get; set; }
 
@@ -14,14 +13,13 @@ internal class SimpleLinkedList<T> : ICollection<T> where T : notnull
 
     public bool IsReadOnly => true;
 
-    public SimpleLinkedList(T value)
+    public CircularLinkedList(T value)
     {
         Head = new Node<T>(value);
     }
-    public SimpleLinkedList(Node<T> head)
+    public CircularLinkedList(Node<T> head)
     {
         Head = head;
-        Head.Next = Head;
     }
     public void Append(T value)
     {
@@ -37,10 +35,8 @@ internal class SimpleLinkedList<T> : ICollection<T> where T : notnull
     //Given there is a circular list of items, provide a comment to indicate whether you need to worry about garbage collection because all the items point to each other and therefore may never be garbage collected. ❌✔
     public void Clear()
     {
-        //Head = Current;
+       
         Head.Next = Head;
-
-        //if we set the End to the head (not circularly but assign it as the head) it will have nothing after it. 
     }
 
     //To establish arrow relationship between nodes. 
@@ -58,7 +54,7 @@ internal class SimpleLinkedList<T> : ICollection<T> where T : notnull
             outputListAsString.Append(current.ToString());
             current = current.Next;
         }
-        
+
         return outputListAsString.ToString();
     }
 
@@ -75,37 +71,63 @@ internal class SimpleLinkedList<T> : ICollection<T> where T : notnull
         }
         Count++;
         current.Next = new Node<T>(item);
-        current.Next.Next = Head;
     }
 
     public bool Contains(T item)
     {
         Node<T> current = Head;
         int searched = 0;
-        while (!current.Next.Equals(current) && searched < Count)
+        while (!current.Next.Equals(current) && searched++ < Count)
         {
             current = current.Next;
         }
-        return current.NodeData.Equals(item);
+        if (searched < Count)
+        {
+            return current.NodeData.Equals(item);
+        }
+        return false;
     }
 
     public void CopyTo(T[] array, int arrayIndex)
     {
-        throw new NotImplementedException();
+        if(array.Length < Count + arrayIndex)
+        {
+            throw new ArgumentException($"The array was not large enough to hold {Count} items starting at index {arrayIndex}");
+        }
+        Node<T> current = Head;
+        for(int i = 0; i < Count; i++)
+        {
+            array[arrayIndex++] = current.NodeData;
+            current = current.Next;
+        }
     }
 
     public bool Remove(T item)
     {
-        throw new NotImplementedException();
+        Node<T> current = Head;
+        int searched = 0;
+        while (!current.Next.Equals(current) && searched++ < Count)
+        {
+            current = current.Next;
+        }
+        if (searched < Count)
+        {
+            current.Next = current.Next.Next;
+            Count--;
+            return true;
+        }
+        return false;
     }
 
     public IEnumerator<T> GetEnumerator()
     {
+        //Yield return
         throw new NotImplementedException();
     }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
+        //Yield return
         throw new NotImplementedException();
     }
 }

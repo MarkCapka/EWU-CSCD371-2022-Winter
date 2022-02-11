@@ -24,11 +24,14 @@ public class CircularLinkedListTests
     {
         string? value = null;
         CircularLinkedList<string> list = new(value!);
+        Assert.IsFalse(list.Contains(value!));
       
     }
 
+    
 
 
+    //TODO Add should be tested through Append since it is called within Append function
 
     [TestMethod]
     public void Append_AddsNodeToLinkedList_Success()
@@ -38,7 +41,7 @@ public class CircularLinkedListTests
         int value3 = 3;
         int value4 = 4;
 
-        CircularLinkedList<int> list = new CircularLinkedList<int>(value);
+        CircularLinkedList<int> list = new(value);
 
         list.Append(value2);
         list.Append(value3);
@@ -56,7 +59,7 @@ public class CircularLinkedListTests
         string value3 = "all alone";
 
 
-        CircularLinkedList<string> list = new CircularLinkedList<string>(value);
+        CircularLinkedList<string> list = new(value);
 
         list.Append(value2);
         list.Append(value3);
@@ -75,7 +78,7 @@ public class CircularLinkedListTests
         string value3 = "hello";
 
 
-        CircularLinkedList<string> list = new CircularLinkedList<string>(value);
+        CircularLinkedList<string> list = new(value);
 
         list.Append(value2);
         list.Append(value3); // Add hello again, should throw error
@@ -89,7 +92,7 @@ public class CircularLinkedListTests
         int value3 = 3;
         int value4 = 4;
 
-        CircularLinkedList<int> list = new CircularLinkedList<int>(value);
+        CircularLinkedList<int> list = new (value);
 
         list.Append(value2);
         list.Append(value3);

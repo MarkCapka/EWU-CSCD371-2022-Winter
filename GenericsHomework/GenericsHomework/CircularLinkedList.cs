@@ -10,21 +10,21 @@ public class CircularLinkedList<T> : ICollection<T> where T : notnull
 
 
 
-//instruction: Create a node class that can contain a value of any type and points to the next node and traversing the next node points back to the first item.
+    //instruction: Create a node class that can contain a value of any type and points to the next node and traversing the next node points back to the first item.
 
-/*
- * 
- * Define the Node class
- * 
- */
+    /*
+     * 
+     * Define the Node class
+     * 
+     */
 
 
-
-     private class Node<T1>// : ICollection<T> //EXTRA CREDIT: 2.Implement Systm.Collections.Generic.ICollection<T> on the Node class ❌✔     
+    //Note: Next setter is technically private through nested class
+    private class Node<T1>// : ICollection<T> //EXTRA CREDIT: 2.Implement Systm.Collections.Generic.ICollection<T> on the Node class ❌✔     
         where T1 : notnull
     {
-        public T1 NodeData { get; set; } //these should be private through nested class
-        public Node<T1> Next { get; set; }//these should be private through nested class
+        public T1 NodeData { get; set; } 
+        public Node<T1> Next { get; set; }//Next's setter should be private through nested class
 
         public Node(T1 data)
         {
@@ -45,7 +45,7 @@ public class CircularLinkedList<T> : ICollection<T> where T : notnull
     public CircularLinkedList(T value)
     {
 
-        if (value == null)
+        if (value is null)
             throw new ArgumentNullException();
 
         Cursor = new Node<T>(value);
@@ -72,13 +72,16 @@ public class CircularLinkedList<T> : ICollection<T> where T : notnull
         return Contains(value);
     }
 
-    //TODO consider: Whether it is sufficient to only set Next to itself ❌✔
-        //yes, it is sufficient to just reference Head as the Head.Next value since the rest of the linkedList that was cleared will be garbage collected since it has a null reference to the old Head //TODO read this again. 
-    //Whether to set the removed items to circle back on themselves. In other words, whether to close the loop of the removed items. (Provide a test to show why this is required if it is required). ❌✔
-    //Given there is a circular list of items, provide a comment to indicate whether you need to worry about garbage collection because all the items point to each other and therefore may never be garbage collected. ❌✔
+   // consider: Whether it is sufficient to only set Next to itself ✔      SEE LINE BELOW FOR RESPONSE:
+ //yes, it is sufficient to just reference Cursor as the Cursor.Next value since the rest of the linkedList that was previously linked will have the data cleared ...\
+ //...by the garbage collector since it has a null reference to the old Cursor. These old values will be cleaned up once we begin running out of memory.
+    
+    
+
+
+   
     public void Clear()
     {
-       //Setting the cursor's Next property to itself is sufficient because the garbage collector will not have a path from the program root to the other nodes and will therefore clean up their memory.
         Cursor.Next = Cursor;
         Count = 1;
     }
@@ -115,7 +118,7 @@ public class CircularLinkedList<T> : ICollection<T> where T : notnull
         }
         Count++;
         Node<T> temp = current.Next;
-        current.Next = new Node<T>(item);
+        current.Next = new(item);
         current.Next.Next = temp;
         Cursor = current.Next;
     }

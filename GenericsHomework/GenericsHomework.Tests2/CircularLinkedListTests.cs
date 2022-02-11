@@ -24,21 +24,17 @@ public class CircularLinkedListTests
     {
         string? value = null;
         CircularLinkedList<string> list = new(value!);
-       
-
     }
 
     [TestMethod]
-    [ExpectedException(typeof(NullReferenceException))] //TODO we have "where notnull" but it isn't throwing an exception when we pass the value?
+    [ExpectedException(typeof(ArgumentNullException))] //TODO we have "where notnull" but it isn't throwing an exception when we pass the value?
     public void Constructor_DataNullNotHead_ThrowsError()
     {
         string value = "start";
         string? value2 = null;
         CircularLinkedList<string> list = new(value);
         list.Append(value2!);
-       
-        list.Contains(value2!);
-       
+
 
     }
 
@@ -52,7 +48,7 @@ public class CircularLinkedListTests
 
 
         list.Append(value2);
-      
+
         Assert.IsTrue(list.Contains(value2));
         Assert.IsFalse(list.Contains("start"));
         Assert.IsTrue(list.Exists(value2));
@@ -66,10 +62,11 @@ public class CircularLinkedListTests
     {
         string? value = null;
         CircularLinkedList<string> list = new(value!);
-     }
+    }
+
 
     [TestMethod]
-    [ExpectedException(typeof(NullReferenceException))]
+    [ExpectedException(typeof(ArgumentNullException))]
     public void Exists_ValueNotAssignedInList_ThrowsError()
     {
         string value = "start";
@@ -81,12 +78,7 @@ public class CircularLinkedListTests
         list2.Append(value2);
 
         list2.Append(value3!);
-        Assert.IsTrue(list2.Exists(value2));
-        Assert.IsFalse(list2.Exists(value3!));
-
-       
-
-
+   
     }
 
 
@@ -137,11 +129,11 @@ public class CircularLinkedListTests
 
 
         CircularLinkedList<string> list = new(value);
-      
+
         list.Append(value2);
         list.Append(value3); // Add hello again, should throw error
 
-     
+
     }
 
     [TestMethod]
@@ -154,7 +146,7 @@ public class CircularLinkedListTests
 
 
         CircularLinkedList<string> list = new(value);
-        
+
 
         list.Append(value2);
         list.Append(value3);

@@ -57,6 +57,7 @@ public class CircularLinkedList<T> : ICollection<T> where T : notnull
    
     public void Next()
     {
+       
         Cursor = Cursor.Next;
     }
     public T GetData()
@@ -65,6 +66,7 @@ public class CircularLinkedList<T> : ICollection<T> where T : notnull
     }
     public void Append(T value)
     {
+
         Add(value);
     }
     public bool Exists(T value)
@@ -74,12 +76,9 @@ public class CircularLinkedList<T> : ICollection<T> where T : notnull
 
    // consider: Whether it is sufficient to only set Next to itself ✔      SEE LINE BELOW FOR RESPONSE:
  //yes, it is sufficient to just reference Cursor as the Cursor.Next value since the rest of the linkedList that was previously linked will have the data cleared ...\
- //...by the garbage collector since it has a null reference to the old Cursor. These old values will be cleaned up once we begin running out of memory.
+ //...by the garbage collector since it has a null reference to the old Cursor. These old values with their null referenced head and any that are connected will be cleaned up once we begin running out of memory.
     
     
-
-
-   
     public void Clear()
     {
         Cursor.Next = Cursor;
@@ -167,7 +166,7 @@ public class CircularLinkedList<T> : ICollection<T> where T : notnull
         {
             current.Next = current.Next.Next;
             Count--;
-            return true;
+            return true;    
         }
         return false;
     }

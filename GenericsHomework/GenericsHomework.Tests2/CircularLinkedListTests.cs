@@ -17,21 +17,79 @@ public class CircularLinkedListTests
     }
 
 
-   
+
     [TestMethod]
     [ExpectedException(typeof(ArgumentNullException))] //TODO we have "where notnull" but it isn't throwing an exception when we pass the value?
-    public void Constructor_DataNull_Fail()
+    public void Constructor_DataNull_ThrowsError()
     {
         string? value = null;
         CircularLinkedList<string> list = new(value!);
-        Assert.IsFalse(list.Contains(value!));
-      
+       
+
     }
 
-    
+    [TestMethod]
+    [ExpectedException(typeof(NullReferenceException))] //TODO we have "where notnull" but it isn't throwing an exception when we pass the value?
+    public void Constructor_DataNullNotHead_ThrowsError()
+    {
+        string value = "start";
+        string? value2 = null;
+        CircularLinkedList<string> list = new(value);
+        list.Append(value2!);
+       
+        list.Contains(value2!);
+       
+
+    }
+
+    [TestMethod]
+    public void Exists_ValueAssigned_Success()
+    {
+        string value = "simon";
+        string value2 = "hello";
+        CircularLinkedList<string> list = new(value);
+        Assert.IsTrue(list.Contains(value));
 
 
-    //TODO Add should be tested through Append since it is called within Append function
+        list.Append(value2);
+      
+        Assert.IsTrue(list.Contains(value2));
+        Assert.IsFalse(list.Contains("start"));
+        Assert.IsTrue(list.Exists(value2));
+        Assert.AreEqual<string>("hello->simon", list.ToString());
+
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentNullException))]
+    public void Exists_ValueNotAssignedAtHead_ThrowsError()
+    {
+        string? value = null;
+        CircularLinkedList<string> list = new(value!);
+     }
+
+    [TestMethod]
+    [ExpectedException(typeof(NullReferenceException))]
+    public void Exists_ValueNotAssignedInList_ThrowsError()
+    {
+        string value = "start";
+        string value2 = "next";
+        string? value3 = null;
+
+        CircularLinkedList<string> list = new(value!);
+        CircularLinkedList<string> list2 = new(value!);
+        list2.Append(value2);
+
+        list2.Append(value3!);
+        Assert.IsTrue(list2.Exists(value2));
+        Assert.IsFalse(list2.Exists(value3!));
+
+       
+
+
+    }
+
+
 
     [TestMethod]
     public void Append_AddsNodeToLinkedList_Success()
@@ -71,7 +129,7 @@ public class CircularLinkedListTests
 
     [TestMethod]
     [ExpectedException(typeof(ArgumentException))]
-    public void Append_PreventAddingDuplicate_ThrowsError()
+    public void Append_PreventAddingDuplicateValue_ThrowsError()
     {
         string value = "hello";
         string value2 = "howdy";
@@ -79,9 +137,29 @@ public class CircularLinkedListTests
 
 
         CircularLinkedList<string> list = new(value);
-
+      
         list.Append(value2);
         list.Append(value3); // Add hello again, should throw error
+
+     
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentException))]
+    public void Append_PreventAddingDuplicateVariable_ThrowsError()
+    {
+        string value = "hello";
+        string value2 = "howdy";
+        string value3 = "whatup";
+
+
+        CircularLinkedList<string> list = new(value);
+        
+
+        list.Append(value2);
+        list.Append(value3);
+        list.Append(value);// Add hello again, should throw error
+
     }
 
     [TestMethod]
@@ -92,7 +170,7 @@ public class CircularLinkedListTests
         int value3 = 3;
         int value4 = 4;
 
-        CircularLinkedList<int> list = new (value);
+        CircularLinkedList<int> list = new(value);
 
         list.Append(value2);
         list.Append(value3);

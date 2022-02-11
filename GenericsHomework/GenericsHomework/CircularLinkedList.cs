@@ -108,7 +108,7 @@ public class CircularLinkedList<T> : ICollection<T> where T : notnull
     public void Add(T item)
     { 
         if(item is null)
-            throw new ArgumentNullException();   
+            throw new ArgumentNullException($"Parameter {nameof(item)} was null");   
 
         Node<T> current = Cursor;
         for (int i = 0; i < Count; i++)
@@ -128,6 +128,8 @@ public class CircularLinkedList<T> : ICollection<T> where T : notnull
 
     public bool Contains(T item)
     {
+        if (item is null)
+            return false;
         Node<T> current = Cursor;
         for(int i = 0; i < Count; i++)
         {
@@ -160,6 +162,10 @@ public class CircularLinkedList<T> : ICollection<T> where T : notnull
 
     public bool Remove(T item)
     {
+        if (item is null)
+        {
+            return false;
+        }
         Node<T> current = Cursor;
         int searched = 0;
         while (!current.Next.Equals(current) && searched++ < Count)

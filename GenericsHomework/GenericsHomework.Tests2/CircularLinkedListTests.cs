@@ -82,6 +82,37 @@ public class CircularLinkedListTests
         
     }
 
+    [TestMethod]
+    public void Contains_ValidSearchFindsValue_Success()
+    {
+        int value = 1;
+        int value2 = 2;
+        int value3 = 3;
+        int value4 = 4;
+
+        CircularLinkedList<int> list = new(value);
+
+        list.Append(value2).Append(value3).Append(value4).Next();
+
+        Assert.IsTrue(list.Contains(value));
+    }
+
+    [TestMethod]
+    public void Contains_InvalidSearchReturnsFalse_Success()
+    {
+        string value = "start";
+        string value2 = "next";
+        string? value3 = null;
+
+        CircularLinkedList<string> list = new(value);
+
+        list.Append(value2).Next();
+
+        Assert.IsTrue(list.Contains(value3!));
+
+        Assert.IsFalse(list.Contains("Unknown"));
+    }
+
 
 
     [TestMethod]
@@ -118,19 +149,21 @@ public class CircularLinkedListTests
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentException))]
-    public void Append_PreventAddingDuplicateValue_ThrowsError()
+    public void Remove_DeletesListItem_Success()
     {
-        string value = "hello";
-        string value2 = "howdy";
-        string value3 = "hello";
+        int value = 1;
+        int value2 = 2;
+        int value3 = 3;
+        int value4 = 4;
 
+        CircularLinkedList<int> list = new(value);
 
-        CircularLinkedList<string> list = new(value);
+        list.Append(value2).Append(value3).Append(value4).Next();
 
-        list.Append(value2).Append(value3); // Add hello again, should throw error
-
-
+        Assert.IsTrue(list.Remove(value2));
+        Assert.IsFalse(list.Contains(value2));
+        Assert.IsTrue(list.Count == 3);
+        Assert.IsFalse(list.Remove(value2));
     }
 
     [TestMethod]

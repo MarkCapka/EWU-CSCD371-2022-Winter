@@ -41,13 +41,14 @@ public class CircularLinkedListTests
     [TestMethod]
     public void Exists_ValueAssigned_Success()
     {
-        string value = "simon";
-        string value2 = "hello";
+        string value = "hello";
+        string value2 = "simon";
         CircularLinkedList<string> list = new(value);
         Assert.IsTrue(list.Contains(value));
 
 
         list.Append(value2);
+        list.Next();
 
         Assert.IsTrue(list.Contains(value2));
         Assert.IsFalse(list.Contains("start"));
@@ -78,7 +79,7 @@ public class CircularLinkedListTests
         list2.Append(value2);
             
         list2.Append(value3!);
-   
+        
     }
 
 
@@ -95,7 +96,7 @@ public class CircularLinkedListTests
 
         list.Append(value2).Append(value3).Append(value4);
 
-        Assert.AreEqual<string>("4->1->2->3", list.ToString());
+        Assert.AreEqual<string>("1->2->3->4", list.ToString());
         Assert.IsTrue(list.Count == 4);
     }
 

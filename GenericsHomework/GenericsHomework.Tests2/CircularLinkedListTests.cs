@@ -174,6 +174,32 @@ public class CircularLinkedListTests
     }
 
     [TestMethod]
+    public void CopyTo_CopiesToArray_Success()
+    {
+        int[] myListArray = new int[3];
+        CircularLinkedList<int> list = new(1);
+        list.Append(2).Append(3).Next();
+
+        list.CopyTo(myListArray, 0);
+        Assert.AreEqual<int>(list.GetData(), myListArray[0]);
+        list.Next();
+        Assert.AreEqual<int>(list.GetData(), myListArray[1]);
+        list.Next();
+        Assert.AreEqual<int>(list.GetData(), myListArray[2]);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentException))]
+    public void CopyTo_CopiesToArrayShortArray_ThrowsException()
+    {
+        int[] myListArray = new int[3];
+        CircularLinkedList<int> list = new(1);
+        list.Append(2).Append(3).Next();
+
+        list.CopyTo(myListArray, 1);
+    }
+
+    [TestMethod]
     public void IEnumerableGetEnumerator_CircularLinkedListsAreEnumerable_Success()
     {
         CircularLinkedList<int>[] lists = new CircularLinkedList<int>[3];

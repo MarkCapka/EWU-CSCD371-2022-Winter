@@ -13,17 +13,17 @@ Chapter 11, 12
 - Create a node class that can contain a value of any type and points to the next node and traversing the next node points back to the first item.
   - Define the `Node` class
   - Include a constuctor that takes a value.  (No validation is necessary on the value). ✔
-  - Add a `ToString()` override that writes out the value's `ToString()` result. ❌✔  --ish - in SimpleLinkedList class - asking question about implementation tomorrow
-  - Add a `Next` property that references the next node or else refers back to itself if there are no other nodes in the list. ❌✔ --ish - in SimpleLinkedList class - asking question about implementation tomorrow
-    - The `Next` property should be non-nullable (careful to follow the non-nullable property guidelines) ❌✔ --ish - in SimpleLinkedList class - asking question about implementation tomorrow
-    - The `Next` property setter should be private. ❌✔ --ish - in SimpleLinkedList class - asking question about implementation tomorrow
-  - Add an `Append` method that takes a value and appends a new `Node` instance after the current node (by invoking the `Next` property). ❌✔--ish - in SimpleLinkedList class - asking question about implementation tomorrow
+  - Add a `ToString()` override that writes out the value's `ToString()` result. ✔ 
+  - Add a `Next` property that references the next node or else refers back to itself if there are no other nodes in the list. ✔ 
+    - The `Next` property should be non-nullable (careful to follow the non-nullable property guidelines) ✔
+    - The `Next` property setter should be private. ✔ 
+  - Add an `Append` method that takes a value and appends a new `Node` instance after the current node (by invoking the `Next` property). ✔
   - Add a Clear method that effectively removes all items from a list except the current node. Pay attention as to whether you should be concerned with the following:
-    - Whether it is sufficient to only set Next to itself ❌✔--ish - in SimpleLinkedList class - asking question about implementation tomorrow
-    - Whether to set the removed items to circle back on themselves. In other words, whether to close the loop of the removed items. (Provide a test to show why this is required if it is required). ❌✔--ish - in SimpleLinkedList class - asking question about implementation tomorrow
-    - Given there is a circular list of items, provide a comment to indicate whether you need to worry about garbage collection because all the items point to each other and therefore may never be garbage collected. ❌✔--ish - in SimpleLinkedList class - asking question about implementation tomorrow
-  - Create an Exists method to test to see if a value exists in the list. ❌✔--ish - in SimpleLinkedList class - asking question about implementation tomorrow
-  - Throw an error on an attempt to Append a duplicate value. (Make sure you test for this case) ❌✔--ish - in SimpleLinkedList class - asking question about implementation tomorrow
+    - Whether it is sufficient to only set Next to itself ✔
+    - Whether to set the removed items to circle back on themselves. In other words, whether to close the loop of the removed items. (Provide a test to show why this is required if it is required). ✔
+    - Given there is a circular list of items, provide a comment to indicate whether you need to worry about garbage collection because all the items point to each other and therefore may never be garbage collected. ✔
+  - Create an Exists method to test to see if a value exists in the list. ✔
+  - Throw an error on an attempt to Append a duplicate value. (Make sure you test for this case) ✔
 - You should not rely on any BCL generic classes for your implementation. ✔
 
 ## Extra Credit
@@ -35,7 +35,7 @@ Do one of the following two options (or both if you want extra extra credit) :)
 - You are not required to use a `Node` from earlier in the homework for your venn diagram implementation.
 - You are welcome to use exising BCL generic classes for the extra credit.
 
-2. Implement `Systm.Collections.Generic.ICollection<T>` on the `Node` class ❌✔
+2. Implement `Systm.Collections.Generic.ICollection<T>` on the `Node` class ✔
 
 ## Fundamentals
 - Ensure you enable:
@@ -43,6 +43,6 @@ Do one of the following two options (or both if you want extra extra credit) :)
   - net6 targetted  ✔
   - C# 10.0  ✔
   - and enabled .NET analyzers for both projects ✔
-- For this assignment, always use `Assert.AreEqual<T>()` (the generic version)  ❌✔ --ish - in SimpleLinkedList class - asking question about implementation tomorrow since issue with tests
-- All of the above should be unit tested ❌✔ --ish - in SimpleLinkedList class - asking question about implementation tomorrow
-- Choose simplicity over complexity ❌✔ --ish - in SimpleLinkedList class - asking question about implementation tomorrow
+- For this assignment, always use `Assert.AreEqual<T>()` (the generic version)  ✔ 
+- All of the above should be unit tested ✔
+- Choose simplicity over complexity ✔

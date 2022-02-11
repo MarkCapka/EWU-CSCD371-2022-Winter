@@ -107,6 +107,9 @@ public class CircularLinkedList<T> : ICollection<T> where T : notnull
 
     public void Add(T item)
     { 
+        if(item is null)
+            throw new ArgumentNullException();   
+
         Node<T> current = Cursor;
         for (int i = 0; i < Count; i++)
         {

@@ -94,7 +94,7 @@ public class CircularLinkedListTests
 
         CircularLinkedList<int> list = new(value);
 
-        list.Append(value2).Append(value3).Append(value4);
+        list.Append(value2).Append(value3).Append(value4).Next();
 
         Assert.AreEqual<string>("1->2->3->4", list.ToString());
         Assert.IsTrue(list.Count == 4);
@@ -145,8 +145,8 @@ public class CircularLinkedListTests
         CircularLinkedList<string> list = new(value);
 
 
-        list.Append(value2);
-        list.Append(value3);
+        list.Append(value2).Append(value3);
+
         list.Append(value);// Add hello again, should throw error
 
     }

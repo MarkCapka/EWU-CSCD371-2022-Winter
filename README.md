@@ -20,8 +20,14 @@ Chapter 11, 12
   - Add an `Append` method that takes a value and appends a new `Node` instance after the current node (by invoking the `Next` property). ✔
   - Add a Clear method that effectively removes all items from a list except the current node. Pay attention as to whether you should be concerned with the following:
     - Whether it is sufficient to only set Next to itself ✔
-    - Whether to set the removed items to circle back on themselves. In other words, whether to close the loop of the removed items. (Provide a test to show why this is required if it is required). ✔
+    - Whether to set the removed items to circle back on themselves. In other words, whether to close the loop of the removed items. (Provide a test to show why this is required if it is required). ✔ not necessary
     - Given there is a circular list of items, provide a comment to indicate whether you need to worry about garbage collection because all the items point to each other and therefore may never be garbage collected. ✔
+ SEE LINE BELOW FOR RESPONSE:
+ //yes, it is sufficient to just reference Cursor as the Cursor.Next value since the rest of the linkedList that was previously linked will have the data cleared ...\
+ //...by the garbage collector since it has a null reference from where the old Cursor used to point. These old values with their null referenced head and any that are connected will be cleaned up once we begin running out of memory.
+    
+
+
   - Create an Exists method to test to see if a value exists in the list. ✔
   - Throw an error on an attempt to Append a duplicate value. (Make sure you test for this case) ✔
 - You should not rely on any BCL generic classes for your implementation. ✔

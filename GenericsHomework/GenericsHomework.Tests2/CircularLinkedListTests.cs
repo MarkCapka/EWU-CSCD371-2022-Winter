@@ -76,7 +76,7 @@ public class CircularLinkedListTests
         CircularLinkedList<string> list = new(value!);
         CircularLinkedList<string> list2 = new(value!);
         list2.Append(value2);
-
+            
         list2.Append(value3!);
    
     }
@@ -93,9 +93,7 @@ public class CircularLinkedListTests
 
         CircularLinkedList<int> list = new(value);
 
-        list.Append(value2);
-        list.Append(value3);
-        list.Append(value4);
+        list.Append(value2).Append(value3).Append(value4);
 
         Assert.AreEqual<string>("4->1->2->3", list.ToString());
         Assert.IsTrue(list.Count == 4);
@@ -111,8 +109,7 @@ public class CircularLinkedListTests
 
         CircularLinkedList<string> list = new(value);
 
-        list.Append(value2);
-        list.Append(value3);
+        list.Append(value2).Append(value3);
         list.Clear(); //only last appended value (which is the current value) should remain
 
         Assert.AreEqual(value3, list.ToString());
@@ -130,8 +127,7 @@ public class CircularLinkedListTests
 
         CircularLinkedList<string> list = new(value);
 
-        list.Append(value2);
-        list.Append(value3); // Add hello again, should throw error
+        list.Append(value2).Append(value3); // Add hello again, should throw error
 
 
     }
@@ -164,10 +160,7 @@ public class CircularLinkedListTests
 
         CircularLinkedList<int> list = new(value);
 
-        list.Append(value2);
-        list.Append(value3);
-        list.Append(value4);
-        list.Next();
+        list.Append(value2).Append(value3).Append(value4).Next();
         var enumerator = list.GetEnumerator();
 
         Assert.IsNotNull(enumerator);
@@ -184,19 +177,13 @@ public class CircularLinkedListTests
     {
         CircularLinkedList<int>[] lists = new CircularLinkedList<int>[3];
         lists[0] = new(1);
-        lists[0].Append(2);
-        lists[0].Append(3);
-        lists[0].Next();
+        lists[0].Append(2).Append(3).Next();
 
         lists[1] = new(4);
-        lists[1].Append(5);
-        lists[1].Append(6);
-        lists[1].Next();
+        lists[1].Append(5).Append(6).Next();
 
         lists[2] = new(7);
-        lists[2].Append(8);
-        lists[2].Append(9);
-        lists[2].Next();
+        lists[2].Append(8).Append(9).Next();
 
         var enumerator = lists.GetEnumerator();
 

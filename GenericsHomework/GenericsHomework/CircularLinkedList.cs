@@ -64,10 +64,11 @@ public class CircularLinkedList<T> : ICollection<T> where T : notnull
     {
         return Cursor.NodeData;
     }
-    public void Append(T value)
+    public CircularLinkedList<T> Append(T value)
     {
 
         Add(value);
+        return this;
     }
     public bool Exists(T value)
     {

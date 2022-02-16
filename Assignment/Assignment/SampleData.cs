@@ -1,12 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.IO;
 
 namespace Assignment
 {
     public class SampleData : ISampleData
     {
         // 1.
-        public IEnumerable<string> CsvRows => throw new NotImplementedException();
+        public IEnumerable<string> CsvRows
+        {
+            get
+            {
+                string[] temp = File.ReadAllLines("People.csv");//System.Reflection.Assembly.GetExecutingAssembly().Location; current will work but it relies on unsafe assumptions
+                temp = temp.Skip(1).ToArray();
+                foreach(string d in temp)
+                {
+                    Console.WriteLine(d);  
+                }
+                return temp;
+
+            }
+        }
+
 
         // 2.
         public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows() 

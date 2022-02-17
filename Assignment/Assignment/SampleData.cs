@@ -70,7 +70,13 @@ public class SampleData : ISampleData
 
 
 
-
+    //Not sure where this function was required, but step 6 says to use it so I created it. Essentially does the same as step 2 but uses the given collection instead of getting csv rows.
+    //Might be fine to leave private.
+    private IEnumerable<string> GetUniqueListOfStates(IEnumerable<IPerson> personList)
+    {
+        IEnumerable<string> data = personList.DistinctBy(person => person.Address.State).Select(person => person.Address.State).ToList();
+        return data;
+    }
 
 
 
@@ -90,7 +96,7 @@ public class SampleData : ISampleData
     //data format: 1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577
     public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
     {
-        IEnumerable<string> data = People.DistinctBy(person => person.Address.State).Select(person => person.Address.State).ToList().OrderBy(state => state.ToString());
+        IEnumerable<string> data = GetUniqueListOfStates(People).OrderBy(state => state.ToString());
         return data;
     }
 
@@ -170,14 +176,6 @@ public class SampleData : ISampleData
         return People.Where(person => filter(person.EmailAddress)).Select(person => (person.FirstName, person.LastName));
     }
 
-    //Not sure where this function was required, but step 6 says to use it so I created it. Essentially does the same as step 2 but uses the given collection instead of getting csv rows.
-    //Might be fine to leave private.
-    private IEnumerable<string> GetUniqueListOfStates(IEnumerable<IPerson> personList)
-    {
-        IEnumerable<string> data = personList.DistinctBy(person => person.Address.State).Select(person => person.Address.State).ToList().OrderBy(state => state.ToString());
-        return data;
-    }
-
     // 6.Implement ISampleData.GetAggregateListOfStatesGivenPeopleCollection(IEnumerable<IPerson> people) to return a string that contains a unique, comma separated list of states. ❌✔
     //TODO: Use the people parameter from ISampleData.GetUniqueListOfStates for your data source. ❌✔
     //TODO: At a minimum, use System.Linq.Enumerable.Aggregate LINQ method to create your result. ❌✔
@@ -188,11 +186,4 @@ public class SampleData : ISampleData
         string states = string.Join(',', GetUniqueListOfStates(people));
         return states;
     }
-
-
-
-
-
-
-
 }

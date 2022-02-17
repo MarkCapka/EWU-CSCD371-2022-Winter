@@ -18,7 +18,6 @@ Be sure to appropriately handle resource (IDisposable) items correctly if applic
  */
 
 
-
 namespace Assignment;
 public class SampleData : ISampleData
 {
@@ -46,28 +45,30 @@ public class SampleData : ISampleData
         {
             string rowReadFromCsv = "";
             //TODO Not sure taht this belongs in the getter here....
-            List<string> csvRows = new();   //holds all of the rows
+            string[] csvRows = System.IO.File.ReadAllLines(".\\People.csv");
+            IEnumerable<string> rows = new List<string>();
+            rows = csvRows.Skip(1);
+            return rows;
             //holds divided up attributes from .csv
             //TODO below is psuedo code for our goals. 
-            var readInFromCsv = new StringReader(rowReadFromCsv);
-            StringReader readCsvRow = new StringReader(rowReadFromCsv);
 
-
-            foreach (List<string> rowFromCsv in  csvRows)
+            foreach (string rowFromCsv in csvRows)
             { 
                 csvRows.Add(rowFromCsv[csvRows.IndexOf(rowFromCsv)]);
             }
             rowReadFromCsv = readCsvRow[rowReadFromCsv]; ;
            
             csvRows.Append((string)rowReadFromCsv);
-          //  csvRows.Insert(rowFromCsv);
-                
-                //list of strings <--- until end of line : readInCsv
+            //  csvRows.Insert(rowFromCsv);
+
+            //list of strings <--- until end of line : readInCsv
             ////foreach(row in csvRows)
             ////csvRows[row].split(",");
             ////Table of elements: id,FirstName,LastName,Email,StreetAddress,City,State,Zip
             //return new CsvRow(rowFromCsv);
             // TODO return string of the row; 
+
+            return null!;
         } 
     }
 
@@ -76,18 +77,22 @@ public class SampleData : ISampleData
     {
         get
         {   //Data will be read in from file. 
-            foreach(Person person in csvRows)
+            foreach(string personData in CsvRows)
             {
+                string[] individualPersonData = personData.Split(',');
+                Person person = new Person(individualPersonData[0], individualPersonData[1], individualPersonData[2]);
                // IEnumerable<IPerson> ISampleData.People = new Person();
-                return new Person(person.FirstName, person.LastName, person.Address, person.EmailAddress); 
+                return new Person(personData.FirstName, personData.LastName, personData.Address, personData.EmailAddress); 
             }
             return Person;
         }
         
     }
 
+    public IEnumerable<IPerson> People => throw new NotImplementedException();
 
-    
+
+
 
 
 

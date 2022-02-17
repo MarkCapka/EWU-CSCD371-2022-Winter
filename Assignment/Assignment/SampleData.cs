@@ -50,28 +50,6 @@ public class SampleData : ISampleData
         }
     }
 
-    public IEnumerable<IPerson> People
-    {
-        get
-        {   
-            IEnumerable<IPerson> data = new List<IPerson>();
-            foreach (string personData in CsvRows)
-            {
-                string[] individualPersonData = personData.Split(',');
-                Person person = new Person(individualPersonData[1], individualPersonData[2],
-                    new Address(individualPersonData[4], individualPersonData[5], individualPersonData[6], individualPersonData[7]),
-                    individualPersonData[3]);
-                data.Append(person);
-            }
-            return data;
-        }
-    }
-
-
-
-
-
-
     //name of file we are reading in 
     //string?[] _Row = File.ReadLines(@"People.csv"); //@ indicates that it is 
     // using (var reader = new StringReader(lineCount)
@@ -112,7 +90,7 @@ public class SampleData : ISampleData
     //data format: 1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577
     public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
     {
-        IEnumerable<string> data = People.DistinctBy(person => person.Address.State).Select(person=>person.Address.State).ToList().OrderBy(state=>state.ToString());
+        IEnumerable<string> data = People.DistinctBy(person => person.Address.State).Select(person => person.Address.State).ToList().OrderBy(state => state.ToString());
         return data;
     }
 
@@ -137,7 +115,10 @@ public class SampleData : ISampleData
     //TODO: Consider "selecting" only the states and calling ToArray() to retrieve an array of all the state names. ❌✔
     //TODO: Given the array, consider using string.Join to combine the list into a single string. ❌✔
     public string GetAggregateSortedListOfStatesUsingCsvRows()
-    => throw new NotImplementedException();
+    {
+        string states = string.Join(',', GetUniqueSortedListOfStatesGivenCsvRows());
+        return states;
+    }
 
 
 
@@ -156,6 +137,22 @@ public class SampleData : ISampleData
 
 
 
+    public IEnumerable<IPerson> People
+    {
+        get
+        {
+            IEnumerable<IPerson> data = new List<IPerson>();
+            foreach (string personData in CsvRows)
+            {
+                string[] individualPersonData = personData.Split(',');
+                Person person = new Person(individualPersonData[1], individualPersonData[2],
+                    new Address(individualPersonData[4], individualPersonData[5], individualPersonData[6], individualPersonData[7]),
+                    individualPersonData[3]);
+                data.Append(person);
+            }
+            return data;
+        }
+    }
 
 
 
@@ -164,22 +161,33 @@ public class SampleData : ISampleData
 
     // 5.Implement ISampleDate.FilterByEmailAddress(Predicate<string> filter) to return a list of names where the email address matches the filter. ❌✔
     //TODO: Use ISampleData.People for your data source. ❌✔
-    public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(
-        Predicate<string> filter) => throw new NotImplementedException();
+    public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(Predicate<string> filter)
+    {
+        if (filter == null)
+        {
+            throw new ArgumentNullException(paramName: $"Provided argument {nameof(filter)} was null.");
+        }
+        return People.Where(person => filter(person.EmailAddress)).Select(person => (person.FirstName, person.LastName));
+    }
 
-
-
-
-
-
+    //Not sure where this function was required, but step 6 says to use it so I created it. Essentially does the same as step 2 but uses the given collection instead of getting csv rows.
+    //Might be fine to leave private.
+    private IEnumerable<string> GetUniqueListOfStates(IEnumerable<IPerson> personList)
+    {
+        IEnumerable<string> data = personList.DistinctBy(person => person.Address.State).Select(person => person.Address.State).ToList().OrderBy(state => state.ToString());
+        return data;
+    }
 
     // 6.Implement ISampleData.GetAggregateListOfStatesGivenPeopleCollection(IEnumerable<IPerson> people) to return a string that contains a unique, comma separated list of states. ❌✔
     //TODO: Use the people parameter from ISampleData.GetUniqueListOfStates for your data source. ❌✔
     //TODO: At a minimum, use System.Linq.Enumerable.Aggregate LINQ method to create your result. ❌✔
     //TODO: Don't forget the list should be unique. ❌✔
     //TODO: It is recommended that, at a minimum, you use ISampleData.GetUniqueSortedListOfStatesGivenCsvRows to validate your result.
-    public string GetAggregateListOfStatesGivenPeopleCollection(
-        IEnumerable<IPerson> people) => throw new NotImplementedException();
+    public string GetAggregateListOfStatesGivenPeopleCollection(IEnumerable<IPerson> people) 
+    {
+        string states = string.Join(',', GetUniqueListOfStates(people));
+        return states;
+    }
 
 
 

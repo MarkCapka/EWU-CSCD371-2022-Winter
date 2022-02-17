@@ -12,7 +12,7 @@ namespace Assignment.Tests
     public class SampleDataTests
     {
         List<string> _CsvRows = new List<string>(File.ReadLines(@"People.csv"));
-
+/*
         [TestMethod]
         public void AssignmentSampleData_DataPutInRowAsString_Success()
         {
@@ -40,7 +40,7 @@ namespace Assignment.Tests
 
         }
 
-
+        */
         //TODO from part 2 
         //TODO: Include a test that leverages a hardcoded list of Spokane-based addresses. ❌✔
         //TODO: Include a test that uses LINQ to verify the data is sorted correctly (do not use a hardcoded list). ❌✔

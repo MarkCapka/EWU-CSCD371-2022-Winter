@@ -7,3 +7,4 @@ using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Naming", "CA1710:Identifiers should have correct suffix", Justification = "Not renaming to have correct suffix.")]
 [assembly: SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "Globalization not required")]
+[assembly: SuppressMessage("Usage", "CA2208:Instantiate argument exceptions correctly", Justification = "The exception is fine.")]

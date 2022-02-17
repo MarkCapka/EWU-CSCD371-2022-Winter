@@ -12,22 +12,47 @@ namespace Assignment
         {
             get
             {
-                string[] temp = File.ReadAllLines("People.csv");//System.Reflection.Assembly.GetExecutingAssembly().Location; current will work but it relies on unsafe assumptions
-                temp = temp.Skip(1).ToArray();
-                foreach(string d in temp)
-                {
-                    Console.WriteLine(d);  
-                }
-                return temp;
-
+                return File.ReadAllLines("People.csv").Skip(1).ToList();//System.Reflection.Assembly.GetExecutingAssembly().Location; current will work but it relies on unsafe assumptions
             }
         }
 
 
         // 2.
-        public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows() 
-            => throw new NotImplementedException();
+        public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
+        {
 
+            // Define Query
+            IEnumerable<string> stateQuery = (
+                from line in CsvRows
+                let columnSeparatedLines = line.Split(',')
+                orderby columnSeparatedLines[6]
+                select columnSeparatedLines[6]
+                ).Distinct().ToList();
+
+            //Execute Query
+            IEnumerable<string> stateList = stateQuery;
+
+            return stateList;
+
+            //IEnumerable<string> temp = CsvRows;
+            //IEnumerator<string> enumerator = temp.GetEnumerator();
+            //List<string> uniqueStateList = new List<string>();
+
+            //while (enumerator.MoveNext())
+            //{
+            //    string[] lineDelimited = enumerator.Current.Split(',');
+            //    string State = lineDelimited[6].Trim();
+            //    if (!uniqueStateList.Contains(State))
+            //    {
+            //        uniqueStateList.Add(State);
+            //    }
+            //    //Console.WriteLine(State);
+            //}
+            //uniqueStateList = (from State in uniqueStateList orderby State descending select State.Distinct<string>()).ToList();
+            ////select distinct states with linq query
+
+            //return uniqueStateList;
+        }
         // 3.
         public string GetAggregateSortedListOfStatesUsingCsvRows()
             => throw new NotImplementedException();

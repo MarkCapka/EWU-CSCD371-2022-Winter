@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,5 +26,38 @@ namespace Assignment.Tests
             var CsvRowsRet = sd.CsvRows;
             Assert.IsFalse(CsvRowsRet.ElementAt<string>(0).Equals("Id,FirstName,LastName,Email,StreetAddress,City,State,Zip" + Environment.NewLine));
         }
+        [TestMethod]
+        public void GetUniqueSortedListOfStatesGivenCsvRows_ReturnsState_Success()
+        {
+            SampleData sampleData = new();
+            IEnumerable<string> statesUniqueSorted = sampleData.GetUniqueSortedListOfStatesGivenCsvRows();
+
+            Assert.IsTrue(statesUniqueSorted.Count() > 0);
+           foreach (string item in statesUniqueSorted)
+            {
+                Assert.IsTrue(item.Length == 2);
+            }
+         
+        }
+
+        [TestMethod]
+        public void GetUniqueSortedListOfStatesGivenCsvRows_HardCodedList_ReturnsOneState()
+        {
+            var mockSD = new Mock<ISampleData>();
+            mockSD.SetupGet(x => x.CsvRows).Returns(
+                new string[]{
+                "1,schuyler,asplin,sasplin@ewu.edu,1228 s. division st.,spokane,WA,99202",
+                  "7,ray,tanner,atanner5@ewu.edu,1012 s. maple st.,spokane,WA,99204"
+                      }
+                );
+                
+                IEnumerable<string>statesUniqueSorted = mockSD.Object.GetUniqueSortedListOfStatesGivenCsvRows();
+            Console.WriteLine(statesUniqueSorted.First());
+            Assert.AreEqual<int>(1, statesUniqueSorted.Count());
+        }
     }
 }
+
+//List<string> a = GetUniqueSortedListoFStatesGivenCsvRows()
+//List<string> b = GetUniqueSortedListoFStatesGivenCsvRows().Sort()
+//Assert.IsTrue()

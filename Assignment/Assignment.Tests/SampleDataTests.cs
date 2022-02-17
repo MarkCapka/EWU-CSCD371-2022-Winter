@@ -11,7 +11,7 @@ namespace Assignment.Tests
     [TestClass()]
     public class SampleDataTests
     {
-        string[] csvRows = new CsvRow(File.ReadLines(@"People.csv"));
+        List<string> _CsvRows = new List<string>(File.ReadLines(@"People.csv"));
 
         [TestMethod]
         public void AssignmentSampleData_DataPutInRowAsString_Success()

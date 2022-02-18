@@ -7,3 +7,4 @@ using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "Test Class, Convention is to use underscores")]
 [assembly: SuppressMessage("Naming", "INTL0003:Methods PascalCase", Justification = "Test Class, Conventions followed for casing")]
+[assembly: SuppressMessage("Globalization", "CA1307:Specify StringComparison", Justification = "<Localization>")]

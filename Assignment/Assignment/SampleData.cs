@@ -51,13 +51,8 @@ public class SampleData : ISampleData
         get
         {
             return _CsvData.Value;
-        {    // TODO 1.Implement the ISampleData.CsvRows property, loading the data from the People.csv file and returning each line as a single string. ✔
-            string[] csvRows = System.IO.File.ReadAllLines(".\\People.csv");
-            IEnumerable<string> rows = new List<string>();
-            rows = csvRows.Skip(1); //
-            Console.WriteLine(rows);
-            return rows;
-        }
+        }  // TODO 1.Implement the ISampleData.CsvRows property, loading the data from the People.csv file and returning each line as a single string. ✔
+        
     }
 
     //name of file we are reading in 
@@ -126,13 +121,15 @@ public class SampleData : ISampleData
 
 
 
-    // 3.Implement ISampleData.GetAggregateSortedListOfStatesUsingCsvRows() to return a string that contains a unique, comma separated list of states. ❌✔
-    //TODO: Use ISampleData.GetUniqueSortedListOfStatesGivenCsvRows() for your data source. ❌✔
-    //TODO: Consider "selecting" only the states and calling ToArray() to retrieve an array of all the state names. ❌✔
-    //TODO: Given the array, consider using string.Join to combine the list into a single string. ❌✔
+    // 3.Implement ISampleData.GetAggregateSortedListOfStatesUsingCsvRows() to return a string that contains a unique, comma separated list of states. ✔
+    //TODO: Use ISampleData.GetUniqueSortedListOfStatesGivenCsvRows() for your data source. ✔
+    //TODO: Consider "selecting" only the states and calling ToArray() to retrieve an array of all the state names. ✔
+    //TODO: Given the array, consider using string.Join to combine the list into a single string. ✔
     public string GetAggregateSortedListOfStatesUsingCsvRows()
-    {
+    {  
+        
         string states = string.Join(',', GetUniqueSortedListOfStatesGivenCsvRows());
+          
         return states;
     }
 
@@ -157,12 +154,12 @@ public class SampleData : ISampleData
     {
         get
         {       //TODO change to Linq (more Linqy - iterating through) 
-            IEnumerable<IPerson> data = new List<IPerson>();
+            IEnumerable<Person> data = new List<Person>();
             foreach (Person person in from string personData in CsvRows
-                                   let individualPersonData = personData.Split(',')
-                                   let person = new Person(individualPersonData[1], individualPersonData[2],
-        new Address(individualPersonData[4], individualPersonData[5], individualPersonData[6], individualPersonData[7]),
-        individualPersonData[3])
+                                      let individualPersonData = personData.Split(',')
+                                      let person = new Person(individualPersonData[1], individualPersonData[2],
+           new Address(individualPersonData[4], individualPersonData[5], individualPersonData[6], individualPersonData[7]),
+           individualPersonData[3]) 
                                    select person)
             {
                 data.Append(person);

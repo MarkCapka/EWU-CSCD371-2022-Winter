@@ -75,7 +75,7 @@ namespace Assignment.Tests
             Assert.Fail();
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void GetAggregateListOfStatesGivenPeopleCollectionTest()
         {
             Assert.Fail();

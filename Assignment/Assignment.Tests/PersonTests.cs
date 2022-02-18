@@ -20,7 +20,7 @@ namespace Assignment.Tests
         [TestMethod()]
         public void PersonTest()
         {
-            Person person = new Person(_FirstName, lastName, address, emailAddress);
+            //Person person = new Person(FirstName, lastName, address, emailAddress);
             Assert.Fail();
         }
     }

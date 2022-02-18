@@ -55,7 +55,14 @@ namespace Assignment.Tests
         [TestMethod]
         public void GetAggregateSortedListOfStatesUsingCsvRows_DatasetOutputsAllUniqueStatesFormattedCorrectly_Success()
         {
-            //string list = GetAggregateSortedListOfStatesUsingCsvRows();
+            
+            //IEnumerable<string> rows = _CsvRows.Where(item => item.GroupBy(.Select(item =>
+
+            //{
+
+            //}).ToList());    
+            ISampleData sampleData = new SampleData();  
+            string list = sampleData.GetAggregateSortedListOfStatesUsingCsvRows();
             Assert.Fail();
         }
 

@@ -18,7 +18,7 @@ namespace Assignment
             EmailAddress = emailAddress;
             Address = address;
             
-            Person person = new Person(firstName, lastName, address, emailAddress);
+            //Person person = new Person(firstName, lastName, address, emailAddress);
         }
 
         public IEnumerator<IPerson> GetEnumerator()

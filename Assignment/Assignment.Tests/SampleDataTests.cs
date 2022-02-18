@@ -78,9 +78,8 @@ namespace Assignment.Tests
                                                               //in the mock method
                                                               //instead of passing people with unique sorted states from People.csv, we pull from a hardcoded list
 
-            
-            Assert.IsTrue(true);
-            //  Assert.Fail();
+
+            Assert.Fail();
         }
 
 
@@ -91,45 +90,30 @@ namespace Assignment.Tests
 
             ISampleData sampleData = new SampleData();
             string csvRows = sampleData.GetAggregateSortedListOfStatesUsingCsvRows(); //holds each of our individual values in the row                       
-         
-            
 
-            
-            
-        //TODO    csvRows.OrderBy(state => state).ThenBy(x => x); 
-            //count = 50 
-
-
-            //}).ToList());    
-
-            // string list = sampleData.GetAggregateSortedListOfStatesUsingCsvRows();
-            //   list.
-
-           //Assert.AreEqual();
-            Assert.AreEqual("", csvRows);
+            Assert.AreEqual("AL,AZ,CA,DC,FL,GA,IN,KS,LA,MD,MN,MO,MT,NC,NE,NH,NV,NY,OR,PA,SC,TN,TX,UT,VA,WA,WV", csvRows);
         }
 
 
         [TestMethod]
         public void FilterByEmailAddressTest()
         {
-            Assert.Fail();
+            ISampleData sampleData = new SampleData();
+            IEnumerable<(string FirstName, string LastName)>? aEmails = sampleData.FilterByEmailAddress(new Predicate<string>(email => email.StartsWith('a')));
+            Assert.AreEqual<int>(4, aEmails.Count());
+            Assert.AreEqual<(string FirstName, string LastName)>(("Amelia", "Toal"), aEmails.First());
         }
 
         [TestMethod]
         public void GetAggregateListOfStatesGivenPeopleCollectionTest()
         {
+            List<IPerson> peopleList = new List<IPerson>();
+            peopleList.Add(new Person("Mark", "Michaelis", new Address("123 Seaseme St", "Spokane", "WA", "99999"), "jobs@intelliTect.com"));
+            ISampleData sampleData = new SampleData();
 
-
-           // IPerson Person = new Person(firstName, lastName, address, emailAddress);
-
-            Assert.Fail();
+            string data = sampleData.GetAggregateListOfStatesGivenPeopleCollection(peopleList);
+            Assert.AreEqual<string>("WA", data);
+            Assert.IsTrue(data.Split(',').Length == 1);
         }
-
-
-
-
-
-
     }
 }

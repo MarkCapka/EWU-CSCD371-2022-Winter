@@ -22,14 +22,6 @@ Choose simplicity over complexity ❌✔
 
 
 
-/* From part 1 of assignment5+6
-
-
-Using LINQ, skip the first row in the People.csv. ✔
-Be sure to appropriately handle resource (IDisposable) items correctly if applicable (and it may not be depending on how you implement it). ❌✔
- * 
- */
-
 
 namespace Assignment;
 public class SampleData : ISampleData
@@ -37,8 +29,8 @@ public class SampleData : ISampleData
 
 
     // TODO Change the "Copy to" property on People.csv to "Copy if newer" so that the file is deployed along with your test project. ✔
-    // TODO Using LINQ, skip the first row in the People.csv. ❌✔
-    // TODO Be sure to appropriately handle resource (IDisposable) items correctly if applicable (and it may not be depending on how you implement it). ❌✔
+    // TODO Using LINQ, skip the first row in the People.csv. ✔
+    // TODO Be sure to appropriately handle resource (IDisposable) items correctly if applicable (and it may not be depending on how you implement it). ✔
 
     IEnumerable<string>? _CsvData;
 
@@ -63,24 +55,6 @@ public class SampleData : ISampleData
         CsvRows = System.IO.File.ReadAllLines(".\\People.csv").Skip(1);
     }
 
-    //name of file we are reading in 
-    //string?[] _Row = File.ReadLines(@"People.csv"); //@ indicates that it is 
-    // using (var reader = new StringReader(lineCount)
-
-
-
-    //TODO divide up the file using the following format: 
-
-    // public IEnumerable<IPerson> People = new Person(firstName, lastName, StreetAddress, emailAddress);
-    //foreach row in Csv: 
-    //new string from csv to row: 
-    //  split on comma
-    //add split value to list containing: Id,FirstName,LastName,Email,StreetAddress,City,State,Zip
-
-    //this.Id = read in first column of ith row
-    // Row.ToList(Id = 1, FirstName = "Priscilla", LastName = "Jenyns", Email = "pjenyns0@state.gov", StreetAddress = "7884 Corry Way", City = "Helena", Zip ="70577"));
-
-
 
 
     //Not sure where this function was required, but step 6 says to use it so I created it. Essentially does the same as step 2 but uses the given collection instead of getting csv rows.
@@ -95,8 +69,8 @@ public class SampleData : ISampleData
 
 
     // TODO 2.Implement IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows() to return a sorted, unique list of states. ❌✔
-    //  TODO: Use ISampleData.CsvRows for your data source. ❌✔
-    //  TODO: Don't forget the list should be unique. ❌✔
+    //  TODO: Use ISampleData.CsvRows for your data source. ✔
+    //  TODO: Don't forget the list should be unique. ✔
     //  TODO: Sort the list alphabetically. ❌✔
     //  TODO: Include a test that leverages a hardcoded list of Spokane-based addresses. 
 
@@ -109,6 +83,8 @@ public class SampleData : ISampleData
     //data format: 1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577
     public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
     {
+
+
         IEnumerable<string> data = GetUniqueListOfStates(People).OrderBy(state => state.ToString());
         return data;
     }

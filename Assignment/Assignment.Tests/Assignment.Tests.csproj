@@ -26,7 +26,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Assignment\Assignment.csproj" />
+	 	  <ProjectReference Include="..\Assignment\Assignment.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="SampleDataTests.cs">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

@@ -5,5 +5,5 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "<Test Class, Convention is to use underscores>", Scope = "member", Target = "~M:Assignment.Tests.SampleDataTests.GetUniqueSortedListOfStatesGivenCsvRowsTest_HardCodedInput_Success")]
-[assembly: SuppressMessage("Naming", "INTL0003:Methods PascalCase", Justification = "<Test Class, Conventions followed for casing>", Scope = "member", Target = "~M:Assignment.Tests.SampleDataTests.GetUniqueSortedListOfStatesGivenCsvRowsTest_HardCodedInput_Success")]
+[assembly: SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "Test Class, Convention is to use underscores")]
+[assembly: SuppressMessage("Naming", "INTL0003:Methods PascalCase", Justification = "Test Class, Conventions followed for casing")]

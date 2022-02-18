@@ -2,13 +2,24 @@
 using System.Collections.Generic;
 
 
+//Mark Capka & Tyler Rose Assignment5+6 .netProgramming February 2022
+
+
+/*General
+ * TODO: Ensure you enable:
+nullable reference types is enabled ✔
+net6 targeted ✔
+C# 10.0 ✔
+and enabled .NET analyzers for both projects ✔
+For this assignment, favor using Assert.AreEqual() (the generic version) ❌✔
+All of the above should be unit tested ❌✔
+Choose simplicity over complexity ❌✔
+ */
 
 
 
-/*
- * 
- * 
- * From part 1 of assignment5+6
+
+/* From part 1 of assignment5+6
 
 
 Using LINQ, skip the first row in the People.csv. ❌✔

@@ -25,7 +25,7 @@ Choose simplicity over complexity ❌✔
 /* From part 1 of assignment5+6
 
 
-Using LINQ, skip the first row in the People.csv. ❌✔
+Using LINQ, skip the first row in the People.csv. ✔
 Be sure to appropriately handle resource (IDisposable) items correctly if applicable (and it may not be depending on how you implement it). ❌✔
  * 
  */
@@ -154,16 +154,18 @@ public class SampleData : ISampleData
     public IEnumerable<IPerson> People
     {
         get
-        {
+        {       //TODO change to Linq (more Linqy - iterating through) 
             IEnumerable<IPerson> data = new List<IPerson>();
-            foreach (string personData in CsvRows)              //TODO change to Linq
+            foreach (Person person in from string personData in CsvRows
+                                   let individualPersonData = personData.Split(',')
+                                   let person = new Person(individualPersonData[1], individualPersonData[2],
+        new Address(individualPersonData[4], individualPersonData[5], individualPersonData[6], individualPersonData[7]),
+        individualPersonData[3])
+                                   select person)
             {
-                string[] individualPersonData = personData.Split(',');
-                Person person = new Person(individualPersonData[1], individualPersonData[2],
-                    new Address(individualPersonData[4], individualPersonData[5], individualPersonData[6], individualPersonData[7]),
-                    individualPersonData[3]);
                 data.Append(person);
             }
+
             return data;
         }
     }

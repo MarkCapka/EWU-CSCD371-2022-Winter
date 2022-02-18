@@ -40,13 +40,7 @@ public class SampleData : ISampleData
     // TODO Using LINQ, skip the first row in the People.csv. ❌✔
     // TODO Be sure to appropriately handle resource (IDisposable) items correctly if applicable (and it may not be depending on how you implement it). ❌✔
 
-
-
-
-
-
-
-
+    Lazy<IEnumerable<string>> _CsvData = new(() => System.IO.File.ReadAllLines(".\\People.csv").Skip(1));
 
 
     //data in row: Id,FirstName,LastName,Email,StreetAddress,City,State,Zip
@@ -55,6 +49,8 @@ public class SampleData : ISampleData
     public IEnumerable<string> CsvRows
     {
         get
+        {
+            return _CsvData.Value;
         {    // TODO 1.Implement the ISampleData.CsvRows property, loading the data from the People.csv file and returning each line as a single string. ✔
             string[] csvRows = System.IO.File.ReadAllLines(".\\People.csv");
             IEnumerable<string> rows = new List<string>();
@@ -84,7 +80,13 @@ public class SampleData : ISampleData
 
 
 
-
+    //Not sure where this function was required, but step 6 says to use it so I created it. Essentially does the same as step 2 but uses the given collection instead of getting csv rows.
+    //Might be fine to leave private.
+    private IEnumerable<string> GetUniqueListOfStates(IEnumerable<IPerson> personList)
+    {
+        IEnumerable<string> data = personList.DistinctBy(person => person.Address.State).Select(person => person.Address.State).ToList();
+        return data;
+    }
 
 
 
@@ -104,7 +106,7 @@ public class SampleData : ISampleData
     //data format: 1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577
     public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
     {
-        IEnumerable<string> data = People.DistinctBy(person => person.Address.State).Select(person => person.Address.State).ToList().OrderBy(state => state.ToString());
+        IEnumerable<string> data = GetUniqueListOfStates(People).OrderBy(state => state.ToString());
         return data;
     }
 
@@ -186,14 +188,6 @@ public class SampleData : ISampleData
         return People.Where(person => filter(person.EmailAddress)).Select(person => (person.FirstName, person.LastName));
     }
 
-    //Not sure where this function was required, but step 6 says to use it so I created it. Essentially does the same as step 2 but uses the given collection instead of getting csv rows.
-    //Might be fine to leave private.
-    private IEnumerable<string> GetUniqueListOfStates(IEnumerable<IPerson> personList)
-    {
-        IEnumerable<string> data = personList.DistinctBy(person => person.Address.State).Select(person => person.Address.State).ToList().OrderBy(state => state.ToString());
-        return data;
-    }
-
     // 6.Implement ISampleData.GetAggregateListOfStatesGivenPeopleCollection(IEnumerable<IPerson> people) to return a string that contains a unique, comma separated list of states. ❌✔
     //TODO: Use the people parameter from ISampleData.GetUniqueListOfStates for your data source. ❌✔
     //TODO: At a minimum, use System.Linq.Enumerable.Aggregate LINQ method to create your result. ❌✔
@@ -204,11 +198,4 @@ public class SampleData : ISampleData
         string states = string.Join(',', GetUniqueListOfStates(people));
         return states;
     }
-
-
-
-
-
-
-
 }

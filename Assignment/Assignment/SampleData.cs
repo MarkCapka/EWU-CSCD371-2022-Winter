@@ -161,11 +161,11 @@ public class SampleData : ISampleData
         get
         {       //TODO change to Linq (more Linqy - iterating through) 
             IEnumerable<IPerson> data = new List<IPerson>();
-            foreach (Person person in from string personData in CsvRows
-                                   let individualPersonData = personData.Split(',')
-                                   let person = new Person(individualPersonData[1], individualPersonData[2],
-        new Address(individualPersonData[4], individualPersonData[5], individualPersonData[6], individualPersonData[7]),
-        individualPersonData[3])
+            foreach (IPerson person in from string personData in CsvRows
+                                      let individualPersonData = personData.Split(',')
+                                       let person = new Person(individualPersonData[1], individualPersonData[2],
+           new Address(individualPersonData[4], individualPersonData[5], individualPersonData[6], individualPersonData[7]),
+           individualPersonData[3]) 
                                    select person)
             {
                 data.Append(person);

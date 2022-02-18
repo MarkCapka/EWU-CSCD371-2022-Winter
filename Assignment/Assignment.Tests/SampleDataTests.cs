@@ -65,9 +65,9 @@ namespace Assignment.Tests
 
             //}).ToList());    
             ISampleData sampleData = new SampleData();  
-            string list = sampleData.GetAggregateSortedListOfStatesUsingCsvRows();
-            list.
-            Assert.IsTrue(true);
+           // string list = sampleData.GetAggregateSortedListOfStatesUsingCsvRows();
+          //  list.
+          //  Assert.IsTrue(true);
         }
 
 

@@ -27,9 +27,6 @@ public class SampleData : ISampleData
     // TODO Using LINQ, skip the first row in the People.csv. ❌✔
     // TODO Be sure to appropriately handle resource (IDisposable) items correctly if applicable (and it may not be depending on how you implement it). ❌✔
 
-    Lazy<IEnumerable<string>> _CsvData = new(() => System.IO.File.ReadAllLines(".\\People.csv").Skip(1));
-
-
     //data in row: Id,FirstName,LastName,Email,StreetAddress,City,State,Zip
     //data format: 1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577
 
@@ -39,6 +36,15 @@ public class SampleData : ISampleData
         {
             return _CsvData.Value;
         }
+        private set
+        {
+            CsvRows = value;
+        }
+    }
+
+    public SampleData()
+    {
+        CsvRows = System.IO.File.ReadAllLines(".\\People.csv").Skip(1);
     }
 
     //name of file we are reading in 

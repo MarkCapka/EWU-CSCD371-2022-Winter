@@ -17,10 +17,10 @@ namespace Assignment.Tests
         
        
 
-        [TestMethod()]
+        [TestMethod]
         public void PersonTest()
         {
-            Person person = new Person(_FirstName, lastName, address, emailAddress);
+//            Person person = new Person(firstName, lastName, address, emailAddress);
             Assert.Fail();
         }
     }

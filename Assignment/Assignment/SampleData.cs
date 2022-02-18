@@ -129,13 +129,15 @@ public class SampleData : ISampleData
 
 
 
-    // 3.Implement ISampleData.GetAggregateSortedListOfStatesUsingCsvRows() to return a string that contains a unique, comma separated list of states. ❌✔
-    //TODO: Use ISampleData.GetUniqueSortedListOfStatesGivenCsvRows() for your data source. ❌✔
-    //TODO: Consider "selecting" only the states and calling ToArray() to retrieve an array of all the state names. ❌✔
-    //TODO: Given the array, consider using string.Join to combine the list into a single string. ❌✔
+    // 3.Implement ISampleData.GetAggregateSortedListOfStatesUsingCsvRows() to return a string that contains a unique, comma separated list of states. ✔
+    //TODO: Use ISampleData.GetUniqueSortedListOfStatesGivenCsvRows() for your data source. ✔
+    //TODO: Consider "selecting" only the states and calling ToArray() to retrieve an array of all the state names. ✔
+    //TODO: Given the array, consider using string.Join to combine the list into a single string. ✔
     public string GetAggregateSortedListOfStatesUsingCsvRows()
-    {
+    {  
+        
         string states = string.Join(',', GetUniqueSortedListOfStatesGivenCsvRows());
+          
         return states;
     }
 

@@ -11,10 +11,10 @@ namespace Assignment.Tests
 
     //TODO outline tests for address here
 
-    [TestClass()]
+    [TestClass]
     public class AddressTests
     {
-        [TestMethod()]
+        [TestMethod]
         public void AddressTest()
         {
             Assert.Fail();

@@ -22,7 +22,7 @@ namespace Assignment;
 public class SampleData : ISampleData
 {
 
-    // TODO 1.Implement the ISampleData.CsvRows property, loading the data from the People.csv file and returning each line as a single string. ❌✔
+
     // TODO Change the "Copy to" property on People.csv to "Copy if newer" so that the file is deployed along with your test project. ✔
     // TODO Using LINQ, skip the first row in the People.csv. ❌✔
     // TODO Be sure to appropriately handle resource (IDisposable) items correctly if applicable (and it may not be depending on how you implement it). ❌✔
@@ -42,10 +42,11 @@ public class SampleData : ISampleData
     public IEnumerable<string> CsvRows
     {
         get
-        {
+        {    // TODO 1.Implement the ISampleData.CsvRows property, loading the data from the People.csv file and returning each line as a single string. ✔
             string[] csvRows = System.IO.File.ReadAllLines(".\\People.csv");
             IEnumerable<string> rows = new List<string>();
-            rows = csvRows.Skip(1);
+            rows = csvRows.Skip(1); //
+            Console.WriteLine(rows);
             return rows;
         }
     }
@@ -142,7 +143,7 @@ public class SampleData : ISampleData
         get
         {
             IEnumerable<IPerson> data = new List<IPerson>();
-            foreach (string personData in CsvRows)
+            foreach (string personData in CsvRows)              //TODO change to Linq
             {
                 string[] individualPersonData = personData.Split(',');
                 Person person = new Person(individualPersonData[1], individualPersonData[2],

@@ -35,10 +35,4 @@
 	  </None>
 	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="People.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

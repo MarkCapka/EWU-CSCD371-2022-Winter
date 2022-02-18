@@ -1,17 +1,19 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Assignment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using Assignment;
+
+
 namespace Assignment.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class SampleDataTests
     {
-        List<string> _CsvRows = new List<string>(File.ReadLines(@"People.csv"));
+        //List<string> _CsvRows = new List<string>(File.ReadLines(@"People.csv"));
 /*
         [TestMethod]
         public void AssignmentSampleData_DataPutInRowAsString_Success()
@@ -55,9 +57,12 @@ namespace Assignment.Tests
         [TestMethod]
         public void GetAggregateSortedListOfStatesUsingCsvRows_DatasetOutputsAllUniqueStatesFormattedCorrectly_Success()
         {
-            //string list = GetAggregateSortedListOfStatesUsingCsvRows();
+
+            string list = GetAggregateSortedListOfStatesUsingCsvRows().ToString();
+        
             Assert.Fail();
         }
+
 
         [TestMethod]
         public void FilterByEmailAddressTest()

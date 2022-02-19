@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace Assignment
 {
-    public class Person : IPerson, IEnumerable<IPerson>
+    public class Person : IPerson
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -19,16 +19,6 @@ namespace Assignment
             Address = address;
             
             //Person person = new Person(firstName, lastName, address, emailAddress);
-        }
-
-        public IEnumerator<IPerson> GetEnumerator()
-        {
-            yield return this;
-        }
-        
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
         }
     }
 }

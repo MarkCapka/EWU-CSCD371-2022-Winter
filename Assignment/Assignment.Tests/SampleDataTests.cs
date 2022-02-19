@@ -43,17 +43,27 @@ namespace Assignment.Tests
         [TestMethod]
         public void GetUniqueSortedListOfStatesGivenCsvRows_HardCodedList_ReturnsOneState()
         {
-            var mockSD = new Mock<ISampleData>();
-            mockSD.SetupGet(x => x.CsvRows).Returns(
-                new string[]{
-                "1,schuyler,asplin,sasplin@ewu.edu,1228 s. division st.,spokane,WA,99202",
-                  "7,ray,tanner,atanner5@ewu.edu,1012 s. maple st.,spokane,WA,99204"
-                      }
-                );
+            //var mockSD = new Mock<ISampleData>();
+            //mockSD.SetupGet(x => x.CsvRows).Returns(
+            //    new string[]{
+            //    "1,schuyler,asplin,sasplin@ewu.edu,1228 s. division st.,spokane,WA,99202",
+            //      "7,ray,tanner,atanner5@ewu.edu,1012 s. maple st.,spokane,WA,99204"
+            //          }
+            //    );
                 
-                IEnumerable<string>statesUniqueSorted = mockSD.Object.GetUniqueSortedListOfStatesGivenCsvRows();
-            Console.WriteLine(statesUniqueSorted.First());
-            Assert.AreEqual<int>(1, statesUniqueSorted.Count());
+            //    IEnumerable<string>statesUniqueSorted = mockSD.Object.GetUniqueSortedListOfStatesGivenCsvRows();
+            //Console.WriteLine(statesUniqueSorted.First());
+            //Assert.AreEqual<int>(1, statesUniqueSorted.Count());
+        }
+        [TestMethod]
+        public void People_NumberOfPeopleEqualToRows_Success()
+        {
+            SampleData sampleDataSD = new();
+            Assert.AreEqual<int>(sampleDataSD.CsvRows.Count(), sampleDataSD.People.Count());
+
+            // peeople not null/ are valid ()
+            // sorted correctly
+
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Assignment
 {
@@ -10,12 +11,23 @@ namespace Assignment
         // 1.
         public IEnumerable<string> CsvRows // = the current return ? 2/17 lecture
         {
-            get 
+            get
             {
-                return File.ReadAllLines("People.csv").Skip(1).ToList();//System.Reflection.Assembly.GetExecutingAssembly().Location; current will work but it relies on unsafe assumptions
+                return File.ReadAllLines(FilePath).Skip(1).ToList();//System.Reflection.Assembly.GetExecutingAssembly().Location; current will work but it relies on unsafe assumptions
             }
         }
 
+        private string FilePath;
+
+        public SampleData()
+        {
+            FilePath = "People.csv";
+        }
+
+        public SampleData([DisallowNull] string filePath)
+        {
+            FilePath = filePath;
+        }
 
         // 2.
         public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
@@ -81,11 +93,18 @@ namespace Assignment
                 return PeopleQuery;
             }
         }
-        
+
 
         // 5.
         public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(
-            Predicate<string> filter) => throw new NotImplementedException();
+            Predicate<string> filter)
+        {
+            IEnumerable<(string, string)> chosenPeople = People.Where(item => filter(item.EmailAddress))
+                                                            .Select(item => (item.FirstName, item.LastName));
+            return chosenPeople;
+        
+        }
+
 
         // 6.
         public string GetAggregateListOfStatesGivenPeopleCollection(IEnumerable<IPerson> People)

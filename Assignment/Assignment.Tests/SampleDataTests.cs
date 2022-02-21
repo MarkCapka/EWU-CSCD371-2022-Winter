@@ -6,15 +6,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Assignment.Tests
 {
     [TestClass]
     public class SampleDataTests
     {
+        SampleData sd = new();
+
+        [TestInitialize]
+        public void testInit()
+        {
+         sd = new();
+        }
+
         [TestMethod]
         public void CsvRows_ReturnsIEnumerable()
         {
-            SampleData sd = new();
+
             var CsvRowsRet = sd.CsvRows;
             Assert.IsTrue(CsvRowsRet.GetType().GetInterface(nameof(IEnumerable<string>)) is not null);
         }
@@ -22,15 +31,14 @@ namespace Assignment.Tests
         [TestMethod]
         public void CsvRows_SkipsFirstRow()
         {
-            SampleData sd = new();
             var CsvRowsRet = sd.CsvRows;
             Assert.IsFalse(CsvRowsRet.ElementAt<string>(0).Equals("Id,FirstName,LastName,Email,StreetAddress,City,State,Zip" + Environment.NewLine));
         }
+
         [TestMethod]
         public void GetUniqueSortedListOfStatesGivenCsvRows_ReturnsState_Success()
         {
-            SampleData sampleData = new();
-            IEnumerable<string> statesUniqueSorted = sampleData.GetUniqueSortedListOfStatesGivenCsvRows();
+            IEnumerable<string> statesUniqueSorted = sd.GetUniqueSortedListOfStatesGivenCsvRows();
 
             Assert.IsTrue(statesUniqueSorted.Count() > 0);
            foreach (string item in statesUniqueSorted)
@@ -43,27 +51,61 @@ namespace Assignment.Tests
         [TestMethod]
         public void GetUniqueSortedListOfStatesGivenCsvRows_HardCodedList_ReturnsOneState()
         {
-            //var mockSD = new Mock<ISampleData>();
-            //mockSD.SetupGet(x => x.CsvRows).Returns(
-            //    new string[]{
-            //    "1,schuyler,asplin,sasplin@ewu.edu,1228 s. division st.,spokane,WA,99202",
-            //      "7,ray,tanner,atanner5@ewu.edu,1012 s. maple st.,spokane,WA,99204"
-            //          }
-            //    );
-                
-            //    IEnumerable<string>statesUniqueSorted = mockSD.Object.GetUniqueSortedListOfStatesGivenCsvRows();
-            //Console.WriteLine(statesUniqueSorted.First());
-            //Assert.AreEqual<int>(1, statesUniqueSorted.Count());
+            string path = "DELETEME.csv";
+
+            string[] hottestGuysInSpokane = {
+                "1,Schuyler,Asplin,sasplin@ewu.edu,1228 S. Division St., Spokane,WA,99202",
+                "1,Ray,Tanner,atanner5@ewu.edu,1012 S. Maple St.,Spokane,WA,99204"
+            };
+
+
+            File.WriteAllLines(path, hottestGuysInSpokane);
+
+            sd = new(path);
+
+            IEnumerable<string> spokaneAddresses = sd.GetUniqueSortedListOfStatesGivenCsvRows();
+            Assert.AreEqual<int>(1, spokaneAddresses.Count());
         }
+
+        [TestMethod]
+        public void GetUniqueSortedListOfStatesGivenCsvRows_StatesAreOrdered()
+        {
+            IEnumerable<string> states = sd.GetUniqueSortedListOfStatesGivenCsvRows();
+            IEnumerable<string> statesSortedByLinq = sd.GetUniqueSortedListOfStatesGivenCsvRows().OrderBy(item => item);
+
+            bool allMatch = states.SequenceEqual<string>(statesSortedByLinq);
+      
+            Assert.IsTrue(allMatch);
+            
+        }
+
         [TestMethod]
         public void People_NumberOfPeopleEqualToRows_Success()
         {
-            SampleData sampleDataSD = new();
-            Assert.AreEqual<int>(sampleDataSD.CsvRows.Count(), sampleDataSD.People.Count());
+            Assert.AreEqual<int>(sd.CsvRows.Count(), sd.People.Count());
+        }
+        
+        
+        [TestMethod]
+        public void GetAggregateSortedListOfStatesGivenPeople_StatesAreOrdered()
+        {
+            string[] statesFromPeople = sd.GetAggregateSortedListOfStatesUsingCsvRows().Split(',');
+            IEnumerable<string> states = sd.GetUniqueSortedListOfStatesGivenCsvRows();
 
-            // peeople not null/ are valid ()
-            // sorted correctly
+            bool allMatch = statesFromPeople.SequenceEqual<string>(states);
 
+            Assert.IsTrue(allMatch);
+        }
+
+        [TestMethod]
+        public void FilterByEmailAddress_ReturnsGovEmails()
+        {
+            (string, string)[] chosenPeople = sd.FilterByEmailAddress(item => item.Contains(".gov")).ToArray();
+
+            foreach(var p in chosenPeople)
+            {
+                Console.WriteLine(p);
+            }
         }
     }
 }

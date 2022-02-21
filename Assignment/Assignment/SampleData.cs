@@ -30,29 +30,34 @@ public class SampleData : ISampleData
 
     // TODO Change the "Copy to" property on People.csv to "Copy if newer" so that the file is deployed along with your test project. ✔
     // TODO Using LINQ, skip the first row in the People.csv. ✔
-    // TODO Be sure to appropriately handle resource (IDisposable) items correctly if applicable (and it may not be depending on how you implement it). ✔
-
-    IEnumerable<string>? _CsvData;
-
+    // TODO Be sure to appropriately handle resource (IDisposable) items correctly if applicable (and it may not be depending on how you implement it). 
 
     //data in row: Id,FirstName,LastName,Email,StreetAddress,City,State,Zip
     //data format: 1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577
 
-    public IEnumerable<string> CsvRows
-    {
-        get
-        {
-            return _CsvData!;
-        }
-        private set
-        {
-            _CsvData = value;
-        }
-    }
+    public IEnumerable<string> CsvRows { get; private set; }
 
     public SampleData()
     {
+        CsvRows = new List<string>();
         CsvRows = System.IO.File.ReadAllLines(".\\People.csv").Skip(1);
+
+        People = new List<IPerson>();
+
+        //Playing wit linq, plz dont dock points :3
+        var data = CsvRows.Select(column => column.Split(',')).Select(column => new
+        {
+            firstName = column[1],
+            lastName = column[2],
+            address = new Address(column[4], column[5], column[6], column[7]),
+            emailAddress = column[3],
+        }).ToList();
+        List<IPerson> newPeople = new List<IPerson>(); //People.Append didn't put anything in the list. Use an interrum list.
+        data.ForEach(field =>
+        {
+            newPeople.Add(new Person(field.firstName, field.lastName, field.address, field.emailAddress));
+        });
+        People = newPeople;
     }
 
 
@@ -85,7 +90,7 @@ public class SampleData : ISampleData
     {
 
 
-        IEnumerable<string> data = GetUniqueListOfStates(People).OrderBy(state => state.ToString());
+        IEnumerable<string> data = GetUniqueListOfStates(People).OrderBy(state => state);
         return data;
     }
 
@@ -110,10 +115,10 @@ public class SampleData : ISampleData
     //TODO: Consider "selecting" only the states and calling ToArray() to retrieve an array of all the state names. ✔
     //TODO: Given the array, consider using string.Join to combine the list into a single string. ✔
     public string GetAggregateSortedListOfStatesUsingCsvRows()
-    {  
-        
+    {
+
         string states = string.Join(',', GetUniqueSortedListOfStatesGivenCsvRows());
-          
+
         return states;
     }
 
@@ -134,24 +139,7 @@ public class SampleData : ISampleData
 
 
 
-    public IEnumerable<IPerson> People
-    {
-        get
-        {       //TODO change to Linq (more Linqy - iterating through) 
-            IEnumerable<IPerson> data = new List<IPerson>();
-            foreach (IPerson person in from string personData in CsvRows
-                                      let individualPersonData = personData.Split(',')
-                                       let person = new Person(individualPersonData[1], individualPersonData[2],
-           new Address(individualPersonData[4], individualPersonData[5], individualPersonData[6], individualPersonData[7]),
-           individualPersonData[3]) 
-                                   select person)
-            {
-                data.Append(person);
-            }
-
-            return data;
-        }
-    }
+    public IEnumerable<IPerson> People { get; private set; }
 
 
 
@@ -162,10 +150,11 @@ public class SampleData : ISampleData
     //TODO: Use ISampleData.People for your data source. ❌✔
     public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(Predicate<string> filter)
     {
-        if (filter == null)
+        if (filter is null)
         {
             throw new ArgumentNullException(paramName: $"Provided argument {nameof(filter)} was null.");
         }
+        
         return People.Where(person => filter(person.EmailAddress)).Select(person => (person.FirstName, person.LastName));
     }
 
@@ -174,7 +163,7 @@ public class SampleData : ISampleData
     //TODO: At a minimum, use System.Linq.Enumerable.Aggregate LINQ method to create your result. ❌✔
     //TODO: Don't forget the list should be unique. ❌✔
     //TODO: It is recommended that, at a minimum, you use ISampleData.GetUniqueSortedListOfStatesGivenCsvRows to validate your result.
-    public string GetAggregateListOfStatesGivenPeopleCollection(IEnumerable<IPerson> people) 
+    public string GetAggregateListOfStatesGivenPeopleCollection(IEnumerable<IPerson> people)
     {
         string states = string.Join(',', GetUniqueListOfStates(people));
         return states;

@@ -34,14 +34,12 @@ namespace Assignment.Tests
 
 
 
-
+            
         [TestMethod]
         public void AssignmentSampleData_DataPutInRowAsString_Success()
         {
 
-            List<IEnumerable<string>> csvRows = new List<IEnumerable<string>>(); //holds each of our individual values in the row
-
-
+            IEnumerable<string> csvRows = sampleData.CsvRows; //holds each of our individual values in the row     
 
             // List<IPerson> persons = csvRows;
 
@@ -113,6 +111,9 @@ namespace Assignment.Tests
         [TestMethod]
         public void FilterByEmailAddressTest()
         {
+
+            ISampleData sapmleData = new SampleData();
+
             Assert.Fail();
         }
 

@@ -61,20 +61,20 @@ Recommended But **Not** Required (in order of priority)
    - Consider "selecting" only the states and calling `ToArray()` to retrieve an array of all the state names. ✔
    - Given the array, consider using `string.Join` to combine the list into a single string. ✔
 
-4. Implement the `ISampleData.People` property to return all the items in `People.csv` as `Person` objects ❌✔
+4. Implement the `ISampleData.People` property to return all the items in `People.csv` as `Person` objects ❌✔ --> Maybe we wanna do null validation
 
    - Use `ISampleData.CsvRows` as the source of the data. ✔
    - Sort the list by State, City, Zip. (Sort the addresses first then select). ✔
    - Be sure that `Person.Address` is also populated. ✔
    - Adding null validation to all the `Person` and `Address` properties is **optional**.❌✔
 
-   - Consider using `ISampleData.CsvRows` in your test to verify your results. ❌✔
+   - Consider using `ISampleData.CsvRows` in your test to verify your results. ✔
 
-5. Implement `ISampleDate.FilterByEmailAddress(Predicate<string> filter)` to return a list of names where the email address matches the `filter`. ❌✔ --> Needs Testing
+5. Implement `ISampleDate.FilterByEmailAddress(Predicate<string> filter)` to return a list of names where the email address matches the `filter`. ✔
 
    - Use `ISampleData.People` for your data source. ✔
 
-6. Implement `ISampleData.GetAggregateListOfStatesGivenPeopleCollection(IEnumerable<IPerson> people)` to return a `string` that contains a **unique**, comma separated list of states. ❌✔ -->
+6. Implement `ISampleData.GetAggregateListOfStatesGivenPeopleCollection(IEnumerable<IPerson> people)` to return a `string` that contains a **unique**, comma separated list of states.  ❌✔ --> Need to 
 
    - Use the `people` parameter from `ISampleData.GetUniqueListOfStates` for your data source. ✔
    - At a minimum, use `System.Linq.Enumerable.Aggregate` LINQ method to create your result. ✔
@@ -83,7 +83,7 @@ Recommended But **Not** Required (in order of priority)
 
 7. Given the implementation of `Node` in Assignment5
 
-- Implement `IEnumerable<T>` to return all the items in the "circle" of items. ❌✔
+- Implement `IEnumerable<T>` to return all the items in the "circle" of items. ✔
 - Add an `IEnumberable<T> ChildItems(int maximum)` method to `Node` that returns the remaining items with a maximum number of items returned less than `maximum`.  
 
 ## Extra Credit
@@ -95,8 +95,8 @@ Recommended But **Not** Required (in order of priority)
 - Ensure you enable:
   - nullable reference types is enabled ✔
   - net6 targeted ✔
-  - C# 10.0 ❌✔
-  - and enabled .NET analyzers for both projects ❌✔
-- For this assignment, favor using Assert.AreEqual<T>() (the generic version) ❌✔
-- All of the above should be unit tested ❌✔
-- Choose simplicity over complexity ❌✔
+  - C# 10.0 ✔
+  - and enabled .NET analyzers for both projects ✔
+- For this assignment, favor using Assert.AreEqual<T>() (the generic version) ✔
+- All of the above should be unit tested ✔
+- Choose simplicity over complexity ✔

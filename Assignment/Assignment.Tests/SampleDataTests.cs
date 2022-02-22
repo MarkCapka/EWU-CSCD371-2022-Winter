@@ -38,8 +38,9 @@ public class SampleDataTests
     public void AssignmentSampleData_DataPutInRowAsString_Success()
     {
 
-        List<IEnumerable<string>> csvRows = new List<IEnumerable<string>>(); //holds each of our individual values in the row
-
+        ISampleData sampleData = new SampleData();
+        IEnumerable<string> csvRows = sampleData.CsvRows;
+        Assert.Fail();
 
 
         // List<IPerson> persons = csvRows;
@@ -64,7 +65,7 @@ public class SampleDataTests
     }
 
     //TODO from part 2 
-    //TODO: Include a test that leverages a hardcoded list of Spokane-based addresses. ❌✔           //TODO drop question if can't figure out from recording, what his intention is. ALl addresses will be Washington. 
+    //TODO: Include a test that leverages a hardcoded list of Spokane-based addresses. ❌✔           //TODO drop question if can't figure out from recording, what his intention is. ALl addresses will be Washington. (so should probably sort on the other values like state, city, zip etc?
     //TODO: Include a test that uses LINQ to verify the data is sorted correctly (do not use a hardcoded list). ❌✔
     //  TODO: Include a test that leverages a hardcoded list of Spokane-based addresses. 
 
@@ -80,7 +81,7 @@ public class SampleDataTests
 
         Assert.Fail();
     }
-
+   
 
 
     [TestMethod]
@@ -93,6 +94,8 @@ public class SampleDataTests
         Assert.AreEqual("AL,AZ,CA,DC,FL,GA,IN,KS,LA,MD,MN,MO,MT,NC,NE,NH,NV,NY,OR,PA,SC,TN,TX,UT,VA,WA,WV", csvRows);
     }
 
+    
+      //TODO 5. - Use `ISampleData.People` for your data source. ❌✔
 
     [TestMethod]
     public void FilterByEmailAddressTest()
@@ -102,6 +105,11 @@ public class SampleDataTests
         Assert.AreEqual<int>(4, aEmails.Count());
         Assert.AreEqual<(string FirstName, string LastName)>(("Amelia", "Toal"), aEmails.First());
     }
+
+
+
+    //6. GetAggregateListOfStatesGivenPeopleCollection: 
+    //TODO: It is recommended that, at a minimum, you use ISampleData.GetUniqueSortedListOfStatesGivenCsvRows to validate your result.
 
     [TestMethod]
     public void GetAggregateListOfStatesGivenPeopleCollectionTest()

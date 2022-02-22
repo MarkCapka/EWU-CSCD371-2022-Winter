@@ -18,7 +18,7 @@ namespace Assignment
             EmailAddress = emailAddress;
             Address = address;
             
-            //Person person = new Person(firstName, lastName, address, emailAddress);
+
         }
     }
 }

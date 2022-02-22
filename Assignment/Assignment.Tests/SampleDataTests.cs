@@ -82,7 +82,7 @@ public class SampleDataTests
         ISampleData sampleData = new SampleData();
         IEnumerable<(string FirstName, string LastName)>? aEmails = sampleData.FilterByEmailAddress(new Predicate<string>(email => email.StartsWith('a')));
         Assert.AreEqual<int>(4, aEmails.Count());
-        Assert.AreEqual<(string FirstName, string LastName)>(("Amelia", "Toal"), aEmails.First());
+        Assert.AreEqual<(string FirstName, string LastName)>(("Arthur", "Myles"), aEmails.First());
     }
 
 
@@ -109,5 +109,46 @@ public class SampleDataTests
         ISampleData sampleData = new SampleData();
         _ = sampleData.FilterByEmailAddress(null!);
     }
+
+
+
+    [TestMethod]
+    public void GetCircle_AddsItemsToCircle_Success()
+    {
+
+        SampleData sampleData = new();
+        IEnumerable<IPerson> linkedList = sampleData.GetCircle();
+
+        Assert.AreEqual<int>(50, linkedList.Count());
+
+       
+
+    }
+
+   
+    [TestMethod]
+    public void ChildItems_ReturnsRemainderOfList_Success()
+    {
+
+        SampleData sampleData = new();
+        IEnumerable<IPerson> linkedList = sampleData.ChildItems(42);
+       
+        Assert.AreEqual<int>(42, linkedList.Count());
+
+
+    }
+
+
+
+    //    Given the implementation of Node in Assignment5
+
+    //Implement IEnumerable<T> to return all the items in the "circle" of items. ✔
+    //Add an IEnumberable<T> ChildItems(int maximum) method to Node that returns the remaining items with a maximum number of items returned less than maximum.
+
+
+
+
+
+
 }
 

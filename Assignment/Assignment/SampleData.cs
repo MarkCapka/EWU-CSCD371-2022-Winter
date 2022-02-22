@@ -58,7 +58,7 @@ public class SampleData : ISampleData
         {
             newPeople.Add(new Person(field.firstName, field.lastName, field.address, field.emailAddress));
         });
-        People = newPeople;
+        People = newPeople.OrderBy(person => person.Address.State).ThenBy(person => person.Address.City).ThenBy(person => person.Address.Zip);
     }
 
 
@@ -75,7 +75,7 @@ public class SampleData : ISampleData
 
 
     // .2. Implement IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows() to return a sorted, unique list of states. ✔
-    //  TODO: Use ISampleData.CsvRows for your data source.❌✔  //requirement note not in assignment: [ confirm that we are using CSVRows as our data source, I believe we are since SampleData pulls the data from CsvRows ayway ❌✔]
+    //  TODO: Use ISampleData.CsvRows for your data source.✔  //requirement note not in assignment: [ confirm that we are using CSVRows as our data source, I believe we are since SampleData pulls the data from CsvRows ayway ❌✔]
     //  Don't forget the list should be unique. ✔
     //  Sort the list alphabetically. ✔
     //  Include a test that leverages a hardcoded list of Spokane-based addresses. 
@@ -113,9 +113,9 @@ public class SampleData : ISampleData
     // 4.Implement the ISampleData.People property to return all the items in People.csv as Person objects ✔
     // Use ISampleData.CsvRows as the source of the data. ✔
     // Sort the list by State, City, Zip. (Sort the addresses first then select). ✔
-    //TODO: Be sure that Person.Address is also populated. ✔
+    // Be sure that Person.Address is also populated. ✔
     // Adding null validation to all the Person and Address properties is optional.
-    //TODO: Consider using ISampleData.CsvRows in your test to verify your results. ❌✔
+    // Consider using ISampleData.CsvRows in your test to verify your results. ✔
 
 
 
@@ -155,12 +155,41 @@ public class SampleData : ISampleData
     //    7. ***take another look at, i'm not sure that we have this implemented. 
     //Given the implementation of Node in Assignment5
 
-    //Implement IEnumerable<T> to return all the items in the "circle" of items. ❌✔
+    //Implement IEnumerable<T> to return all the items in the "circle" of items. ✔
     //Add an IEnumberable<T> ChildItems(int maximum) method to Node that returns the remaining items with a maximum number of items returned less than maximum.
 
 
+    public IEnumerable<IPerson> GetCircle()
+    {
+
+        CircularLinkedList <IPerson> linkedList = new(People.First());
+
+        People.Skip(1).ToList().ForEach(people => linkedList.Append(people));
+        return linkedList;
+
+    }
 
 
+
+    public IEnumerable<IPerson> ChildItems(int maximum)
+    {
+
+        CircularLinkedList<IPerson> linkedList = new(People.First());
+
+        People.Skip(1).Take(maximum-1).ToList().ForEach(people => linkedList.Append(people));
+
+
+        return linkedList;
+
+    }
+
+
+    //string longestName =
+    //fruits.Aggregate("banana",
+    //                (longest, next) =>
+    //                    next.Length > longest.Length ? next : longest,
+    //// Return the final result as an upper case string.
+    //                fruit => fruit.ToUpper());
 
 
 }

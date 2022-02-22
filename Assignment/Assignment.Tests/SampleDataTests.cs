@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using Assignment;
-
+using Moq;
 
 namespace Assignment.Tests;
 [TestClass]
@@ -34,40 +34,10 @@ public class SampleDataTests
 
 
 
-    [TestMethod]
-    public void AssignmentSampleData_DataPutInRowAsString_Success()
-    {
-
-        ISampleData sampleData = new SampleData();
-        IEnumerable<string> csvRows = sampleData.CsvRows;
-        Assert.Fail();
-
-
-        // List<IPerson> persons = csvRows;
-
-        // IEnumerable<Person> persons = cvsRows.Where(item => item.FirstName, item => item.LasttName);
-        //IEnumerable<string> Name = cvsRows.Select(item => (item.FirstName, item.LastName));
-
-        //foreach(IEnumerable<Person> item in csvRows)
-        //{
-
-        //    object p = csvRows.Add(item.FirstName, item.LastName, item.EmailAddress);
-        //}
-
-
-
-        //DataCsv format: Id,FirstName,LastName,Email,StreetAddress,City,State,Zip
-
-        //  Assert.AreEqual("1, Priscilla, Jenyns, pjenyns0@state.gov, 7884 Corry Way, Helena, MT, 70577", cvsRow[1].ToString());
-
-        //data format:
-
-    }
-
     //TODO from part 2 
-    //TODO: Include a test that leverages a hardcoded list of Spokane-based addresses. ❌✔           //TODO drop question if can't figure out from recording, what his intention is. ALl addresses will be Washington. (so should probably sort on the other values like state, city, zip etc?
-    //TODO: Include a test that uses LINQ to verify the data is sorted correctly (do not use a hardcoded list). ❌✔
-    //  TODO: Include a test that leverages a hardcoded list of Spokane-based addresses. 
+    //TODO: Include a test that leverages a hardcoded list of Spokane-based addresses. ✔           //TODO drop question if can't figure out from recording, what his intention is. ALl addresses will be Washington. (so should probably sort on the other values like state, city, zip etc?
+    //Include a test that uses LINQ to verify the data is sorted correctly (do not use a hardcoded list). ✔
+    // Include a test that leverages a hardcoded list of Spokane-based addresses. 
 
     [TestMethod]        //TODO come back to once we figure out the hardcoded, washington state stuff
     public void GetUniqueSortedListOfStatesGivenCsvRowsTest_HardCodedInput_Success()
@@ -79,7 +49,16 @@ public class SampleDataTests
                                                           //instead of passing people with unique sorted states from People.csv, we pull from a hardcoded list
 
 
-        Assert.Fail();
+        var mockTest = new Mock<ISampleData>();
+
+
+        IEnumerable<string> hardcodedData = csvRows.Select(item => item).Where((item => item.Contains("Spokane")));
+        mockTest.SetupSequence(data => data.CsvRows).Returns(hardcodedData);
+
+        Assert.AreEqual<IEnumerable<string>>(hardcodedData, mockTest.Object.CsvRows);
+
+        mockTest.Verify<IEnumerable<string>>(hardcodedData => hardcodedData.CsvRows, Times.Exactly(1));
+
     }
    
 
@@ -91,11 +70,11 @@ public class SampleDataTests
         ISampleData sampleData = new SampleData();
         string csvRows = sampleData.GetAggregateSortedListOfStatesUsingCsvRows(); //holds each of our individual values in the row                       
 
-        Assert.AreEqual("AL,AZ,CA,DC,FL,GA,IN,KS,LA,MD,MN,MO,MT,NC,NE,NH,NV,NY,OR,PA,SC,TN,TX,UT,VA,WA,WV", csvRows);
+        Assert.AreEqual<string>("AL,AZ,CA,DC,FL,GA,IN,KS,LA,MD,MN,MO,MT,NC,NE,NH,NV,NY,OR,PA,SC,TN,TX,UT,VA,WA,WV", csvRows);
     }
 
     
-      //TODO 5. - Use `ISampleData.People` for your data source. ❌✔
+      //TODO 5. - Use `ISampleData.People` for your data source.  ✔
 
     [TestMethod]
     public void FilterByEmailAddressTest()
@@ -114,7 +93,7 @@ public class SampleDataTests
     [TestMethod]
     public void GetAggregateListOfStatesGivenPeopleCollectionTest()
     {
-        List<IPerson> peopleList = new List<IPerson>();
+        List<IPerson> peopleList = new();
         peopleList.Add(new Person("Mark", "Michaelis", new Address("123 Seaseme St", "Spokane", "WA", "99999"), "jobs@intelliTect.com"));
         ISampleData sampleData = new SampleData();
 

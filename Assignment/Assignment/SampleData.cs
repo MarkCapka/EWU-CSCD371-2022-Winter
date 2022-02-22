@@ -124,7 +124,7 @@ public class SampleData : ISampleData
 
 
     // 5.Implement ISampleDate.FilterByEmailAddress(Predicate<string> filter) to return a list of names where the email address matches the filter. ✔
-    //TODO: Use ISampleData.People for your data source. ❌✔ CONFIRM
+    // Use ISampleData.People for your data source. ✔ 
     public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(Predicate<string> filter)
     {
         if (filter is null)
@@ -142,7 +142,11 @@ public class SampleData : ISampleData
     //TODO: It is recommended that, at a minimum, you use ISampleData.GetUniqueSortedListOfStatesGivenCsvRows to validate your result.
     public string GetAggregateListOfStatesGivenPeopleCollection(IEnumerable<IPerson> people)
     {
-        string states = string.Join(',', GetUniqueListOfStates(people));
+        string states = string.Join(',', GetUniqueListOfStates(people).ToArray());
+
+        // string stateAggregate = people.Aggregate();        //Iperson can't convert to string
+
+
         return states;
     }
 

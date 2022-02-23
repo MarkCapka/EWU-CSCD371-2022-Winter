@@ -78,8 +78,8 @@ Recommended But **Not** Required (in order of priority)
 
    - Use the `people` parameter from `ISampleData.GetUniqueListOfStates` for your data source. ✔
    - At a minimum, use `System.Linq.Enumerable.Aggregate` LINQ method to create your result. ✔
-   - Don't forget the list should be unique. ❌✔
-   - It is recommended that, at a minimum, you use `ISampleData.GetUniqueSortedListOfStatesGivenCsvRows` to validate your result.❌✔
+   - Don't forget the list should be unique. ✔
+   - It is recommended that, at a minimum, you use `ISampleData.GetUniqueSortedListOfStatesGivenCsvRows` to validate your result.✔
 
 7. Given the implementation of `Node` in Assignment5
 

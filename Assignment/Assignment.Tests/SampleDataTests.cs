@@ -125,7 +125,7 @@ namespace Assignment.Tests
         }
         
         [TestMethod]
-        public void GetAggregateSortedListOfStatesGivenPeople_StatesAreOrdered()
+        public void GetAggregateSortedListOfStatesGivenCsvRows_StatesAreOrdered()
         {
             string[] statesFromPeople = sd.GetAggregateSortedListOfStatesUsingCsvRows().Split(',');
             IEnumerable<string> states = sd.GetUniqueSortedListOfStatesGivenCsvRows();
@@ -157,6 +157,19 @@ namespace Assignment.Tests
             Assert.AreEqual<int>(2, chosenPeople.Count());
 
             File.Delete(path);
+        }
+
+        [TestMethod]
+        public void GetAggregateListOfStatesGivenPeopleCollection_IsSorted()
+        {
+            string[] stateArrayFromPeople = sd.GetAggregateListOfStatesGivenPeopleCollection(sd.People).Split(',');
+            Assert.IsTrue(stateArrayFromPeople.SequenceEqual(sd.GetUniqueSortedListOfStatesGivenCsvRows()));
+        }
+        [TestMethod]
+        public void GetAggregateListOfStatesGivenPeopleCollection_IsUnique()
+        {
+            string[] stateArrayFromPeople = sd.GetAggregateListOfStatesGivenPeopleCollection(sd.People).Split(',');
+            Assert.AreEqual<int>(stateArrayFromPeople.Count(), stateArrayFromPeople.Distinct().Count());
         }
 
         

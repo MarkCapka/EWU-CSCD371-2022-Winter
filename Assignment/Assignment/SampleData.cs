@@ -50,24 +50,17 @@ namespace Assignment
         // 3.
         public string GetAggregateSortedListOfStatesUsingCsvRows()
         {
-           
-            return String.Join( ",",GetUniqueSortedListOfStatesGivenCsvRows());
 
-            
-            //string stateString = new("");
-            //IEnumerable<string> states = GetUniqueSortedListOfStatesGivenCsvRows(){
-            //    from item in states
-            //    stateString = stateString.Join(",", item);
-            //    select stateString;
-            //}
+            return String.Join(",", GetUniqueSortedListOfStatesGivenCsvRows());
+
         }
-            
+
         // 4.
         public IEnumerable<IPerson> People
         {
             get
             {
-               
+
                 IEnumerable<IPerson> PeopleQuery = (
                    from line in CsvRows
                    let columnSeparatedLines = line.Split(',')
@@ -76,20 +69,14 @@ namespace Assignment
                    orderby addressArray[2], //State
                       addressArray[1], //city
                       addressArray[3]   //zip
-               let tempAddress = new Address(addressArray[0], addressArray[1], addressArray[2], addressArray[3])
+                   let tempAddress = new Address(addressArray[0], addressArray[1], addressArray[2], addressArray[3])
                    select new Person(
                         peopleArray[1], // FirstName
                         peopleArray[2], // LastName
-                        tempAddress, 
+                        tempAddress,
                         peopleArray[3]) // Email 
                    ).ToList();
 
-                //foreach (Person p in PeopleQuery){
-
-                //    Console.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}, {6}", p.FirstName, p.LastName,
-                //        p.Address.StreetAddress, p.Address.City, p.Address.State, p.Address.Zip, p.EmailAddress);
-
-                //}
                 return PeopleQuery;
             }
         }
@@ -102,7 +89,7 @@ namespace Assignment
             IEnumerable<(string, string)> chosenPeople = People.Where(item => filter(item.EmailAddress))
                                                             .Select(item => (item.FirstName, item.LastName));
             return chosenPeople;
-        
+
         }
 
 

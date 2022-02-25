@@ -5,19 +5,34 @@
     <!-- Make sure you have this
         section in your HTML file. -->
     <title>Meg's Special Page</title>
+    <link rel="stylesheet" href="css/site.css">
 </head>
 
 <body>
     <div>
+
+
         <p style="font-weight: bold;">
             This is <span style="color:red;">some</span> text.
         </p>
-    </div>
-    <div>
+
+
+
+
         <button>
+
+            <p style="font-weight: bold;">
+                This is <span style="color:red"> </span>
+            </p>
+
+
+
+
+
             <img src="https://www.freeiconspng.com/thumbs/cursor-png/cursor-png-ico-icns-free-icon-download--icon100m-20.png"
                 alt="Meg" />
-            Meg's <span>ABC</span> Button</button>
+            Meg's <span>ABC</span> Button
+        </button>
         <div>
             <button>
                 <img class="medium"
@@ -30,40 +45,41 @@
                 height="50" width="50" alt="Meg" />
         </div>
     </div>
+
+    <table>
+        <thead>
+            <th class="name">Name</th>
+            <th class="description">Description</th>
+            <th class="price text-right">Price</th>
+        </thead>
+
+        <tbody>
+            <tr>ß
+                <td style="width: 20%;">Princess Bride BluRay DVD</td>
+                <td>NEW and IMPROVED HDR version of the classic!! For &lt; &euro;30!!!</td>
+                <td style="width: 250ßpx;">&euro; 29.99 </td>
+            </tr>
+            <tr>
+                <td> Another Name Being Filled </td>
+                <td> Another Description Being Filled </td>
+                <td> Another Price Being Filled </td>
+
+            </tr>
+
+
+        </tbody>
+    </table>
+
+    <tfoot class="color-footer">
+        <tr>
+            <th colspan="2" class="text-right">Total:</th>
+            <th class="text-right">&euro;0.00</th>
+
+          
+        </tr>
+    </tfoot>
+
+
 </body>
 
 </html>
-<style>
-    span {
-        color: blue;
-    }
-
-    button {
-        background-color: blueviolet;
-        border: 2px solid aliceblue;
-        padding: 2px;
-        margin: 10px;
-        border-radius: 10px;
-    }
-
-    img {
-        width: 10px;
-        height: 20px;
-        background-color: pink;
-    }
-
-    .medium {
-        background-color: red;
-    }
-
-    div {
-        padding: 2px;
-        margin: 3px;
-        border: 2px solid black;
-    }
-
-    button:hover {
-        padding: 3px;
-        background: linear-gradient(90deg, rgba(2,0,36,0.8) 0%, rgba(9,9,121,0.5) 75%, rgba(0,212,255,1) 100%);
-    }
-</style>

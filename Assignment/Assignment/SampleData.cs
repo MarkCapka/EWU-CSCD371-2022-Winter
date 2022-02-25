@@ -103,8 +103,8 @@ public class SampleData : ISampleData
     public string GetAggregateSortedListOfStatesUsingCsvRows()
     {
 
-        string states = string.Join(',', GetUniqueSortedListOfStatesGivenCsvRows().Select(state => state).ToArray());
-        return states;
+        
+        return string.Join(',', GetUniqueSortedListOfStatesGivenCsvRows().Select(state => state).ToArray()); ;
     }
 
 
@@ -137,60 +137,19 @@ public class SampleData : ISampleData
 
     // 6.Implement ISampleData.GetAggregateListOfStatesGivenPeopleCollection(IEnumerable<IPerson> people) to return a string that contains a unique, comma separated list of states. ❌✔
     // Use the people parameter from ISampleData.GetUniqueListOfStates for your data source. ✔
-    //TODO: At a minimum, use System.Linq.Enumerable.Aggregate LINQ method to create your result.❌ ✔
-    //TODO: Don't forget the list should be unique. ❌✔
+    //TODO: At a minimum, use System.Linq.Enumerable.Aggregate LINQ method to create your result. ✔
+    //TODO: Don't forget the list should be unique. ✔
     //TODO: It is recommended that, at a minimum, you use ISampleData.GetUniqueSortedListOfStatesGivenCsvRows to validate your result.
-    public string GetAggregateListOfStatesGivenPeopleCollection(IEnumerable<IPerson> people)
-    {
-        string states = string.Join(',', GetUniqueListOfStates(people).ToArray());
+    public string GetAggregateListOfStatesGivenPeopleCollection(IEnumerable<IPerson> people) =>
+  
+     people.Select(x=>x.Address.State).Distinct().Aggregate((states, nextState) => states + ", " + nextState);        //Iperson can't convert to string
 
-        // string stateAggregate = people.Aggregate();        //Iperson can't convert to string
-
-
-        return states;
-    }
+       
+    
 
 
 
-    //    7. ***take another look at, i'm not sure that we have this implemented. 
-    //Given the implementation of Node in Assignment5
-
-    //Implement IEnumerable<T> to return all the items in the "circle" of items. ✔
-    //Add an IEnumberable<T> ChildItems(int maximum) method to Node that returns the remaining items with a maximum number of items returned less than maximum.
-
-
-    public IEnumerable<IPerson> GetCircle()
-    {
-
-        CircularLinkedList <IPerson> linkedList = new(People.First());
-
-        People.Skip(1).ToList().ForEach(people => linkedList.Append(people));
-        return linkedList;
-
-    }
-
-
-
-    public IEnumerable<IPerson> ChildItems(int maximum)
-    {
-
-        CircularLinkedList<IPerson> linkedList = new(People.First());
-
-        People.Skip(1).Take(maximum-1).ToList().ForEach(people => linkedList.Append(people));
-
-
-        return linkedList;
-
-    }
-
-
-    //string longestName =
-    //fruits.Aggregate("banana",
-    //                (longest, next) =>
-    //                    next.Length > longest.Length ? next : longest,
-    //// Return the final result as an upper case string.
-    //                fruit => fruit.ToUpper());
-
+    
 
 }
 

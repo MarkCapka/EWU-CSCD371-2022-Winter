@@ -60,7 +60,7 @@ public class SampleDataTests
         mockTest.Verify<IEnumerable<string>>(hardcodedData => hardcodedData.CsvRows, Times.Exactly(1));
 
     }
-   
+
 
 
     [TestMethod]
@@ -73,8 +73,8 @@ public class SampleDataTests
         Assert.AreEqual<string>("AL,AZ,CA,DC,FL,GA,IN,KS,LA,MD,MN,MO,MT,NC,NE,NH,NV,NY,OR,PA,SC,TN,TX,UT,VA,WA,WV", csvRows);
     }
 
-    
-      //TODO 5. - Use `ISampleData.People` for your data source.  ✔
+
+    //TODO 5. - Use `ISampleData.People` for your data source.  ✔
 
     [TestMethod]
     public void FilterByEmailAddressTest()
@@ -115,40 +115,23 @@ public class SampleDataTests
     [TestMethod]
     public void GetCircle_AddsItemsToCircle_Success()
     {
-
         SampleData sampleData = new();
-        IEnumerable<IPerson> linkedList = sampleData.GetCircle();
+        IEnumerable<IPerson> circle = sampleData.GetCircle();
 
-        Assert.AreEqual<int>(50, linkedList.Count());
-
-       
+        Assert.AreEqual<int>(50, circle.Count());
 
     }
 
-   
+
     [TestMethod]
     public void ChildItems_ReturnsRemainderOfList_Success()
     {
 
         SampleData sampleData = new();
-        IEnumerable<IPerson> linkedList = sampleData.ChildItems(42);
-       
-        Assert.AreEqual<int>(42, linkedList.Count());
+        IEnumerable<IPerson> circle = sampleData.GetCircle();
+        circle = sampleData.ChildItems(16);
 
-
+        Assert.AreEqual<int>(15, circle.Count());
     }
-
-
-
-    //    Given the implementation of Node in Assignment5
-
-    //Implement IEnumerable<T> to return all the items in the "circle" of items. ✔
-    //Add an IEnumberable<T> ChildItems(int maximum) method to Node that returns the remaining items with a maximum number of items returned less than maximum.
-
-
-
-
-
-
 }
 

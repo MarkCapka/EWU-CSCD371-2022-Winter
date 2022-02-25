@@ -142,15 +142,35 @@ public class SampleData : ISampleData
     //TODO: It is recommended that, at a minimum, you use ISampleData.GetUniqueSortedListOfStatesGivenCsvRows to validate your result.
     public string GetAggregateListOfStatesGivenPeopleCollection(IEnumerable<IPerson> people) =>
   
-     people.Select(x=>x.Address.State).Distinct().Aggregate((states, nextState) => states + ", " + nextState);        //Iperson can't convert to string
+     people.Select(x=>x.Address.State).Distinct().Aggregate((states, nextState) => states + ", " + nextState);
 
-       
-    
+    private IEnumerable<IPerson>? _Circle;
+
+    public IEnumerable<IPerson> GetCircle()
+    {
+
+        CircularLinkedList<IPerson> linkedList = new(People.First());
+        People.ToList().ForEach(people => linkedList.Append(people));
+        _Circle = linkedList;
+        return _Circle;
+
+    }
 
 
 
-    
+    public IEnumerable<IPerson> ChildItems(int maximum)
+    { 
+        if(_Circle is null)
+        {
+            return new List<IPerson>();
+        }
+        IEnumerable<IPerson> circle = _Circle;
+        CircularLinkedList<IPerson> children = new CircularLinkedList<IPerson>(circle.Skip(1).First());
+        circle.Skip(2).Take(maximum - 1).ToList().ForEach(people => children.Append(people));
 
+        return children;
+
+    }
 }
 
 

@@ -20,9 +20,9 @@ Just like when working as a software developer, the web will be your primary sou
 
 ### General
 - The project should look like the image below ❌✔
-- The project should have an index.html file ❌✔
-  - With an index.js file in a js folder ❌✔
-  - And a site.css file in a css folder (along with other css files) ❌✔
+- The project should have an index.html file ✔
+  - With an index.js file in a js folder ✔
+  - And a site.css file in a css folder (along with other css files) ✔
 - There should be a `<head>`
   - With a favicon ❌✔
   - And a title ❌✔

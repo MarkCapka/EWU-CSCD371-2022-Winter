@@ -1,22 +1,107 @@
-
-span{
-    background-color: silver;
+.centered{
+    margin: auto;
 }
 
-div{
-    padding: 2px;
+.two-thirds-width{
+    width: 60%;
+}
+
+.float-right{
+    float: right;
+}
+
+.page-header {
+    background-color: black;
+}
+
+.eagle-red {
+    color: #B7142E;
+    font-weight: bold;
+}
+
+.card {
+    box-shadow: 0 4px 12px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 12px;
+    border: 2px solid black;
+}
+
+.card-header {
+    height: 1em;
+    border-radius: 10px 10px 0 0;
+    background-color: rgba(128, 128, 128, 0.521);
+    color: Black;
+    padding: 1em;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 1.5em;
     margin: 3px; 
-    border: 2px solid gray;
+    border-bottom: 2px solid gray;
 }
 
-
-
-p.blackheader{
-    font-size: 10.5px;
+.card-footer {
+    /* height: 1em; */
+    border-radius: 0 0 10px 10px;
+    color: Black;
+    padding: 1em;
 }
 
-#Blackheader {
+button {
+    background-color: lightgrey;
+    color: black;
+    padding: 14px 20px;
+    font-weight: bold;
+    font-size: 1.1em;
+    border: solid linear-gradient(to bottom right, lightGrey 0%, black 100%);
+    border-radius: 0.5em;
+    cursor: pointer;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+table{
+    padding:5px;
+}
+
+.outer-border-medium{
+    border: 3px solid black;
+}
+
+.border-grey{
+    border-color: grey;
+}
+
+.ddmenu{
+    position: fixed;
+    top: 7%;
+    right: 20%;
     background-color: white;
+}
+
+.ddmenu button {
+    font-size: 1em;
+    background:linear-gradient(to bottom right, rgb(136, 177, 179) 0%, rgb(24, 151, 224) 100%);
+    width: 300px;
+    color: white;
+}
+
+.get-joke {
+    background-color: #797979;
+    background:linear-gradient(to bottom right, rgb(136, 177, 179) 0%, rgb(24, 151, 224) 100%);
+    color: white;
+    font-weight: 100;
+    padding: 14px 20px;
+    border-radius: 0;
+    border: solid linear-gradient(to bottom right, grey 0%, black 100%);
+    cursor: pointer;
+}
+
+.get-joke:hover {
+    /* background-color: #B7142E; */
+    background:linear-gradient(to right, #000000 0%, #B7142E 100%);
 }
 
 /* .telljokeframe{

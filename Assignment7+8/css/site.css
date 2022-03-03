@@ -1,0 +1,36 @@
+
+span{
+    background-color: silver;
+}
+
+div{
+    padding: 2px;
+    margin: 3px; 
+    border: 2px solid gray;
+}
+
+
+
+p.blackheader{
+    font-size: 10.5px;
+}
+
+#Blackheader {
+    background-color: white;
+}
+
+/* .telljokeframe{
+    border: 1px solid white;
+    width: 350px;
+    padding: 20px;
+    position: fixed;
+    top: 100px;
+    left: 100px;
+}
+
+.telljokeframe buttonFormat{
+    width: 100%; 
+    margin: 0;
+    padding: 10px; 
+    border: 4px blueviolet;
+} */

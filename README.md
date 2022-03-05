@@ -25,19 +25,19 @@ Just like when working as a software developer, the web will be your primary sou
   - And a site.css file in a css folder (along with other css files) ✔
 - There should be a `<head>`
   - With a favicon ❌✔
-  - And a title ❌✔
+  - And a title ✔
 - The `<body>` should use the middle 70% of the page ❌✔
 
 ### Menu Bar
-- The page should have a title/menu bar ❌✔
+- The page should have a title/menu bar ✔
   - Use Font Awesome for the hamburger icon (https://fontawesome.com/start) ❌✔ 
   - When clicked, the menu should appear under it ❌✔
-  - The menu should have four buttons with creative names (the buttons don't need to do anything) ❌✔
+  - The menu should have four buttons with creative names (the buttons don't need to do anything) ✔
 
 ### Create a card with `<div>`s and CSS
-- Create a card from `<div>`s ❌✔
-  - The card should have a header, body, and footer ❌✔
-  - The CSS for this should be in the CSS file and work easily for another card. ❌✔
+- Create a card from `<div>`s ✔
+  - The card should have a header, body, and footer ✔
+  - The CSS for this should be in the CSS file and work easily for another card. ✔
 
 ### Show jokes on the card
 - Use the joke API from the first assignment to display a joke on a card (https://v2.jokeapi.dev/joke/Programming) ❌✔
@@ -53,7 +53,10 @@ Just like when working as a software developer, the web will be your primary sou
 ## Extra Credit
 Do the following:
 
-1. Make the buttons in the menu do something creative ❌✔
+1. Make the buttons in the menu do something creative ❌✔  
+//ideas: button changes color, flips button, button gets shrinks, randomize position of buttons? 
+
+
 2. Rather than just making the menu appear, have it fade in and slide down. ❌✔
 3. Have the page jump to 100% width on a smaller screen and 50% on a larger screen with 70% on a regular screen.
 

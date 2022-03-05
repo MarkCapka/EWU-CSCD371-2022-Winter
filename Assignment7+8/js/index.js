@@ -1,10 +1,23 @@
 var joke ="Haha - i'm telling a joke"; //Make array holding setup then punchline
 
-var jokeTeller = {
-    name: "the Riddler",
-    joke: function() {
+var joke = {
+    
+    jokeOutput: function() { //tells whole joke at once
         return new joke.getJoke();
+    },
+    setup: function(){
+        this.setup = joke.getJoke().split(" ")[0];
+        return this.setup;
+    },
+    punchline: function(){
+        this.punchline = joke.getJoke().split(" ")[1];
+        return this.punchline;
+    },
+    getJoke: function(){
+
+        return this.joke;
     }
+    
 }
 
 
@@ -46,8 +59,8 @@ axios({
 //jokes from https://v2.jokeapi.dev/joke/Programming
 function tellJoke(){
     console.log("This is the joke i'll be calling from the API: " + joke.getJoke());
-    setTimeout(tellJoke, 4000); // TODO TEST will wait 4 seconds between telling jokes : NOTE UNTESTED , make sure it isn't in an infinite loop. 
-
+    setTimeout(tellJoke(), 4000); // TODO TEST will wait 4 seconds between telling jokes : NOTE UNTESTED , make sure it isn't in an infinite loop. 
+                                    //NOTE: TODO: you can call getJoke instead for immediate output I think or jokeOutput
     //above could also potentially be more like the other example from class: 
         /*
                 from class Lecture15-web

@@ -1,4 +1,4 @@
-var joke ="Haha - i'm telling a joke";
+var joke ="Haha - i'm telling a joke"; //Make array holding setup then punchline
 
 var jokeTeller = {
     name: "the Riddler",
@@ -15,6 +15,7 @@ function getJoke(){
 
 
 document.getElementById("mybutton").addEventListener("click", function(){
+    //Send the joke data to page elements, generate a new joke
     console.log("button has been clicked: here is your joke:    TODO setup & delivery to build joke");
 })
 
@@ -29,6 +30,7 @@ axios({
         console.log(response);   //TODO come back and make this more intent revealing'
         console.log(response.data.main.joke); //TODO haven't tested yet 
 
+        //Put the joke directly in the joke array variable
         let jokeOutput = document.querySelector("joke");
         jokeOutput.setup = response.data.main.joke.setup + "\n" 
         + response.data.main.joke.delivery;
@@ -55,3 +57,5 @@ function tellJoke(){
         */ 
 
 }
+
+//Call the API to get the first joke as soon as the page loads

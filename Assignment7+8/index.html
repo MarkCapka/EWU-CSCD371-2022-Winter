@@ -5,48 +5,65 @@
 
     <title> The Joke Page Title - a Tyler and Mark production </title>
     <link rel="stylesheet" href="css/site.css">
-
+    <link rel="stylesheet" href="css/all.css">
 </head>
 
 
-<body>
-    
-   
-    <div id = "Blackheader">
+<body class="centered two-thirds-width">
 
+    <div class="page-header">
 
-    <p class="ewulogo">
-        EWU - make this bigger and redder -----space------------------------menu-dropdown
-    </p>
-
+        <h1 class="eagle-red">
+            EWU
+            <span style="color:white" class="float-right" onclick="showMenu()">Menu <i class="hamburger-class-thing-here"></i></span>
+        </h1>
+        
     </div>
 
+    <table class="outer-border-medium border-grey ddmenu">
+        <tr>
+            <td><button>Find Miracle Max</button></td>
+        </tr>
+        <tr>
+            <td><button>Storm the Castle</button></td>
+        </tr>
+        <tr>
+            <td><button>Do Chores</button></td>
+        </tr>
+        <tr>
+            <td><button>Become unmostly dead</button></td>
+        </tr>
+    </table>
 
-    <div>
-        The Joke Page --large and bold
-    </div>
+
+    <h2>
+        The Joke Page
+    </h2>
 
 
-
-    <div>
-        A Joke -- medium and bold -- gray background
-
-
-        <div class="setup">
-            <p> setup </p>
+    <hr />
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                A Joke
+            </div>
         </div>
-        <div class="punchline">a
-            <p> punchline</p>
+        <div class="card-body">
+            <div class="setup">
+                <p> setup </p>
+            </div>
+            <div class="punchline">a
+                <p> punchline</p>
+            </div>
+        </div>  
+        <div class="card-footer">
+            <button class="get-joke" onclick="tellJoke()">Another Joke</button>
+            <button onclick="">Joke API</button>
         </div>
-
-
-        <button onclick="tellJoke()"></button>
-        <p> add second button and format them and color them </p>
-
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js"></script>
     <script src="js/index.js"></script>
 </body>
 

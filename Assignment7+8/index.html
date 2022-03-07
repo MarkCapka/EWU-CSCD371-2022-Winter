@@ -45,25 +45,29 @@
     <div class="card">
         <div class="card-header">
             <div class="card-title">
-                A Joke
+
+                A Jokes
             </div>
         </div>
         <div class="card-body">
-            <div class="setup">
-                <p>  jokeOutput.setup? </p> 
+                <div id = "Setup">
+                    setup
+                </div>
             </div>
-            <div class="punchline">
-                <p> punchline</p> 
+           
+            <div id="Delivery" src = "js/index.js">
+                delivery
             </div>
         </div>  
         <div class="card-footer">
             <button class="get-joke" onclick="tellJoke()">Another Joke</button> 
-            <button onclick="">Joke API: doesn't link yet - will do: Mark</button> 
+           
+            <button class = "get-joke" onclick="apiLink()">Joke API</button> 
         </div>
     </div>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="js/index.js"></script>
 </body>
 

@@ -1,74 +1,73 @@
-var joke ="Haha - i'm telling a joke"; //Make array holding setup then punchline
-
-var joke = {
-    
-    jokeOutput: function() { //tells whole joke at once
-        return new joke.getJoke();
-    },
-    setup: function(){
-        this.setup = joke.getJoke().split(" ")[0];
-        return this.setup;
-    },
-    punchline: function(){
-        this.punchline = joke.getJoke().split(" ")[1];
-        return this.punchline;
-    },
-    getJoke: function(){
-
-        return this.joke;
-    }
-    
-}
-
-
-function getJoke(){
-    return  this.joke;        
-}
-
-
-
-document.getElementById("mybutton").addEventListener("click", function(){
-    //Send the joke data to page elements, generate a new joke
-    console.log("button has been clicked: here is your joke:    TODO setup & delivery to build joke");
-})
-
-
-
+var jokeOutput;
 
 axios({
-    jokeTeller: 'get',
+    joke: 'get',
     url: 'https://v2.jokeapi.dev/joke/Programming'
 })
     .then(function (response) {
         console.log(response);   //TODO come back and make this more intent revealing'
         console.log(response.data.main.joke); //TODO haven't tested yet 
 
-        //Put the joke directly in the joke array variable
-        let jokeOutput = document.querySelector("joke");
-        jokeOutput.setup = response.data.main.joke.setup + "\n" 
-        + response.data.main.joke.delivery;
 
     })
-    .catch(function (error){
-            console.log("status code: " + error + " Try again in a few seconds..."); //TODO make more specific
+    .catch(function (error) {
+        console.log("status code: " + error + " Try again in a few seconds..."); //TODO make more specific
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.header);
+
     });
+
 
 
 
 //Joke API syntax: {error, category, type (number of parts), (if more than one part i.e. setup, delivery it will put them down ), joke, flags (default-false) {nsfw, religious, political, racist, sexist, explicit}}, id, safe, lang
 //jokes from https://v2.jokeapi.dev/joke/Programming
-function tellJoke(){
-    console.log("This is the joke i'll be calling from the API: " + joke.getJoke());
-    setTimeout(tellJoke(), 4000); // TODO TEST will wait 4 seconds between telling jokes : NOTE UNTESTED , make sure it isn't in an infinite loop. 
-                                    //NOTE: TODO: you can call getJoke instead for immediate output I think or jokeOutput
+function tellJoke() {
+    //Put the joke directly in the joke array variable
+    if (document.querySelector.type.contains("joke")) {
+        let jokeOutput = document.querySelector("joke");
+        Console.log("Joke: " + jokeOutput);
+    }
+    else    //type: twopart 
+    {
+        let setup = document.querySelector('#jokeOutput-setup');
+        jokeElement.innerText = 'Setup: ${setup}';
+        jokeDiv.append(this.jokeElement);
+
+        let delivery = document.querySelector('#jokeOutput-setup');
+        jokeElement.innerText = 'Delivery: ${delivery}';
+        jokeDiv.append(this.jokeElement);
+        // jokeSetup = jokeDiv[0];
+        // jokeDelivery = jokeDiv[1];
+        // jokeOutput = ("Setup: " + jokeSetup + "\n"
+        // + "Delivery: " + jokeDelivery);]
+        this.jokeOutput = jokdeDiv;
+    }
+
+    Console.log(this.getJoke());
+
+    console.log("This is the joke i'll be calling from the API: " + jokeOutput.getJoke());
+
+    setTimeout(jokeOutput.tellJoke(), 4000); // TODO TEST will wait 4 seconds between telling jokes : NOTE UNTESTED , make sure it isn't in an infinite loop. 
+    //NOTE: TODO: you can call getJoke instead for immediate output I think or jokeOutput
     //above could also potentially be more like the other example from class: 
-        /*
-                from class Lecture15-web
-                console.log(new Joke().getJoke());
-                setInterval(function() {console.log(new Joke().getJoke();)}, 4000); //may also wait 4 seconds, however, one of these will cause an issue iirc 
+    /*
+            from class Lecture15-web
+            console.log(new Joke().getJoke());
+            setInterval(function() {console.log(new Joke().getJoke();)}, 4000); //may also wait 4 seconds, however, one of these will cause an issue iirc 
 
-        */ 
+    */
 
+}
+
+function apiLink(){
+
+}
+
+function getJoke() {
+
+    return  jokeOutput;
 }
 
 //Call the API to get the first joke as soon as the page loads

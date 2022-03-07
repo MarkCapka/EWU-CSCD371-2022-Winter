@@ -14,13 +14,12 @@
     <div class="page-header">
 
         <h1 class="eagle-red">
-            EWU
-            <span style="color:white" class="float-right" onclick="showMenu()">Menu <i class="hamburger-class-thing-here"></i></span>
+            <span>EWU</span>
+            <span style="color:white" class="float-right" id="menuButton">Menu &#9776;</span>
         </h1>
-        
     </div>
 
-    <table class="outer-border-medium border-grey ddmenu">
+    <table id="drop-down-menu" class="outer-border-medium border-grey ddmenu" hidden>
         <tr>
             <td><button>Find Miracle Max</button></td>
         </tr>
@@ -49,16 +48,16 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="setup">
+            <div id="setup">
                 <p> setup </p>
             </div>
-            <div class="punchline">a
+            <div id="punchline">a
                 <p> punchline</p>
             </div>
-        </div>  
+        </div>
         <div class="card-footer">
-            <button class="get-joke" onclick="tellJoke()">Another Joke</button>
-            <button onclick="">Joke API</button>
+            <button class="get-joke" id="getJokeButton">Another Joke</button>
+            <button id="jokeAPIButton">Joke API</button>
         </div>
     </div>
 

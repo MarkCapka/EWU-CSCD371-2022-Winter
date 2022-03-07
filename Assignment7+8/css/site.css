@@ -104,7 +104,7 @@ table{
     background:linear-gradient(to right, #000000 0%, #B7142E 100%);
 }
 
-/* .telljokeframe{
+.telljokeframe{
     border: 1px solid white;
     width: 350px;
     padding: 20px;
@@ -118,4 +118,4 @@ table{
     margin: 0;
     padding: 10px; 
     border: 4px blueviolet;
-} */
+}

@@ -2,20 +2,22 @@
 <html lang="en-us">
 
 <head>
-
+   
     <title> The Joke Page Title - a Tyler and Mark production </title>
     <link rel="stylesheet" href="css/site.css">
     <link rel="stylesheet" href="css/all.css">
 </head>
 
-
 <body class="centered two-thirds-width">
 
     <div class="page-header">
-
         <h1 class="eagle-red">
-            EWU
-            <span style="color:white" class="float-right" onclick="showMenu()">Menu <i class="hamburger-class-thing-here"></i></span>
+             EWU
+                   
+            <span style="color:white" class="float-right" onclick="showMenu()">Menu <i class="fa-solid fa-bars"></i></span>
+           
+                
+          
         </h1>
         
     </div>
@@ -36,7 +38,7 @@
     </table>
 
 
-    <h2>
+    <h2 class="joke-header">
         The Joke Page
     </h2>
 
@@ -45,31 +47,43 @@
     <div class="card">
         <div class="card-header">
             <div class="card-title">
-
-                A Jokes
+                
+                A Joke:
             </div>
         </div>
+           <p id = "joke">"This is where the joke should output" </p>
+        <script>
+                     document.getElementById("joke").innerHTML = "Joke will be output here once the call works :/";
+        </script>
+       
         <div class="card-body">
-            <div id = "Setup" >
-                   
+            <div id = "setup" >
+            
                 setup
-                <p></p> 
+                <p id = "setup"></p>
+                <script>
+                    document.getElementById("setup").innerHTML = "Setup:" + joke.setup;
+                 </script>
+      
         
             </div>
         
-            <div id="Delivery" tellJoke>
-               
-            delivery
-            
+            <div id="#jokeOutput-delivery">
+               <p id = "delivery"></p>
+                <script>
+                    document.getElementById("delivery").innerHTML = "Delivery:" + delivery;
+                </script>
             </div>
         </div>  
         <div class="card-footer">
-            <button class="get-joke" onclick="tellJoke()">Tell Another Joke</button> 
+            <button class="get-joke" onclick="tellJoke()">Another Joke</button> 
            
-            <button class = "get-joke" onclick="apiLink()">Link to the Joke API</button> 
+            <button class = "joke-api" onclick="apiLink()">Joke API</button> 
         </div>
     </div>
 
+    
+   
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="js/index.js"></script>

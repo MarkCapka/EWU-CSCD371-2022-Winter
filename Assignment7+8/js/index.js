@@ -31,11 +31,11 @@ jokeOutput = axios({
         console.log(response);   //TODO come back and make this more intent revealing'
         console.log(response.data.setup); //TODO haven't tested yet 
         console.log(response.data.delivery);
-        console.log(response.data.joke)
-        if(response.data.joke == undefined){
-        jokeOutput = response.data.setup,response.data.delivery
+        console.log(response.data.joke) 
+        if(response.data.type == "twopart"){
+            jokeOutput = response.data.type,response.data.setup,response.data.delivery
         } else {
-            jokeOutput = response.data.joke,"";
+            jokeOutput = response.data.type,response.data.joke,"";
         }
     })
     .catch(function (error) {

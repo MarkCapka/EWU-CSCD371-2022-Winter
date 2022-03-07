@@ -25,7 +25,7 @@ axios({
 //jokes from https://v2.jokeapi.dev/joke/Programming
 function tellJoke() {
     //Put the joke directly in the joke array variable
-    if (document.querySelector.type.contains("joke")) {
+    if (document.querySelector.contains("joke")) {
         let jokeOutput = document.querySelector("joke");
         Console.log("Joke: " + jokeOutput);
     }
@@ -45,11 +45,11 @@ function tellJoke() {
         this.jokeOutput = jokdeDiv;
     }
 
-    Console.log(this.getJoke());
+    Console.log(jokeOutput.getJoke());
 
     console.log("This is the joke i'll be calling from the API: " + jokeOutput.getJoke());
 
-    setTimeout(jokeOutput.tellJoke(), 4000); // TODO TEST will wait 4 seconds between telling jokes : NOTE UNTESTED , make sure it isn't in an infinite loop. 
+  //  setTimeout(jokeOutput.tellJoke(), 4000); // TODO TEST will wait 4 seconds between telling jokes : NOTE UNTESTED , make sure it isn't in an infinite loop. 
     //NOTE: TODO: you can call getJoke instead for immediate output I think or jokeOutput
     //above could also potentially be more like the other example from class: 
     /*
@@ -62,7 +62,7 @@ function tellJoke() {
 }
 
 function apiLink(){
-
+    window.location='https://v2.jokeapi.dev/joke/Programming';
 }
 
 function getJoke() {

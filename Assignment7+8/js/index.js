@@ -47,7 +47,7 @@ document.getElementById("joke").addEventListener("click", function () {
     console.log(jokeOutput);
 });
 
-setTimeout(getJoke, 200);
+setTimeout(getJoke, 200 );
 //Call the API to get the first joke as soon as the page loads
 //Joke API syntax: {error, category, type (number of parts), (if more than one part i.e. setup, delivery it will put them down ), joke, flags (default-false) {nsfw, religious, political, racist, sexist, explicit}}, id, safe, lang
 //jokes from https://v2.jokeapi.dev/joke/Programming
@@ -60,16 +60,17 @@ function tellJoke() {
     console.log("Setup: " + jokeOutput.setup + "\n\n" + "Delivery: " + jokeOutput.delivery + "\n\n" + "Joke: " + jokeOutput.joke);
 
     
-    let setup = document.querySelector('setup');
-    let delivery = document.querySelector('delivery');
+    let setup = document.getElementById('setup');
+    let delivery = document.getElementById('delivery');
 
     if(jokeOutput.type == "twopart"){
-        //setup.innerHTML = '<p>Setup: ${jokeSetup}</p>';    
-        //delivery.innerText = '<p>Delivery: ${jokeDelivery}</p>'; 
+        setup.innerText = jokeSetup;    
+        delivery.innerText = jokeDelivery; 
     }
     else
     {
-        //setup.innerText = 'Setup: ${jokeSetup}';
+        setup.innerText = jokeJoke;    
+        delivery.innerText = ""; 
     }
     setTimeout(getJoke, 200);
 }

@@ -47,37 +47,36 @@ document.getElementById("joke").addEventListener("click", function () {
     console.log(jokeOutput);
 });
 
-setTimeout(getJoke, 2000);
+setTimeout(getJoke, 200);
 //Call the API to get the first joke as soon as the page loads
 //Joke API syntax: {error, category, type (number of parts), (if more than one part i.e. setup, delivery it will put them down ), joke, flags (default-false) {nsfw, religious, political, racist, sexist, explicit}}, id, safe, lang
 //jokes from https://v2.jokeapi.dev/joke/Programming
 
 function tellJoke() {
-    //Put the joke directly in the joke array variable
-    // if (document.querySelector(".joke")) {
-    let jokeOutput = document.querySelector("joke");
-    console.log("Joke: " + jokeOutput);
-    //  }
-    //   else    //type: twopart 
-    //   {
-    let setup = document.querySelector('#jokeOutput-setup');
-    setup.innerText = 'Setup: ${setup}';
-    jokeDiv.append(this.jokeElement);
+    
+    let jokeSetup = jokeOutput.setup;
+    let jokeDelivery = jokeOutput.delivery;
+    let jokeJoke = jokeOutput.joke
+    console.log("Setup: " + jokeOutput.setup + "\n\n" + "Delivery: " + jokeOutput.delivery + "\n\n" + "Joke: " + jokeOutput.joke);
 
-    let delivery = document.querySelector('#jokeOutput-delivery');
-    delivery.innerText = 'Delivery: ${delivery}';
-    jokeDiv.append(thiis.jokeElement);
-    // jokeSetup = jokeDiv[0];
-    // jokeDelivery = jokeDiv[1];
-    // jokeOutput = ("Setup: " + jokeSetup + "\n"
-    // + "Delivery: " + jokeDelivery);]
-    this.jokeOutput = jokeDiv;
+    
+    let setup = document.querySelector('setup');
+    let delivery = document.querySelector('delivery');
 
-    Console.log("Setup: " + jokeDiv[0] + "\n\n" + "Delivery: " + jokeDiv[1]);
+    if(jokeOutput.type == "twopart"){
+        //setup.innerHTML = '<p>Setup: ${jokeSetup}</p>';    
+        //delivery.innerText = '<p>Delivery: ${jokeDelivery}</p>'; 
+    }
+    else
+    {
+        //setup.innerText = 'Setup: ${jokeSetup}';
+    }
+    setTimeout(getJoke, 200);
 }
 
 function toggleMenu() {
     document.getElementById("drop-down-menu").hidden = !document.getElementById("drop-down-menu").hidden;
 }
 
-document.getElementById("menuButton").addEventListener("click", toggleMenu);
+document.getElementById("menu-button").addEventListener("click", toggleMenu);
+document.getElementById("get-joke").addEventListener("click", tellJoke);

@@ -55,7 +55,7 @@ button {
     padding: 14px 20px;
     font-weight: bold;
     font-size: 1.1em;
-    border: solid linear-gradient(to bottom right, lightGrey 0%, black 100%);
+    border: linear-gradient(to bottom right, lightGrey 0%, black 100%);
     border-radius: 0.5em;
     cursor: pointer;
     padding-left: 5px;
@@ -77,8 +77,8 @@ table{
 
 .ddmenu{
     position: fixed;
-    top: 3.5em;
-    right: 20%;
+    top: 5.5em;
+    right: 16%;
     background-color: white;
 }
 
@@ -88,7 +88,7 @@ table{
     width: 300px;
     color: white;
     font-family:'Times New Roman', Times, serif;
-    padding-right: 1.0em;
+    padding-right: 0.5em;
 }
 
 .joke-header {
@@ -102,7 +102,7 @@ table{
     font-weight: 100;
     padding: 14px 20px;
     border-radius: 0;
-    border: solid linear-gradient(to bottom right, grey 0%, black 100%);
+    border: linear-gradient(to bottom right, grey 0%, black 100%);
     cursor: pointer;
   }
 
@@ -118,7 +118,7 @@ table{
     font-weight: 100;
     padding: 14px 20px;
     border-radius: 6px;
-    border: bold black;
+    border: solid black;
     cursor: pointer;
  }
 

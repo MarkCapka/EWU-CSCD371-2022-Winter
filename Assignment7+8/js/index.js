@@ -47,7 +47,7 @@ document.getElementById("joke").addEventListener("click", function () {
     console.log(jokeOutput);
 });
 
-setTimeout(getJoke, 200 );
+setTimeout(getJoke, 400 );
 //Call the API to get the first joke as soon as the page loads
 //Joke API syntax: {error, category, type (number of parts), (if more than one part i.e. setup, delivery it will put them down ), joke, flags (default-false) {nsfw, religious, political, racist, sexist, explicit}}, id, safe, lang
 //jokes from https://v2.jokeapi.dev/joke/Programming
@@ -72,7 +72,7 @@ function tellJoke() {
         setup.innerText = jokeJoke;    
         delivery.innerText = ""; 
     }
-    setTimeout(getJoke, 200);
+    setTimeout(getJoke, 400);
 }
 
 function toggleMenu() {
@@ -81,3 +81,5 @@ function toggleMenu() {
 
 document.getElementById("menu-button").addEventListener("click", toggleMenu);
 document.getElementById("get-joke").addEventListener("click", tellJoke);
+document.getElementById("joke-api").addEventListener("click", apiLink);
+

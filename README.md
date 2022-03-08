@@ -24,7 +24,7 @@ Just like when working as a software developer, the web will be your primary sou
   - With an index.js file in a js folder ✔
   - And a site.css file in a css folder (along with other css files) ✔
 - There should be a `<head>`
-  - With a favicon ❌✔   #will update before Thurs
+  - With a favicon ✔   #will update before Thurs
   - And a title ✔
 - The `<body>` should use the middle 70% of the page ❌✔ #confirm quantity - but i think so
 

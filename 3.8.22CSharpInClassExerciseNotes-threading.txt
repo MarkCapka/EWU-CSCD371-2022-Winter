@@ -1,0 +1,13 @@
+write a program
+
+launch a long running task, get status, while it is launching and running have another thread allowing you to interact with data in there.
+
+cuda1   
+	task  
+	do_task_while(data.nextLine() || !interupt) { complete task
+
+
+cuda2    
+
+
+can wait or enter something to cause the program to cancel or close your program           break;? 

@@ -1,0 +1,15 @@
+N:\CSharpInClassExercise3.8.22\PrintItUntilYouDont\PrintItUntilYouDont\bin\Debug\net6.0\PrintItUntilYouDont.exe
+N:\CSharpInClassExercise3.8.22\PrintItUntilYouDont\PrintItUntilYouDont\bin\Debug\net6.0\PrintItUntilYouDont.deps.json
+N:\CSharpInClassExercise3.8.22\PrintItUntilYouDont\PrintItUntilYouDont\bin\Debug\net6.0\PrintItUntilYouDont.runtimeconfig.json
+N:\CSharpInClassExercise3.8.22\PrintItUntilYouDont\PrintItUntilYouDont\bin\Debug\net6.0\PrintItUntilYouDont.dll
+N:\CSharpInClassExercise3.8.22\PrintItUntilYouDont\PrintItUntilYouDont\bin\Debug\net6.0\ref\PrintItUntilYouDont.dll
+N:\CSharpInClassExercise3.8.22\PrintItUntilYouDont\PrintItUntilYouDont\bin\Debug\net6.0\PrintItUntilYouDont.pdb
+N:\CSharpInClassExercise3.8.22\PrintItUntilYouDont\PrintItUntilYouDont\obj\Debug\net6.0\PrintItUntilYouDont.csproj.AssemblyReference.cache
+N:\CSharpInClassExercise3.8.22\PrintItUntilYouDont\PrintItUntilYouDont\obj\Debug\net6.0\PrintItUntilYouDont.GeneratedMSBuildEditorConfig.editorconfig
+N:\CSharpInClassExercise3.8.22\PrintItUntilYouDont\PrintItUntilYouDont\obj\Debug\net6.0\PrintItUntilYouDont.AssemblyInfoInputs.cache
+N:\CSharpInClassExercise3.8.22\PrintItUntilYouDont\PrintItUntilYouDont\obj\Debug\net6.0\PrintItUntilYouDont.AssemblyInfo.cs
+N:\CSharpInClassExercise3.8.22\PrintItUntilYouDont\PrintItUntilYouDont\obj\Debug\net6.0\PrintItUntilYouDont.csproj.CoreCompileInputs.cache
+N:\CSharpInClassExercise3.8.22\PrintItUntilYouDont\PrintItUntilYouDont\obj\Debug\net6.0\PrintItUntilYouDont.dll
+N:\CSharpInClassExercise3.8.22\PrintItUntilYouDont\PrintItUntilYouDont\obj\Debug\net6.0\ref\PrintItUntilYouDont.dll
+N:\CSharpInClassExercise3.8.22\PrintItUntilYouDont\PrintItUntilYouDont\obj\Debug\net6.0\PrintItUntilYouDont.pdb
+N:\CSharpInClassExercise3.8.22\PrintItUntilYouDont\PrintItUntilYouDont\obj\Debug\net6.0\PrintItUntilYouDont.genruntimeconfig.cache

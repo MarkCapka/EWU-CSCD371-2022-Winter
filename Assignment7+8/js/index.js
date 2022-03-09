@@ -10,7 +10,7 @@ var jokeOutput;
 */
 
 function apiLink() {
-    window.location.href = 'https://v2.jokeapi.dev/joke/Programming';
+    window.location.href = 'https://v2.jokeapi.dev/';
 }
 
 function getJoke() {

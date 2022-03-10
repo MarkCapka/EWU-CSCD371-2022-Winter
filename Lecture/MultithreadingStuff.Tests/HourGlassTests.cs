@@ -21,7 +21,7 @@ public class HourGlassTests
         //After thread Completes
     }
 
-
+     //THIS DOES NOT CONCERN ITSELF WITH LOCKS OR SYNCHRONIZING
     [TestMethod]
     async public Task DisplayAsync()
     {
@@ -30,14 +30,14 @@ public class HourGlassTests
                     new CancellationTokenSource();
 
         HourGlass hourGlass = new HourGlass();
-        Task <int> task =
-            hourGlass.DisplayAsync('.', cancellationTokenSource.Token);
+        int task =
+            await hourGlass.DisplayAsync('.', cancellationTokenSource.Token);
         //Thread 1 
         //timer to avoid waiting too long
         //the user pressed ENTER to escape
 
         cancellationTokenSource.Cancel();
-        int iterationCount = await task.WaitAsync(default(CancellationToken));
+        //  int iterationCount = await task.WaitAsync(default(CancellationToken));
 
         //IF THERE IS AN ASYNCH METHOD YOU SHOULD FAVOR THIS OVER NON-ASYNC
         //ASYNC: api is telling you that the process could take a long time to run. 
@@ -58,17 +58,22 @@ public class HourGlassTests
         //VAST MAJORITY OF TIMES, YOU ARE JUST LOOKING FOR A PREWRITTEN ASYNCH METHOD. 
 
         //Note: data is processed kind of upside down, in that you load your result last when returning a Task. 
-        
 
-        //NOT Thread 1 
+
+        ////NOT Thread 1 
         int counter = 0;
         TestContext?.WriteLine($"{counter++}");
         TestContext?.WriteLine($"{counter++}");
         TestContext?.WriteLine($"{counter++}");
         TestContext?.WriteLine($"{counter++}");
-        iterationCount = task.Result;
+        //iterationCount = task.Result;
     }
 
+    async public Task DisplayTaskAsync()
+    {
+        HourGlass hourGlass = (HourGlass)new HourGlass();   
+
+    }
 
 
 

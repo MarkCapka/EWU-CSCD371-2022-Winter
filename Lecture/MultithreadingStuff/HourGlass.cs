@@ -8,7 +8,9 @@ namespace MultithreadingStuff;
 
 public class HourGlass
 {
-    async public Task<int> DisplayAsync()
+   
+
+    async public Task<int> DisplayAsync(char character, CancellationToken cancellationToken)
     {
         int iterationCount = 0;
         Thread.CurrentThread.Name = "DisplayThread";
@@ -21,10 +23,7 @@ public class HourGlass
         return iterationCount;
     }
 
-    public Task<int> DisplayAsync(char v, CancellationToken token)
-    {
-        throw new NotImplementedException();
-    }
+   
 }
     //async public int DisplayAsync(char character, CancellationToken cancellationToken)
     //{

@@ -1,5 +1,6 @@
 ﻿
 using System.Diagnostics;
+using System.Net;
 
 public class Program
 {
@@ -7,11 +8,11 @@ public class Program
     static void Main(string[] args)
     {
         Console.WriteLine("Hello, World!");
-        CancellationTokenSource cancellationTokenSource = 
+        CancellationTokenSource cancellationTokenSource =
             new CancellationTokenSource();
 
         Task<int> taskDisplay = Task.Run(
-            () => Display('.', cancellationTokenSource.Token)                
+            () => Display('.', cancellationTokenSource.Token)
             );
 
         static void Decrement()
@@ -48,8 +49,27 @@ public class Program
     public int StartProcess(int interations)
     {
         Process process = Process.Start("ping", "google.com");
+        //other code; Note that there is no task here. Processes are Asynchronous, but we don't need a task to make asynchronous processes? I thinK?
         process.WaitForExit();
         return process.ExitCode;
     }
+
+
+    public void DownloadFile()
+    {
+        WebClient webClient = new WebClient();
+        Task task = webClient.DownloadFileTaskAsync(new Uri("IntelliTect.com"), "intellitect.html");
+            //do other stuff here
+
+
+
+        //NOTE NEVE EVER DO THIS: 
+            //DON'T DO THIS: Task.Run(()=>webClient.DownlaodFile(new Uri("IntelliTect.com"), "intellitect.html"));
+                //DON'T if Asynch is available Do the above because we are going outside of the API that was written for the library. 
+                    //inside the method we never know or think abou tasks
+
+        task.Wait();
+    }
+
 }
 

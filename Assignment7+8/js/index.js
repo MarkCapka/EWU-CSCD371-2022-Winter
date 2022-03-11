@@ -81,9 +81,10 @@ function rollNo2(){
 }
 
 function rollNo3(){
-    toggleMenu()
     document.getElementById("body").insertAdjacentHTML('afterbegin',
     '<iframe width="100%" height="719" style="pointer-events:none;" src="http://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&showinfo=0&controls=0" title="YouTube video player" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen autoplay></iframe></div>');
+    //move down 719px
+    document.getElementById("drop-down-menu").style="transform:translateY(740px);transition: 4s;";
 }
 
 function rollNo4(){

@@ -39,7 +39,7 @@ function getJoke() {
             return jokeOutput;
         })
         .catch(function (error) {
-            console.log("status code: " + error + " Try again in a few seconds..."); //TODO make more specifi
+            console.log("status code: " + error + " Try again in a few seconds..."); 
         });
 }
 
@@ -75,7 +75,7 @@ function tellJoke() {
     setTimeout(getJoke, 400);
 }
 
-function toggleMenu() { 
+function toggleMenu() {
     document.getElementById("drop-down-menu").hidden = !document.getElementById("drop-down-menu").hidden;
 }
 

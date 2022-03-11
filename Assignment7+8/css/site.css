@@ -1,13 +1,12 @@
-.centered{
-    margin: auto;
-}
-
 .that70sWidth{
+    margin: auto;
     width: 70%;
 }
 
 .float-right{
     float: right;
+    color:white;
+    padding-right: 4%;
 }
 
 .page-header {
@@ -20,7 +19,7 @@
     color: #B7142E;
     font-weight: bold;
     padding-top: 0.5em;
-    padding-left: 0.5em;
+    padding-left: 0.6em;
 }
 
 .card {
@@ -34,7 +33,7 @@
     border-radius: 10px 10px 0 0;
     background-color: rgba(128, 128, 128, 0.521);
     color: Black;
-    padding: 1em;
+    padding: 0.5em;
     font-size: 2em;
     font-weight: bold;
 }
@@ -112,7 +111,6 @@ table{
   }
 
 .get-joke:hover {
-    /* background-color: #B7142E; */
     background:linear-gradient(to right, #000000 0%, #B7142E 100%);
 }
 
@@ -131,6 +129,3 @@ table{
   background:linear-gradient(to right, #000000 0%, #B7142E 100%);
   color: white;
 }
-
-
-

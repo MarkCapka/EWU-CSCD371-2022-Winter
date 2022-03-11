@@ -2,8 +2,8 @@
     margin: auto;
 }
 
-.two-thirds-width{
-    width: 66.6%;
+.that70sWidth{
+    width: 70%;
 }
 
 .float-right{
@@ -50,12 +50,12 @@
 }
 
 button {
-    background-color: lightgrey;
+    background: lightgrey;
     color: black;
     padding: 14px 20px;
     font-weight: bold;
     font-size: 1.1em;
-    border: linear-gradient(to bottom right, lightGrey 0%, black 100%);
+    border:  black;
     border-radius: 0.5em;
     cursor: pointer;
     padding-left: 5px;
@@ -91,6 +91,11 @@ table{
     padding-right: 0.5em;
 }
 
+.ddmenu button:hover {
+  background:linear-gradient(to right, #000000 0%, #B7142E 100%);
+  color: white;
+}
+
 .joke-header {
     font-size: xx-large;
 }
@@ -102,7 +107,7 @@ table{
     font-weight: 100;
     padding: 14px 20px;
     border-radius: 0;
-    border: linear-gradient(to bottom right, grey 0%, black 100%);
+    border: lightgrey;
     cursor: pointer;
   }
 
@@ -123,13 +128,9 @@ table{
  }
 
 .joke-api:hover{
-  /* background-color: #B7142E;  */
   background:linear-gradient(to right, #000000 0%, #B7142E 100%);
   color: white;
 }
 
-@font-face{
-    font-family: 'Times New Roman', Times, serif;
-    src: "js/index.js";
-}
+
 

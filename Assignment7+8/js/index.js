@@ -103,5 +103,5 @@ document.getElementById("roll4").addEventListener("click", rollNo4);
 
 
 //Prep a joke and begin displaying it on the page
-//setTimeout(getJoke, 400 );
-//tellJoke();
+setTimeout(getJoke, 400 );
+tellJoke();

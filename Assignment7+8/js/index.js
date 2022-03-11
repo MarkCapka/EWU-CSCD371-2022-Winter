@@ -28,7 +28,7 @@ function getJoke() {
             return jokeOutput;
         })
         .catch(function (error) {
-            console.log("status code: " + error + " Try again in a few seconds..."); //TODO make more specifi
+            console.log("status code: " + error + " Try again in a few seconds..."); 
         });
 }
 

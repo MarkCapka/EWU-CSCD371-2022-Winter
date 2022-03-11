@@ -4,64 +4,68 @@
 <head>
 
     <title> The Joke Page - a Tyler and Mark production </title>
-    <link rel = "icon" type = "image/x-icon" href = "images/favicon.PNG">
+    <link rel="icon" type="image/x-icon" href="images/favicon.PNG">
     <link rel="stylesheet" href="css/site.css">
     <link rel="stylesheet" href="css/all.css">
 </head>
 
-<body class="that70sWidth">
-
-    <div class="page-header">
-        <h1 class="eagle-red">
-            <span>EWU</span>
-            <span class="float-right" id="menu-button">Menu <i class="fa-solid fa-bars"></i></span>
-        </h1>
-    </div>
-
-    <table id="drop-down-menu" class="outer-border-medium ddmenu" hidden>
-        <tr>
-            <td><button>Find Miracle Max</button></td>
-        </tr>
-        <tr>
-            <td><button>Storm the Castle</button></td>
-        </tr>
-        <tr>
-            <td><button>Do Chores</button></td>
-        </tr>
-        <tr>
-            <td><button>Become unmostly dead</button></td>
-        </tr>
-    </table>
-
-
-    <h2 class="joke-header">
-        The Joke Page
-    </h2>
-
-
-    <hr />
-    <div class="card">
-        <div class="card-header">            A Joke:
-            
+<body>
+    <div class="that70sWidth" id="body">
+        <div class="page-header">
+            <h1 class="eagle-red">
+                <span>EWU</span>
+                <span class="float-right" id="menu-button">Menu <i class="fa-solid fa-bars"></i></span>
+            </h1>
         </div>
-        <p id="joke"></p>
-        <div class="card-body">
-            <div>
-                <p id="setup"></p>
+
+        <table id="drop-down-menu" class="outer-border-medium border-grey ddmenu" hidden>
+            <tr>
+                <td><button id="roll1">Find Miracle Max</button></td>
+            </tr>
+            <tr>
+                <td><button id="roll2">Storm the Castle</button></td>
+            </tr>
+            <tr>
+                <td><button id="roll3">Do Chores</button></td>
+            </tr>
+            <tr>
+                <td><button id="roll4">Become unmostly dead</button></td>
+            </tr>
+        </table>
+
+
+        <h2 class="joke-header">
+            The Joke Page
+        </h2>
+
+
+        <hr />
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+
+                    A Joke:
+                </div>
             </div>
-            <div>
-                <p id="delivery"></p>
+            <p id="joke"></p>
+            <div class="card-body">
+                <div>
+                    <p id="setup"></p>
+                </div>
+                <div>
+                    <p id="delivery"></p>
+                </div>
+            </div>
+            <div class="card-footer">
+
+                <button id="get-joke" class="get-joke">Another Joke</button>
+                <a id="joke-api" class="joke-api">Joke API</a>
             </div>
         </div>
-        <div class="card-footer">
-           
-                <button id="get-joke" class = "get-joke">Another Joke</button>
-                <a id="joke-api" class = "joke-api" >Joke API</a>
-            </div>
-        </div>
-   
+
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="js/index.js"></script>
+    </div>
 </body>
 
 

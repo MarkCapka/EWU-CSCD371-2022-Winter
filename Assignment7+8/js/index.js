@@ -1,18 +1,7 @@
+//Variable to cache the next joke to avoid delay when pressing the button
 var jokeOutput;
-//  setTimeout(jokeOutput.tellJoke(), 4000); // TODO TEST will wait 4 seconds between telling jokes : NOTE UNTESTED , make sure it isn't in an infinite loop. 
-//NOTE: TODO: you can call getJoke instead for immediate output I think or jokeOutput
-//above could also potentially be more like the other example from class: 
-/*
-        from class Lecture15-web
-        console.log(new Joke().getJoke());
-        setInterval(function() {console.log(new Joke().getJoke();)}, 4000); //may also wait 4 seconds, however, one of these will cause an issue iirc 
 
-*/
-
-function apiLink() {
-    window.location.href = 'https://v2.jokeapi.dev/';
-}
-
+//Retrieve and store a joke from the API
 function getJoke() {
     axios({
         joke: 'get',
@@ -43,15 +32,7 @@ function getJoke() {
         });
 }
 
-document.getElementById("joke").addEventListener("click", function () {
-    console.log(jokeOutput);
-});
-
-setTimeout(getJoke, 400 );
-//Call the API to get the first joke as soon as the page loads
-//Joke API syntax: {error, category, type (number of parts), (if more than one part i.e. setup, delivery it will put them down ), joke, flags (default-false) {nsfw, religious, political, racist, sexist, explicit}}, id, safe, lang
-//jokes from https://v2.jokeapi.dev/joke/Programming
-
+//Print the joke to the page
 function tellJoke() {
     
     let jokeSetup = jokeOutput.setup;
@@ -65,21 +46,62 @@ function tellJoke() {
 
     if(jokeOutput.type == "twopart"){
         setup.innerText = jokeSetup;    
+        setTimeout(getJoke, 4000);
         delivery.innerText = jokeDelivery; 
     }
     else
     {
         setup.innerText = jokeJoke;    
         delivery.innerText = ""; 
+        setTimeout(getJoke, 500);
     }
-    setTimeout(getJoke, 400);
+    
 }
 
+//Event listener for the button with button functions
 function toggleMenu() {
     document.getElementById("drop-down-menu").hidden = !document.getElementById("drop-down-menu").hidden;
 }
 
+function apiLink() {
+    window.location.href = 'https://v2.jokeapi.dev/';
+}
+
+function rollNo1(){
+    toggleMenu()
+    document.getElementById("body").style = "transform:rotate(360deg);transition: 4s;";
+    setTimeout(function(){
+        document.getElementById("body").style = "";
+    }, 4100);
+}
+
+function rollNo2(){
+    toggleMenu()
+    window.location.href = 'https://www.youtube.com/watch?v=ub82Xb1C8os';
+}
+
+function rollNo3(){
+    toggleMenu()
+    document.getElementById("body").insertAdjacentHTML('afterbegin',
+    '<iframe width="100%" height="719" style="pointer-events:none;" src="http://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&showinfo=0&controls=0" title="YouTube video player" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen autoplay></iframe></div>');
+}
+
+function rollNo4(){
+    toggleMenu()
+    document.getElementById("body").style = "transform:rotate(-360deg);transition: 4s;";
+    setTimeout(function(){
+        document.getElementById("body").style = "";
+    }, 4100);
+}
 document.getElementById("menu-button").addEventListener("click", toggleMenu);
 document.getElementById("get-joke").addEventListener("click", tellJoke);
 document.getElementById("joke-api").addEventListener("click", apiLink);
+document.getElementById("roll1").addEventListener("click", rollNo1);
+document.getElementById("roll2").addEventListener("click", rollNo2);
+document.getElementById("roll3").addEventListener("click", rollNo3);
+document.getElementById("roll4").addEventListener("click", rollNo4);
 
+
+//Prep a joke and begin displaying it on the page
+//setTimeout(getJoke, 400 );
+//tellJoke();

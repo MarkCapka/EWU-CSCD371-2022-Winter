@@ -68,9 +68,6 @@ table{
 
 .outer-border-medium{
     border: 3px solid black;
-}
-
-.border-grey{
     border-color: grey;
 }
 

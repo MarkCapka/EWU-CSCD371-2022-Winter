@@ -75,7 +75,7 @@ function tellJoke() {
     setTimeout(getJoke, 400);
 }
 
-function toggleMenu() {
+function toggleMenu() { 
     document.getElementById("drop-down-menu").hidden = !document.getElementById("drop-down-menu").hidden;
 }
 

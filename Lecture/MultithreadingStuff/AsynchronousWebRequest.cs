@@ -27,19 +27,20 @@ namespace AddisonWesley.Michaelis.EssentialCSharp.Chapter20.Listing20_02
                 // Ignore additional parameters
             }
             Console.Write($"Searching for '{findText}' at URL '{url}'.");
-
-            using WebClient webClient = new();
+            //essentially this sets up the whole process before doing anything.
+            using WebClient webClient = new(); //returns task in a byte array. 
             Console.Write("\nDownloading...");
             Task task = webClient.DownloadDataTaskAsync(url)
                 .ContinueWith(antecedent =>
                 {
-                    byte[] downloadData = antecedent.Result;
+                    byte[] downloadData = antecedent.Result; //this doesn't specify what to do while downloading, just what to do after.
+                        //we could potentially do something like: byte[] downloadData = await taskDownload;     //NOTE: await isn't creating a thread, just tells the compiler to rewrite the code so that it can be returned to the caller, sets up all statements below with continue-with statements
                     Console.Write("\nSearching...");
                     return CountOccurrencesAsync(
-                        downloadData, findText);
-                })
-                .Unwrap()
-                .ContinueWith(antecedent =>
+                        downloadData, findText);  //essentially we have a Task within a Task, we know this since it has Async in the method
+                })   //runs a task, then another task, 
+                .Unwrap()       //preserves the type of our parameter by removing the cast to Task?
+                .ContinueWith(antecedent =>   //this is a task
                 {
                     int textOccurrenceCount = antecedent.Result;
                     Console.WriteLine(
@@ -50,7 +51,7 @@ namespace AddisonWesley.Michaelis.EssentialCSharp.Chapter20.Listing20_02
 
             try
             {
-                while (!task.Wait(100))
+                while (!task.Wait(100)) //while running task, write out periods to the console
                 {
                     Console.Write(".");
                 }

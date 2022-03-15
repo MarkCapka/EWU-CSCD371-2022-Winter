@@ -29,6 +29,7 @@ public class PingProcessTests
     [TestMethod]
     public void Run_GoogleDotCom_Success()
     {
+        //May talk about on thursday: sideNote: could refactor this to run with a TestDouble (generic term for Mock), could be done with derivation, fakes,
         int exitCode = Sut.Run("google.com").ExitCode;
         Assert.AreEqual<int>(0, exitCode);
     }
@@ -57,8 +58,8 @@ public class PingProcessTests
     [TestMethod]
     public void RunTaskAsync_Success()
     {
-        // Do NOT use async/await in this test.
-        // Test Sut.RunTaskAsync("localhost");
+        // Do NOT use async/await in this test. //TODO 
+        // Test Sut.RunTaskAsync("localhost"); //TODO 
     }
 
     [TestMethod]
@@ -94,13 +95,13 @@ public class PingProcessTests
     [ExpectedException(typeof(TaskCanceledException))]
     public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrappingTaskCanceledException()
     {
-        // Use exception.Flatten()
+        // //TODO  Use exception.Flatten()
     }
 
     [TestMethod]
     async public Task RunAsync_MultipleHostAddresses_True()
     {
-        // Pseudo Code - don't trust it!!!
+        //TODO  Pseudo Code - don't trust it!!!
         string[] hostNames = new string[] { "localhost", "localhost", "localhost", "localhost" };
         int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length*hostNames.Length;
         PingResult result = await Sut.RunAsync(hostNames);
@@ -109,14 +110,14 @@ public class PingProcessTests
     }
 
     [TestMethod]
-#pragma warning disable CS1998 // Remove this
+#pragma warning disable CS1998 //  //TODO Remove this
     async public Task RunLongRunningAsync_UsingTpl_Success()
     {
         PingResult result = default;
-        // Test Sut.RunLongRunningAsync("localhost");
+        //  //TODO Test Sut.RunLongRunningAsync("localhost");
         AssertValidPingOutput(result);
     }
-#pragma warning restore CS1998 // Remove this
+#pragma warning restore CS1998 // //TODO  Remove this
 
     [TestMethod]
     public void StringBuilderAppendLine_InParallel_IsNotThreadSafe()

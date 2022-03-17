@@ -65,11 +65,15 @@ public class PingProcess
         StartInfo.Arguments = hostNameOrAddress; //specifies what we are pinging
         StringBuilder? stringBuilder = null; //modifying strings is a relatively expensive operation, so if we want to keep appending to a string, StringBuilder is a good option.
       
-        void updateStdOutput(string? line) =>       //Delegate: this is a method declaration that is being written inside a method
+        void UpdateStdOutput(string? line) =>       //Delegate: this is a method declaration that is being written inside a method
             (stringBuilder ??= new StringBuilder()).AppendLine(line); //appends to the stringbuilder, Don't invoke this -> even things outside of this method are prohibited since stringbuilder is a local variable. This is encapsulated witihn the method and even other methods within this class can't access it. Only way to run the method is to run the method.
-                    //if the above method is null, we assign it back to the string builder. from now on, when it is invoked, stringbuilder will havea  value, this is a "lazy load". 
+                                                                      //if the above method is null, we assign it back to the string builder. from now on, when it is invoked, stringbuilder will havea  value, this is a "lazy load". 
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        CancellationToken cancellationToken = cancellationTokenSource.Token;
 
-        Process process = RunProcessInternal(StartInfo, updateStdOutput, default, default); //RunProcessInternal is generic and can take any process. We use hardcoded "ping"
+        Action<string?>? progressError;
+        CancellationToken token;
+        Process process = RunProcessInternal(StartInfo, UpdateStdOutput, progressError, token); //RunProcessInternal is generic and can take any process. We use hardcoded "ping"
         return new PingResult(process.ExitCode, stringBuilder?.ToString()); //because we had to return the data returned on the commandline and exit code, we create a new class, PingResult which we pass those parameters for conditions on exiting and building the string. 
             //stringBuilder? indicates that it will return null if null, if NOT null: returns value
 
@@ -120,9 +124,16 @@ public class PingProcess
     async public Task<PingResult> RunAsync(
         string hostNameOrAddress, CancellationToken cancellationToken = default)
     {
+<<<<<<< Updated upstream
         Task task = null!;
         await task;
         throw new NotImplementedException();
+=======
+        Task<PingResult> task = Task.Run(
+            () => Run(hostNameOrAddress), cancellationToken
+            );
+        return await task.ConfigureAwait(false); //TODO not sure if this ConfigureAwait should be here but it got the analyzer to shut up
+>>>>>>> Stashed changes
     }
 
 
@@ -135,11 +146,11 @@ public class PingProcess
             Task<PingResult> task = null!;
         // ...
 
-        await task.WaitAsync(default(CancellationToken));
+           await task.WaitAsync(default(CancellationToken)).ConfigureAwait(false);  //TODO not sure if this ConfigureAwait should be here but it got the analyzer to shut up
             return task.Result.ExitCode;
         });
 
-        await Task.WhenAll(all);
+        await Task.WhenAll(all).ConfigureAwait(false); //TODO not sure if this ConfigureAwait should be here but it got the analyzer to shut up
         int total = all.Aggregate(0, (total, item) => total + item.Result);
         return new PingResult(total, stringBuilder?.ToString());
     }
@@ -150,11 +161,11 @@ public class PingProcess
     //5. Implement AND test public Task<int> RunLongRunningAsync(ProcessStartInfo startInfo, Action<string?>? progressOutput, Action<string?>? progressError, CancellationToken token) using Task.Factory.StartNew()
             //and invoking RunProcessInternal with a TaskCreation value of TaskCreationOptions.LongRunning and a
             //TaskScheduler value of TaskScheduler.Current.NOTE: This method does NOT use Task.Run.
-    async public Task<PingResult> RunLongRunningAsync(
+    async public static Task<PingResult> RunLongRunningAsync(
         string hostNameOrAddress, CancellationToken cancellationToken = default)
     {
         Task task = null!;
-        await task;
+        await task.ConfigureAwait(false); 
         throw new NotImplementedException();
     }
 

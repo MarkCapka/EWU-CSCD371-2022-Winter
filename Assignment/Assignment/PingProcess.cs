@@ -92,8 +92,14 @@ public class PingProcess
 
     public Task<PingResult> RunTaskAsync(string hostNameOrAddress)
     {
-        throw new NotImplementedException();
+     /*   CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        CancellationToken cancellationToken = cancellationTokenSource.Token;
+     */
+        Task<PingResult> taskPing = Task.Run(
+            () => Run(hostNameOrAddress) //honestly don't know if this cancellationTokenSource is needed, was in Main of example, no main here. 
+            );
 
+        return taskPing;
 
 
     } 
@@ -120,9 +126,13 @@ public class PingProcess
     async public Task<PingResult> RunAsync(
         string hostNameOrAddress, CancellationToken cancellationToken = default)
     {
-        Task task = null!;
-        await task;
-        throw new NotImplementedException();
+
+        Task<PingResult> taskPing = Task.Run(
+                    () => RunAsync(hostNameOrAddress, cancellationToken)
+                    );
+        await taskPing;
+        return taskPing.Result;
+
     }
 
 
@@ -144,30 +154,16 @@ public class PingProcess
         return new PingResult(total, stringBuilder?.ToString());
     }
 
-
-
-    //TODO 5. NOTE: from Mark Michaelis: OK if you return this as a Task<PingResult> instad of an <int>:::::   NOTE: if int it is returning the PingResult
-    //5. Implement AND test public Task<int> RunLongRunningAsync(ProcessStartInfo startInfo, Action<string?>? progressOutput, Action<string?>? progressError, CancellationToken token) using Task.Factory.StartNew()
-            //and invoking RunProcessInternal with a TaskCreation value of TaskCreationOptions.LongRunning and a
-            //TaskScheduler value of TaskScheduler.Current.NOTE: This method does NOT use Task.Run.
-    async public Task<PingResult> RunLongRunningAsync(
-        string hostNameOrAddress, CancellationToken cancellationToken = default)
-    {
-        Task task = null!;
-        await task;
-        throw new NotImplementedException();
-    }
-
-    /*
-     * call start pass in file name and argument
-     * 
-     * OR 
-     * 
-     * pass in the start.info which is infomation on how to start the program. 
-     * ProcessStartInfo does this for us. this method could be used for any process, currently hardcoded to "ping" process though. 
-     * 
-     */
-    private Process RunProcessInternal(
+        /*
+         * call start pass in file name and argument
+         * 
+         * OR 
+         * 
+         * pass in the start.info which is infomation on how to start the program. 
+         * ProcessStartInfo does this for us. this method could be used for any process, currently hardcoded to "ping" process though. 
+         * 
+         */
+        private Process RunProcessInternal(
         ProcessStartInfo startInfo,
         Action<string?>? progressOutput,    //delegate to confirm that we are making progress. This will be invoked anytime we garb new data.
                                             //  This is a lambda expression that has no return, since it is an action. 

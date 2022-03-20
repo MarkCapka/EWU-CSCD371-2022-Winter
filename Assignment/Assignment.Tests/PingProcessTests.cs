@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Assignment.Tests;
@@ -58,16 +59,21 @@ public class PingProcessTests
     [TestMethod]
     public void RunTaskAsync_Success()
     {
-        // Do NOT use async/await in this test. //TODO 
+        Task<PingResult> result = Sut.RunTaskAsync("localhost");
+        AssertValidPingOutput(result.Result);
+        // Do NOT use async/await in this test. //TODO
+        // 
+
         // Test Sut.RunTaskAsync("localhost"); //TODO 
     }
-
+    
     [TestMethod]
     public void RunAsync_UsingTaskReturn_Success()
     {
         // Do NOT use async/await in this test.
         PingResult result = default;
-        // Test Sut.RunAsync("localhost");
+        Task<PingResult> task = Sut.RunAsync("localhost");
+        result = task.Result;
         AssertValidPingOutput(result);
     }
 
@@ -78,17 +84,20 @@ public class PingProcessTests
         // DO use async/await in this test.
         PingResult result = default;
 
-        // Test Sut.RunAsync("localhost");
+        result = await Sut.RunAsync("localhost");
         AssertValidPingOutput(result);
     }
 #pragma warning restore CS1998 // Remove this
 
-
+    //TPL is Task Parallel library
     [TestMethod]
     [ExpectedException(typeof(AggregateException))]
     public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrapping()
     {
-        
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        CancellationToken cancellationToken = cancellationTokenSource.Token;
+
+        cancellationTokenSource.Cancel();
     }
 
     [TestMethod]
@@ -114,8 +123,10 @@ public class PingProcessTests
     async public Task RunLongRunningAsync_UsingTpl_Success()
     {
         PingResult result = default;
+      //  result = Sut.RunLongRunningAsync("localhost").Result;
+
         //  //TODO Test Sut.RunLongRunningAsync("localhost");
-        AssertValidPingOutput(result);
+        AssertValidPingOutput(result.ExitCode, result.StdOutput);
     }
 #pragma warning restore CS1998 // //TODO  Remove this
 

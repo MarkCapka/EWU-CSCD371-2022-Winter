@@ -39,7 +39,7 @@ Previously Assigned
    NOTE:
       - The order of the items in the stdOutput is irrelevent and expected to be intermingled.
       - StdOutput must have all the ping output returned (no lines can be missing) even though intermingled. ❌✔
-5. Implement **AND test** `public Task<int> RunLongRunningAsync(ProcessStartInfo startInfo, Action<string?>? progressOutput, Action<string?>? progressError, CancellationToken token)` using `Task.Factory.StartNew()` and invoking `RunProcessInternal` with a `TaskCreation` value of `TaskCreationOptions.LongRunning` and a `TaskScheduler` value of `TaskScheduler.Current`.
+5. Implement **AND test** `public Task<int> RunLongRunningAsync(ProcessStartInfo startInfo, Action<string?>? progressOutput, Action<string?>? progressError, CancellationToken token)` using `Task.Factory.StartNew()` and invoking `RunProcessInternal` with a `TaskCreation` value of `TaskCreationOptions.LongRunning` and a `TaskScheduler` value of `TaskScheduler.Current`. Returning a `Task<PingResult>` is also okay.
    NOTE: This method does **NOT** use `Task.Run`.
 
 ## Extra Credit

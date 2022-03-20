@@ -135,15 +135,15 @@ public class PingProcess
 
     }
 
-
-
-    async public Task<PingResult> RunAsync(params string[] hostNameOrAddresses)
-    {
-        StringBuilder? stringBuilder = null;
+    async public Task<PingResult> RunAsync(CancellationToken cancellationToken = default, params string[] hostNameOrAddresses)
+    {   
+        cancellationToken.ThrowIfCancellationRequested();
+        StringBuilder? stringBuilder = new();
         ParallelQuery<Task<int>>? all = hostNameOrAddresses.AsParallel().Select(async item =>
         {
-            Task<PingResult> task = null!;
-        // ...
+            Task<PingResult> task = Task.Run(
+            () => RunAsync(item)
+            );
 
         await task.WaitAsync(default(CancellationToken));
             return task.Result.ExitCode;

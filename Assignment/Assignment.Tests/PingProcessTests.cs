@@ -43,7 +43,7 @@ public class PingProcessTests
         Assert.IsFalse(string.IsNullOrWhiteSpace(stdOutput));
         stdOutput = WildcardPattern.NormalizeLineEndings(stdOutput!.Trim());
         Assert.AreEqual<string?>(
-            "Ping request could not find host badaddress. Please check the name and try again.".Trim(),
+            "Ping request could not find host bad address. Please check the name and try again.".Trim(),
             stdOutput,
             $"Output is unexpected: {stdOutput}");
         Assert.AreEqual<int>(1, exitCode);
@@ -59,12 +59,10 @@ public class PingProcessTests
     [TestMethod]
     public void RunTaskAsync_Success()
     {
+        // Do NOT use async/await in this test.
+        // Test Sut.RunTaskAsync("localhost");
         Task<PingResult> result = Sut.RunTaskAsync("localhost");
         AssertValidPingOutput(result.Result);
-        // Do NOT use async/await in this test. //TODO
-        // 
-
-        // Test Sut.RunTaskAsync("localhost"); //TODO 
     }
     
     [TestMethod]
@@ -78,7 +76,6 @@ public class PingProcessTests
     }
 
     [TestMethod]
-#pragma warning disable CS1998 // Remove this
     async public Task RunAsync_UsingTpl_Success()
     {
         // DO use async/await in this test.
@@ -87,7 +84,6 @@ public class PingProcessTests
         result = await Sut.RunAsync("localhost");
         AssertValidPingOutput(result);
     }
-#pragma warning restore CS1998 // Remove this
 
     //TPL is Task Parallel library
     [TestMethod]
@@ -95,9 +91,12 @@ public class PingProcessTests
     public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrapping()
     {
         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-        CancellationToken cancellationToken = cancellationTokenSource.Token;
-
+        CancellationToken token = cancellationTokenSource.Token;
+        PingResult result = default;
+        string[] hosts = new string[] { "localhost", "localhost" };
+        result = Sut.RunAsync(token, hosts).Result;
         cancellationTokenSource.Cancel();
+        AssertValidPingOutput(result);
     }
 
     [TestMethod]
@@ -113,7 +112,7 @@ public class PingProcessTests
         //TODO  Pseudo Code - don't trust it!!!
         string[] hostNames = new string[] { "localhost", "localhost", "localhost", "localhost" };
         int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length*hostNames.Length;
-        PingResult result = await Sut.RunAsync(hostNames);
+        PingResult result = await Sut.RunAsync(new CancellationTokenSource().Token, hostNames);
         int? lineCount = result.StdOutput?.Split(Environment.NewLine).Length;
         Assert.AreEqual(expectedLineCount, lineCount);
     }
@@ -123,10 +122,8 @@ public class PingProcessTests
     async public Task RunLongRunningAsync_UsingTpl_Success()
     {
         PingResult result = default;
-      //  result = Sut.RunLongRunningAsync("localhost").Result;
-
-        //  //TODO Test Sut.RunLongRunningAsync("localhost");
-        AssertValidPingOutput(result.ExitCode, result.StdOutput);
+        result = await Sut.RunLongRunningAsync("localhost");
+        AssertValidPingOutput(result);
     }
 #pragma warning restore CS1998 // //TODO  Remove this
 

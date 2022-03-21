@@ -62,7 +62,7 @@ public class PingProcessTests
         // Do NOT use async/await in this test.
         // Test Sut.RunTaskAsync("localhost");
         Task<PingResult> result = Sut.RunTaskAsync("localhost");
-        AssertValidPingOutput(result.Result);
+         AssertValidPingOutput(result.Result);
     }
     
     [TestMethod]
@@ -73,6 +73,7 @@ public class PingProcessTests
         Task<PingResult> task = Sut.RunAsync("localhost");
         result = task.Result;
         AssertValidPingOutput(result);
+        //TODO assert final result
     }
 
     [TestMethod]
@@ -81,7 +82,7 @@ public class PingProcessTests
         // DO use async/await in this test.
         PingResult result = default;
 
-        result = await Sut.RunAsync("localhost");
+        result = await Sut.RunAsync("localhost").ConfigureAwait(false);
         AssertValidPingOutput(result);
     }
 
@@ -90,8 +91,9 @@ public class PingProcessTests
     [ExpectedException(typeof(AggregateException))]
     public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrapping()
     {
-        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        CancellationTokenSource cancellationTokenSource = new();
         CancellationToken token = cancellationTokenSource.Token;
+        cancellationTokenSource.Cancel();
         PingResult result = default;
         string[] hosts = new string[] { "localhost", "localhost" };
         result = Sut.RunAsync(token, hosts).Result;
@@ -104,15 +106,20 @@ public class PingProcessTests
     public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrappingTaskCanceledException()
     {
         // //TODO  Use exception.Flatten()
+
     }
 
     [TestMethod]
     async public Task RunAsync_MultipleHostAddresses_True()
     {
+
+        CancellationTokenSource cancellationTokenSource = new();
+        CancellationToken token = cancellationTokenSource.Token;
+
         //TODO  Pseudo Code - don't trust it!!!
         string[] hostNames = new string[] { "localhost", "localhost", "localhost", "localhost" };
-        int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length*hostNames.Length;
-        PingResult result = await Sut.RunAsync(new CancellationTokenSource().Token, hostNames);
+        int expectedLineCount = _PingOutputLikeExpression.Split(Environment.NewLine).Length*hostNames.Length;
+        PingResult result = await Sut.RunAsync(token, hostNameOrAddresses: hostNames).ConfigureAwait(false);
         int? lineCount = result.StdOutput?.Split(Environment.NewLine).Length;
         Assert.AreEqual(expectedLineCount, lineCount);
     }
@@ -122,7 +129,7 @@ public class PingProcessTests
     async public Task RunLongRunningAsync_UsingTpl_Success()
     {
         PingResult result = default;
-        result = await Sut.RunLongRunningAsync("localhost");
+        result = await PingProcess.RunLongRunningAsync("localhost").ConfigureAwait(false);
         AssertValidPingOutput(result);
     }
 #pragma warning restore CS1998 // //TODO  Remove this
@@ -137,7 +144,7 @@ public class PingProcessTests
         Assert.AreNotEqual(lineCount, numbers.Count()+1);
     }
 
-    readonly string PingOutputLikeExpression = @"
+    readonly string _PingOutputLikeExpression = @"
 Pinging * with 32 bytes of data:
 Reply from ::1: time<*
 Reply from ::1: time<*
@@ -151,8 +158,10 @@ Approximate round trip times in milli-seconds:
     private void AssertValidPingOutput(int exitCode, string? stdOutput)
     {
         Assert.IsFalse(string.IsNullOrWhiteSpace(stdOutput));
+
+        Console.WriteLine(stdOutput);
         stdOutput = WildcardPattern.NormalizeLineEndings(stdOutput!.Trim());
-        Assert.IsTrue(stdOutput?.IsLike(PingOutputLikeExpression)??false,
+        Assert.IsTrue(stdOutput?.IsLike(_PingOutputLikeExpression)??false,
             $"Output is unexpected: {stdOutput}");
         Assert.AreEqual<int>(0, exitCode);
     }

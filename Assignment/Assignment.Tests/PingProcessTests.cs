@@ -121,7 +121,8 @@ public class PingProcessTests
     {
         //TODO  Pseudo Code - don't trust it!!!
         string[] hostNames = new string[] { "localhost", "localhost", "localhost", "localhost" };
-        int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length * hostNames.Length;
+        //expected count is length of an output * number of outputs + new lines between each output + new line at end
+        int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length * hostNames.Length + hostNames.Length * 2 + 1;
         PingResult result = await Sut.RunAsync(new CancellationTokenSource().Token, hostNames);
         int? lineCount = result.StdOutput?.Split(Environment.NewLine).Length;
         Assert.AreEqual(expectedLineCount, lineCount);

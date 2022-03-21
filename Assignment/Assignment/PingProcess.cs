@@ -109,7 +109,7 @@ public class PingProcess
 
     async public Task<PingResult> RunAsync(CancellationToken cancellationToken = default, params string[] hostNameOrAddresses)
     {   
-        cancellationToken.ThrowIfCancellationRequested();
+        
         StringBuilder? stringBuilder = new();
         ParallelQuery<Task<int>>? all = hostNameOrAddresses.AsParallel().Select(async item =>
         {
@@ -123,6 +123,7 @@ public class PingProcess
 
         await Task.WhenAll(all);
         int total = all.Aggregate(0, (total, item) => total + item.Result);
+        cancellationToken.ThrowIfCancellationRequested();
         return new PingResult(total, stringBuilder?.ToString());
     }
 
@@ -136,6 +137,8 @@ public class PingProcess
         string hostNameOrAddress, CancellationToken cancellationToken = default)
     {
         Task task = null!;
+        await task;
+        await task;
         await task;
         throw new NotImplementedException();
     }

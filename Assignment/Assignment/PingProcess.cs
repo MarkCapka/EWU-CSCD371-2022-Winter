@@ -65,11 +65,11 @@ public class PingProcess
         StartInfo.Arguments = hostNameOrAddress; //specifies what we are pinging
         StringBuilder? stringBuilder = null; //modifying strings is a relatively expensive operation, so if we want to keep appending to a string, StringBuilder is a good option.
       
-        void updateStdOutput(string? line) =>       //Delegate: this is a method declaration that is being written inside a method
+        void UpdateStdOutput(string? line) =>       //Delegate: this is a method declaration that is being written inside a method
             (stringBuilder ??= new StringBuilder()).AppendLine(line); //appends to the stringbuilder, Don't invoke this -> even things outside of this method are prohibited since stringbuilder is a local variable. This is encapsulated witihn the method and even other methods within this class can't access it. Only way to run the method is to run the method.
                     //if the above method is null, we assign it back to the string builder. from now on, when it is invoked, stringbuilder will havea  value, this is a "lazy load". 
 
-        Process process = RunProcessInternal(StartInfo, updateStdOutput, default, default); //RunProcessInternal is generic and can take any process. We use hardcoded "ping"
+        Process process = RunProcessInternal(StartInfo, UpdateStdOutput, default, default); //RunProcessInternal is generic and can take any process. We use hardcoded "ping"
         return new PingResult(process.ExitCode, stringBuilder?.ToString()); //because we had to return the data returned on the commandline and exit code, we create a new class, PingResult which we pass those parameters for conditions on exiting and building the string. 
             //stringBuilder? indicates that it will return null if null, if NOT null: returns value
 
@@ -126,44 +126,70 @@ public class PingProcess
     async public Task<PingResult> RunAsync(
         string hostNameOrAddress, CancellationToken cancellationToken = default)
     {
-
         Task<PingResult> taskPing = Task.Run(
-                    () => RunAsync(hostNameOrAddress, cancellationToken)
+                    () => Run(hostNameOrAddress), cancellationToken
                     );
         await taskPing;
+        cancellationToken.ThrowIfCancellationRequested();
         return taskPing.Result;
 
     }
 
     async public Task<PingResult> RunAsync(CancellationToken cancellationToken = default, params string[] hostNameOrAddresses)
     {   
-        cancellationToken.ThrowIfCancellationRequested();
+        
         StringBuilder? stringBuilder = new();
-        ParallelQuery<Task<int>>? all = hostNameOrAddresses.AsParallel().Select(async item =>
+        ParallelQuery<Task<PingResult>>? all = hostNameOrAddresses.AsParallel().Select(async item =>
         {
             Task<PingResult> task = Task.Run(
             () => RunAsync(item)
             );
 
-        await task.WaitAsync(default(CancellationToken));
-            return task.Result.ExitCode;
+            await task.WaitAsync(default(CancellationToken));
+            return task.Result;
         });
 
         await Task.WhenAll(all);
-        int total = all.Aggregate(0, (total, item) => total + item.Result);
+        all.Aggregate(stringBuilder, (a, item) => stringBuilder.Append(item.Result.StdOutput));
+        int total = all.Aggregate(0, (total, item) => total + item.Result.ExitCode);
+        cancellationToken.ThrowIfCancellationRequested();
         return new PingResult(total, stringBuilder?.ToString());
     }
 
-        /*
-         * call start pass in file name and argument
-         * 
-         * OR 
-         * 
-         * pass in the start.info which is infomation on how to start the program. 
-         * ProcessStartInfo does this for us. this method could be used for any process, currently hardcoded to "ping" process though. 
-         * 
-         */
-        private Process RunProcessInternal(
+
+
+    //TODO 5. NOTE: from Mark Michaelis: OK if you return this as a Task<PingResult> instad of an <int>:::::   NOTE: if int it is returning the PingResult
+    //5. Implement AND test public Task<int> RunLongRunningAsync(ProcessStartInfo startInfo, Action<string?>? progressOutput, Action<string?>? progressError, CancellationToken token) using Task.Factory.StartNew()
+    //and invoking RunProcessInternal with a TaskCreation value of TaskCreationOptions.LongRunning and a
+    //TaskScheduler value of TaskScheduler.Current.NOTE: This method does NOT use Task.Run.
+    public static async Task<PingResult> RunLongRunningAsync(
+        string hostNameOrAddress, CancellationToken cancellationToken = default)
+    {
+        Task task = null!;
+        await task.ConfigureAwait(false);
+      
+        throw new NotImplementedException();
+
+      // "await Task.Delay(3000);
+    }
+
+
+
+
+
+
+
+
+    /*
+     * call start pass in file name and argument
+     * 
+     * OR 
+     * 
+     * pass in the start.info which is infomation on how to start the program. 
+     * ProcessStartInfo does this for us. this method could be used for any process, currently hardcoded to "ping" process though. 
+     * 
+     */
+    private Process RunProcessInternal(
         ProcessStartInfo startInfo,
         Action<string?>? progressOutput,    //delegate to confirm that we are making progress. This will be invoked anytime we garb new data.
                                             //  This is a lambda expression that has no return, since it is an action. 

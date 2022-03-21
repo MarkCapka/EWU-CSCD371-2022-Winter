@@ -43,9 +43,8 @@ public class PingProcessTests
         Assert.IsFalse(string.IsNullOrWhiteSpace(stdOutput));
         stdOutput = WildcardPattern.NormalizeLineEndings(stdOutput!.Trim());
         Assert.AreEqual<string?>(
-            "Ping request could not find host bad address. Please check the name and try again.".Trim(),
-            stdOutput,
-            $"Output is unexpected: {stdOutput}");
+            "Ping request could not find host badaddress. Please check the name and try again.".Trim(),
+            stdOutput, $"Output is unexpected: {stdOutput}");
         Assert.AreEqual<int>(1, exitCode);
     }
 
@@ -93,17 +92,28 @@ public class PingProcessTests
         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         CancellationToken token = cancellationTokenSource.Token;
         PingResult result = default;
-        string[] hosts = new string[] { "localhost", "localhost" };
-        result = Sut.RunAsync(token, hosts).Result;
+        string[] hosts = new string[] { "localhost", "localhost", "localhost", "localhost", "localhost" };
         cancellationTokenSource.Cancel();
-        AssertValidPingOutput(result);
+        result = Sut.RunAsync(token, hosts).Result;
     }
 
     [TestMethod]
     [ExpectedException(typeof(TaskCanceledException))]
     public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrappingTaskCanceledException()
     {
-        // //TODO  Use exception.Flatten()
+        try {
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            CancellationToken token = cancellationTokenSource.Token;
+            PingResult result = default;
+            string[] hosts = new string[] { "localhost", "localhost", "localhost", "localhost", "localhost" };
+            cancellationTokenSource.Cancel();
+            result = Sut.RunAsync(token, hosts).Result;
+        } catch (AggregateException ex) {
+            if (ex.InnerException is not null)
+            {
+                throw ex.InnerException;
+            }
+        }
     }
 
     [TestMethod]
@@ -111,7 +121,8 @@ public class PingProcessTests
     {
         //TODO  Pseudo Code - don't trust it!!!
         string[] hostNames = new string[] { "localhost", "localhost", "localhost", "localhost" };
-        int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length*hostNames.Length;
+        //expected count is length of an output * number of outputs + new lines between each output + new line at end
+        int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length * hostNames.Length + hostNames.Length * 2 + 1;
         PingResult result = await Sut.RunAsync(new CancellationTokenSource().Token, hostNames);
         int? lineCount = result.StdOutput?.Split(Environment.NewLine).Length;
         Assert.AreEqual(expectedLineCount, lineCount);
@@ -134,7 +145,7 @@ public class PingProcessTests
         System.Text.StringBuilder stringBuilder = new();
         numbers.AsParallel().ForAll(item => stringBuilder.AppendLine(""));
         int lineCount = stringBuilder.ToString().Split(Environment.NewLine).Length;
-        Assert.AreNotEqual(lineCount, numbers.Count()+1);
+        Assert.AreNotEqual(lineCount, numbers.Count() + 1);
     }
 
     readonly string PingOutputLikeExpression = @"
@@ -152,7 +163,7 @@ Approximate round trip times in milli-seconds:
     {
         Assert.IsFalse(string.IsNullOrWhiteSpace(stdOutput));
         stdOutput = WildcardPattern.NormalizeLineEndings(stdOutput!.Trim());
-        Assert.IsTrue(stdOutput?.IsLike(PingOutputLikeExpression)??false,
+        Assert.IsTrue(stdOutput?.IsLike(PingOutputLikeExpression) ?? false,
             $"Output is unexpected: {stdOutput}");
         Assert.AreEqual<int>(0, exitCode);
     }

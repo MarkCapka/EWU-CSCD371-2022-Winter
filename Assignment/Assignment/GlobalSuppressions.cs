@@ -5,4 +5,4 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Naming", "INTL0003:Methods PascalCase", Justification = "<Pending>", Scope = "member", Target = "~M:Assignment.PingProcess.Run(System.String)~Assignment.PingResult")]
+[assembly: SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "written by intellitect people, assume that it is semantics that the analyzer prefers to not use default", Scope = "member", Target = "~M:Assignment.PingProcess.Run(System.String)~Assignment.PingResult")]

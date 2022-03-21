@@ -43,9 +43,8 @@ public class PingProcessTests
         Assert.IsFalse(string.IsNullOrWhiteSpace(stdOutput));
         stdOutput = WildcardPattern.NormalizeLineEndings(stdOutput!.Trim());
         Assert.AreEqual<string?>(
-            "Ping request could not find host bad address. Please check the name and try again.".Trim(),
-            stdOutput,
-            $"Output is unexpected: {stdOutput}");
+            "Ping request could not find host badaddress. Please check the name and try again.".Trim(),
+            stdOutput, $"Output is unexpected: {stdOutput}");
         Assert.AreEqual<int>(1, exitCode);
     }
 

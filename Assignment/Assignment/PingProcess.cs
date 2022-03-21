@@ -129,7 +129,7 @@ public class PingProcess
         Task<PingResult> taskPing = Task.Run(
                     () => Run(hostNameOrAddress), cancellationToken
                     );
-        await taskPing;
+        await taskPing.ConfigureAwait(false);
         cancellationToken.ThrowIfCancellationRequested();
         return taskPing.Result;
 

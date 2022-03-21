@@ -6,3 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "written by intellitect people, assume that it is semantics that the analyzer prefers to not use default", Scope = "member", Target = "~M:Assignment.PingProcess.Run(System.String)~Assignment.PingResult")]
+[assembly: SuppressMessage("Reliability", "CA2007:Consider calling ConfigureAwait on the awaited task", Justification = "do we need to configureAwait?")]

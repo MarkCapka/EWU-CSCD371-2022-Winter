@@ -64,7 +64,7 @@ public class PingProcessTests
         Task<PingResult> result = Sut.RunTaskAsync("localhost");
         AssertValidPingOutput(result.Result);
     }
-
+    
     [TestMethod]
     public void RunAsync_UsingTaskReturn_Success()
     {
@@ -85,7 +85,7 @@ public class PingProcessTests
         AssertValidPingOutput(result);
     }
 
-
+    //TPL is Task Parallel library
     [TestMethod]
     [ExpectedException(typeof(AggregateException))]
     public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrapping()

@@ -92,19 +92,47 @@ public class PingProcess
 
     public Task<PingResult> RunTaskAsync(string hostNameOrAddress)
     {
+     /*   CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        CancellationToken cancellationToken = cancellationTokenSource.Token;
+     */
         Task<PingResult> taskPing = Task.Run(
-            () => Run(hostNameOrAddress)
-        );
-        return taskPing;
-    }
+            () => Run(hostNameOrAddress) //honestly don't know if this cancellationTokenSource is needed, was in Main of example, no main here. 
+            );
 
+        return taskPing;
+
+
+    } 
+    
+    
+    
+    /*             NOTE from Mark not the lads: I THINK THIS IS 2. the brackets are missing but there doesn't seem to be another one. Double check this though
+    *   TODO   2. Implement PingProcess' async public Task<PingResult> RunAsync(string hostNameOrAddress) ❌✔
+            First implement the public void RunAsync_UsingTaskReturn_Success() test method to test PingProcess.RunAsync() using "localhost" without using async/await. ❌✔
+             Also implement the async public Task RunAsync_UsingTpl_Success() test method to test PingProcess.RunAsync() using "localhost" but this time DO using async/await. ❌✔
+     */
+
+    // TODO 3. Add support for an optional cancellation token to the PingProcess.RunAsync() signature. ❌✔
+    // Inside the PingProcess.RunAsync() invoke the token's ThrowIfCancellationRequested() method so an exception is thrown. ❌✔
+    // Test that, when cancelled from the test method, the exception thrown is an AggregateException ❌✔
+    // with a TaskCanceledException inner exception ❌✔ using the test methods RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrapping ❌✔
+    // and RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrappingTaskCanceledException ❌✔
+    // respectively.
+
+    // TODO  4.  Complete/fix AND test async public Task<PingResult> RunAsync(IEnumerable<string> hostNameOrAddresses, CancellationToken cancellationToken = default)
+    //              which executes ping for and array of hostNameOrAddresses(which can all be "localhost") in parallel, adding synchronization if needed. ❌✔
+    //              NOTE: The order of the items in the stdOutput is irrelevent and expected to be intermingled.
+                    //StdOutput must have all the ping output returned (no lines can be missing) even though intermingled. ❌✔
     async public Task<PingResult> RunAsync(
         string hostNameOrAddress, CancellationToken cancellationToken = default)
     {
-        Task<PingResult> task = Task.Run(
-            () => Run(hostNameOrAddress), cancellationToken
-            );
-        return await task;
+
+        Task<PingResult> taskPing = Task.Run(
+                    () => RunAsync(hostNameOrAddress, cancellationToken)
+                    );
+        await taskPing;
+        return taskPing.Result;
+
     }
 
     async public Task<PingResult> RunAsync(CancellationToken cancellationToken = default, params string[] hostNameOrAddresses)
@@ -131,8 +159,8 @@ public class PingProcess
 
     //TODO 5. NOTE: from Mark Michaelis: OK if you return this as a Task<PingResult> instad of an <int>:::::   NOTE: if int it is returning the PingResult
     //5. Implement AND test public Task<int> RunLongRunningAsync(ProcessStartInfo startInfo, Action<string?>? progressOutput, Action<string?>? progressError, CancellationToken token) using Task.Factory.StartNew()
-            //and invoking RunProcessInternal with a TaskCreation value of TaskCreationOptions.LongRunning and a
-            //TaskScheduler value of TaskScheduler.Current.NOTE: This method does NOT use Task.Run.
+    //and invoking RunProcessInternal with a TaskCreation value of TaskCreationOptions.LongRunning and a
+    //TaskScheduler value of TaskScheduler.Current.NOTE: This method does NOT use Task.Run.
     async public Task<PingResult> RunLongRunningAsync(
         string hostNameOrAddress, CancellationToken cancellationToken = default)
     {
@@ -142,6 +170,13 @@ public class PingProcess
         await task;
         throw new NotImplementedException();
     }
+
+
+
+
+
+
+
 
     /*
      * call start pass in file name and argument

@@ -59,7 +59,7 @@ public class PingProcessTests
     public void RunTaskAsync_Success()
     {
         // Do NOT use async/await in this test.
-        // Test Sut.RunTaskAsync("localhost");
+       
         Task<PingResult> result = Sut.RunTaskAsync("localhost");
         AssertValidPingOutput(result.Result);
     }
@@ -84,60 +84,61 @@ public class PingProcessTests
         AssertValidPingOutput(result);
     }
 
-//    //TPL is Task Parallel library
-//    [TestMethod]
-//    [ExpectedException(typeof(AggregateException))]
-//    public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrapping()
-//    {
-//        CancellationTokenSource cancellationTokenSource = new();
-//        CancellationToken token = cancellationTokenSource.Token;
-//        PingResult result = default;
-//        string[] hosts = new string[] { "localhost", "localhost", "localhost", "localhost", "localhost" };
-//        cancellationTokenSource.Cancel();
-//        result = Sut.RunAsync(token, hosts).Result;
-//    }
+    //TPL is Task Parallel library
+    [TestMethod]
+    [ExpectedException(typeof(AggregateException))]
+    public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrapping()
+    {
+        CancellationTokenSource cancellationTokenSource = new();
+        CancellationToken token = cancellationTokenSource.Token;
+        PingResult result = default;
+        string[] hosts = new string[] { "localhost", "localhost", "localhost", "localhost", "localhost" };
+        cancellationTokenSource.Cancel();
+        result = Sut.RunAsync(token, hosts).Result;
+    }
 
-//    [TestMethod]
-//    [ExpectedException(typeof(TaskCanceledException))]
-//    public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrappingTaskCanceledException()
-//    {
-//        try {
-//            CancellationTokenSource cancellationTokenSource = new();
-//            CancellationToken token = cancellationTokenSource.Token;
-//            PingResult result = default;
-//            string[] hosts = new string[] { "localhost", "localhost", "localhost", "localhost", "localhost" };
-//            cancellationTokenSource.Cancel();
-//            result = Sut.RunAsync(token, hosts).Result;
-//        } catch (AggregateException ex) {
-//            if (ex.InnerException is not null)
-//            {
-//                throw ex.InnerException;
-//            }
-//        }
-//    }
+    [TestMethod]
+    [ExpectedException(typeof(TaskCanceledException))]
+    public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrappingTaskCanceledException()
+    {
+        try
+        {
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            CancellationToken token = cancellationTokenSource.Token;
+            PingResult result = default;
+            string[] hosts = new string[] { "localhost", "localhost", "localhost", "localhost", "localhost" };
+            cancellationTokenSource.Cancel();
+            result = Sut.RunAsync(token, hosts).Result;
+        }
+        catch (AggregateException ex)
+        {
+            if (ex.InnerException is not null)
+            {
+                throw ex.InnerException;
+            }
+        }
+    }
 
-//    [TestMethod]
-//    async public Task RunAsync_MultipleHostAddresses_True()
-//    {
-//        //TODO  Pseudo Code - don't trust it!!!
-//        string[] hostNames = new string[] { "localhost", "localhost", "localhost", "localhost" };
-//        //expected count is length of an output * number of outputs + new lines between each output + new line at end
-//        int expectedLineCount = _PingOutputLikeExpression.Split(Environment.NewLine).Length * hostNames.Length + hostNames.Length * 2 + 1;
-//        PingResult result = await Sut.RunAsync(new CancellationTokenSource().Token, hostNames).ConfigureAwait(false);
-//        int? lineCount = result.StdOutput?.Split(Environment.NewLine).Length;
-//        Assert.AreEqual(expectedLineCount, lineCount);
-//    }
+    [TestMethod]
+    async public Task RunAsync_MultipleHostAddresses_True()
+    {
+        string[] hostNames = new string[] { "localhost", "localhost", "localhost", "localhost" };
+        //expected count is length of an output * number of outputs + new lines between each output + new line at end
+        int expectedLineCount = _PingOutputLikeExpression.Split(Environment.NewLine).Length * hostNames.Length + hostNames.Length * 2 + 1;
+        PingResult result = await Sut.RunAsync(new CancellationTokenSource().Token, hostNames).ConfigureAwait(false);
+        int? lineCount = result.StdOutput?.Split(Environment.NewLine).Length;
+        Assert.AreEqual(expectedLineCount, lineCount);
+    }
 
-//    [TestMethod]
-//#pragma warning disable CS1998 //  //TODO Remove this
-//    async public Task RunLongRunningAsync_UsingTpl_Success()
-//    {
-//        PingResult result = default;
-//        result = await Sut.RunLongRunningAsync("localhost")
-//                          .ConfigureAwait(false);
-//        AssertValidPingOutput(result);
-//    }
-#pragma warning restore CS1998 // //TODO  Remove this
+    [TestMethod]
+    async public Task RunLongRunningAsync_UsingTpl_Success()
+    {
+        PingResult result = default;
+        result = await Sut.RunLongRunningAsync("localhost")
+                          .ConfigureAwait(false);
+        AssertValidPingOutput(result);
+    }
+
 
     [TestMethod]
     public void StringBuilderAppendLine_InParallel_IsNotThreadSafe()

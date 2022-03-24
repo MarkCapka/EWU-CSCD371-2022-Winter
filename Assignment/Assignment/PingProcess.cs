@@ -133,7 +133,7 @@ public class PingProcess
 
     }
 
-    async public Task<PingResult> RunAsync(CancellationToken cancellationToken = default, params string[] hostNameOrAddresses)
+    async public Task<PingResult> RunAsync(System.IProgress<PingResult> progress, CancellationToken cancellationToken = default, params string[] hostNameOrAddresses)
     {   
         
         StringBuilder? stringBuilder = new();
@@ -144,6 +144,7 @@ public class PingProcess
             );
 
             await task.WaitAsync(default(CancellationToken));
+            progress.Report(task.Result);
             return task.Result;
         });
 

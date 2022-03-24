@@ -94,7 +94,11 @@ public class PingProcessTests
         PingResult result = default;
         string[] hosts = new string[] { "localhost", "localhost", "localhost", "localhost", "localhost" };
         cancellationTokenSource.Cancel();
-        result = Sut.RunAsync(token, hosts).Result;
+        System.IProgress<PingResult> progress = new System.Progress<PingResult>(report =>
+        {
+            Console.WriteLine(report);
+        });
+        result = Sut.RunAsync(progress, token, hosts).Result;
     }
 
     [TestMethod]
@@ -108,7 +112,11 @@ public class PingProcessTests
             PingResult result = default;
             string[] hosts = new string[] { "localhost", "localhost", "localhost", "localhost", "localhost" };
             cancellationTokenSource.Cancel();
-            result = Sut.RunAsync(token, hosts).Result;
+            System.IProgress<PingResult> progress = new System.Progress<PingResult>(report =>
+            {
+                Console.WriteLine(report);
+            });
+            result = Sut.RunAsync(progress, token, hosts).Result;
         }
         catch (AggregateException ex)
         {
@@ -125,7 +133,11 @@ public class PingProcessTests
         string[] hostNames = new string[] { "localhost", "localhost", "localhost", "localhost" };
         //expected count is length of an output * number of outputs + new lines between each output + new line at end
         int expectedLineCount = _PingOutputLikeExpression.Split(Environment.NewLine).Length * hostNames.Length + hostNames.Length * 2 + 1;
-        PingResult result = await Sut.RunAsync(new CancellationTokenSource().Token, hostNames).ConfigureAwait(false);
+        System.IProgress<PingResult> progress = new System.Progress<PingResult>(report =>
+        {
+            Console.WriteLine(report);
+        });
+        PingResult result = await Sut.RunAsync(progress, new CancellationTokenSource().Token, hostNames).ConfigureAwait(false);
         int? lineCount = result.StdOutput?.Split(Environment.NewLine).Length;
         Assert.AreEqual(expectedLineCount, lineCount);
     }

@@ -44,7 +44,7 @@ Previously Assigned
 
 ## Extra Credit
 
-- Test and implement `PingProcess.RunAsync(System.IProgress<T> progess)` so that you can capture the output as it occurs rather than capturing the output only when the process finishes. X✔
+- Test and implement `PingProcess.RunAsync(System.IProgress<T> progess)` so that you can capture the output as it occurs rather than capturing the output only when the process finishes. ✔
 
 ## Fundamentals
 
